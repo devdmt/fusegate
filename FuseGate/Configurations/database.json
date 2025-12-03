@@ -1,0 +1,39 @@
+{
+  ///////mssql - local
+
+  //"databasesettings": {
+  //  "dbprovider": "mysql",
+  //  "connectionstring": "server=MNDOGOH\\MNDOGOH;userid=sa;password=Unknown@123;database=FCB_Popote;AllowZeroDateTime=true;ConvertZeroDateTime=true"
+  //}
+
+  //////postgresql - local
+
+  //"DatabaseSettings": {
+  //  "DBProvider": "postgresql",
+  //  "ConnectionString": "Server=127.0.0.1;Port=5432;Database=RiskSolve;User Id=postgres;Password=mvchr;Integrated Security=true;"
+  //}
+
+  /////postgresql - inserver
+
+  //"DatabaseSettings": {
+  //  "DBProvider": "postgresql",
+  //  "ConnectionString": "Server=127.0.0.1;Port=5432;Database=RiskSolve;User Id=postgres;Password=Dynamics322;Integrated Security=true;"
+  //}
+
+    
+  /////mssql --docker
+
+  "databasesettings": {
+    "dbprovider": "mssql",
+    "MainConnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=sanlamuat;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    "MainConnectionstringEnvironmentVariable": "FUSEGATE__DB__MAIN",
+    "ESBConnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=FuseGate;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    "ESBConnectionstringEnvironmentVariable": "FUSEGATE__DB__ESB",
+    "Akibaconnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=AkibaLve;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    "AkibaconnectionstringEnvironmentVariable": "FUSEGATE__DB__AKIBA",
+    //"connectionstring": "data source=DESKTOP-9HU6DH7;user id=sa;password=12345678;initial catalog=SanlamOnboarding;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    //"connectionstring": "data source=mndogoh;user id=sa;password=Unknown@123;initial catalog=SanlamSC;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    "Cypher": "8VThmpghZ4pHL4PBshZRux7LXh5li0sYgFsYsIJbQvktZRPcBkoTPlTTY9LoCwGV",
+    "CypherEnvironmentVariable": "FUSEGATE__DB__CYPHER"
+  }
+}

@@ -1,0 +1,327 @@
+[
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.AuthController",
+    "Method": "GenerateToken",
+    "RelativePath": "api/auth/generatetoken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.AuthResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "API.Infrastructure.Middleware.ErrorResult",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "EsbJson.API.Controllers.MSure.CreditLifeController",
+    "Method": "GetProduct",
+    "RelativePath": "api/creditlife/getproduct/{PartnerCode}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PartnerCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EsbJson.API.Controllers.MSure.CreditLifeController",
+    "Method": "InsureRequest",
+    "RelativePath": "api/creditlife/insurerequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "msure",
+        "Type": "DAL.ModelView.MsureDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EsbJson.API.Controllers.MSure.CreditLifeController",
+    "Method": "OnboardingRequest",
+    "RelativePath": "api/creditlife/onboarding",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "onboardingDto",
+        "Type": "DAL.ModelView.CreditLifeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "ActivateProduct",
+    "RelativePath": "api/v1/pension/activateproduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "withdrawal",
+        "Type": "DAL.ModelView.Pension.ActivatePensionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.ResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "AddBeneficiary",
+    "RelativePath": "api/v1/pension/addbeneficiary",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "repairShopAUth",
+        "Type": "DAL.ModelView.Pension.PensionBeneficiaryDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.Pension.PensionOnboardResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "Contribute",
+    "RelativePath": "api/v1/pension/contribute",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "repairShopAUth",
+        "Type": "DAL.ModelView.Pension.contributeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.ResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "BalanceRequest",
+    "RelativePath": "api/v1/pension/initiate-balance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "balance",
+        "Type": "DAL.ModelView.Pension.BalanceDTORequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.Pension.BalanceDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "Oboarding",
+    "RelativePath": "api/v1/pension/onboarding",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.Pension.PensionOnboardingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.Pension.OnboardResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "DAL.ModelView.Pension.OnboardResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "ViewBalance",
+    "RelativePath": "api/v1/pension/view-balance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "repairShopAUth",
+        "Type": "DAL.ModelView.Pension.ViewBalanceDTORequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.Pension.BalanceDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "WithdrawalRequest",
+    "RelativePath": "api/v1/pension/withdrawalrequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "withdrawal",
+        "Type": "DAL.ModelView.Pension.WithdrawalDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.ResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.ContactController",
+    "Method": "ContactUs",
+    "RelativePath": "contactus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.Pension.ContactUsRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "api-version",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.ContactController",
+    "Method": "ContactUs",
+    "RelativePath": "getcontacts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "api-version",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.Pension.ContactResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

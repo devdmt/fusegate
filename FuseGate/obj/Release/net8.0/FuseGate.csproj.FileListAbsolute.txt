@@ -1,0 +1,8 @@
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.csproj.AssemblyReference.cache
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.GeneratedMSBuildEditorConfig.editorconfig
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.AssemblyInfoInputs.cache
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.AssemblyInfo.cs
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.csproj.CoreCompileInputs.cache
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.MvcApplicationPartsAssemblyInfo.cs
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.MvcApplicationPartsAssemblyInfo.cache
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\FuseGate.sourcelink.json

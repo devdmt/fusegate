@@ -1,0 +1,102 @@
+<mxfile host="app.diagrams.net">
+    <diagram name="eSahal Platform Overview" id="eSahal-Platform">
+        <mxGraphModel dx="1426" dy="881" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                
+                <!-- Title -->
+                <mxCell id="title" value="&lt;b&gt;eSahal - Unified Digital Financial Platform&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+                    <mxGeometry x="380" y="40" width="400" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- Section 1: Onboarding -->
+                <mxCell id="onboardingSection" value="&lt;b&gt;1. Customer Onboarding &amp;amp; KYC Compliance&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="100" width="330" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="onboardingContent" value="&lt;div style=&quot;font-size: 12px; text-align: left; margin-left: 10px;&quot;&gt;&lt;b&gt;Input:&lt;/b&gt;&lt;br&gt;- National ID&lt;br&gt;- Phone Number&lt;br&gt;- Supporting Documents&lt;br&gt;&lt;br&gt;&lt;b&gt;Process:&lt;/b&gt;&lt;br&gt;- Integrated KYC/AML Validation&lt;br&gt;- Regulatory Compliance&lt;br&gt;&lt;br&gt;&lt;b&gt;Output:&lt;/b&gt;&lt;br&gt;- Secure &amp;amp; Compliant Enrollment&lt;br&gt;- Full Platform Access&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="onboardingSection">
+                    <mxGeometry x="10" y="30" width="310" height="140" as="geometry"/>
+                </mxCell>
+
+                <!-- Section 2: User Roles & Services -->
+                <mxCell id="rolesSection" value="&lt;b&gt;2. User Roles &amp;amp; Core Services&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="100" width="700" height="300" as="geometry"/>
+                </mxCell>
+                
+                <!-- Customer Services -->
+                <mxCell id="customerCard" value="&lt;b&gt;Customers&lt;/b&gt;&lt;div style=&quot;font-size: 11px; text-align: left;&quot;&gt;• View Account Balance&lt;br&gt;• Buy Airtime&lt;br&gt;• P2P Transfers&lt;br&gt;• Send to Other Banks&lt;br&gt;• Cash In/Out via Agents&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="rolesSection">
+                    <mxGeometry x="40" y="40" width="140" height="140" as="geometry"/>
+                </mxCell>
+                
+                <!-- Agent Services -->
+                <mxCell id="agentCard" value="&lt;b&gt;Agents&lt;/b&gt;&lt;div style=&quot;font-size: 11px; text-align: left;&quot;&gt;• Deposit to Accounts&lt;br&gt;• Process Withdrawals&lt;br&gt;• Transfer to Agents&lt;br&gt;• Network Management&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="rolesSection">
+                    <mxGeometry x="220" y="40" width="140" height="140" as="geometry"/>
+                </mxCell>
+                
+                <!-- Merchant Services -->
+                <mxCell id="merchantCard" value="&lt;b&gt;Merchants&lt;/b&gt;&lt;div style=&quot;font-size: 11px; text-align: left;&quot;&gt;• Accept Payments&lt;br&gt;• Withdraw Earnings&lt;br&gt;• Transfer to Bank&lt;br&gt;• Business Tools&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rolesSection">
+                    <mxGeometry x="400" y="40" width="140" height="140" as="geometry"/>
+                </mxCell>
+                
+                <!-- Security Features -->
+                <mxCell id="securityCard" value="&lt;b&gt;Security &amp;amp; Processing&lt;/b&gt;&lt;div style=&quot;font-size: 11px; text-align: left;&quot;&gt;• Instant API Processing&lt;br&gt;• Advanced Authentication&lt;br&gt;• End-to-End Encryption&lt;br&gt;• Data Integrity Protection&lt;br&gt;• Real-time Experience&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="rolesSection">
+                    <mxGeometry x="280" y="200" width="200" height="80" as="geometry"/>
+                </mxCell>
+
+                <!-- Section 3: Omnichannel Platform -->
+                <mxCell id="channelSection" value="&lt;b&gt;3. Omnichannel Access Platform&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="300" width="330" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="channelContent" value="&lt;div style=&quot;font-size: 12px; text-align: left; margin-left: 10px;&quot;&gt;&lt;b&gt;USSD&lt;/b&gt;&lt;br&gt;- Basic Mobile Devices&lt;br&gt;- Rural Accessibility&lt;br&gt;&lt;br&gt;&lt;b&gt;Mobile App&lt;/b&gt;&lt;br&gt;- Smartphones&lt;br&gt;- Urban &amp;amp; Tech-Savvy Users&lt;br&gt;&lt;br&gt;&lt;b&gt;Web Interface&lt;/b&gt;&lt;br&gt;- Agents &amp;amp; Merchants&lt;br&gt;- Full Management Tools&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="channelSection">
+                    <mxGeometry x="10" y="30" width="310" height="140" as="geometry"/>
+                </mxCell>
+
+                <!-- Section 4: Backend Integration -->
+                <mxCell id="backendSection" value="&lt;b&gt;4. Backend Integration &amp;amp; Partners&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="420" width="700" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="backendContent" value="&lt;div style=&quot;font-size: 12px; text-align: center;&quot;&gt;Secure APIs connect to: &lt;b&gt;Banks&lt;/b&gt; • &lt;b&gt;Payment Switches&lt;/b&gt; • &lt;b&gt;Mobile Network Operators&lt;/b&gt;&lt;br&gt;Enabling seamless interoperability and real-time transaction processing across the financial ecosystem.&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="backendSection">
+                    <mxGeometry x="10" y="40" width="680" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Outcome -->
+                <mxCell id="outcome" value="&lt;b&gt;Platform Outcome:&lt;/b&gt;&lt;br&gt;Versatile &amp;amp; Inclusive Financial Services&lt;br&gt;Serving Urban &amp;amp; Rural Customers&lt;br&gt;Securely and Efficiently" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="560" width="300" height="80" as="geometry"/>
+                </mxCell>
+
+                <!-- Arrows -->
+                <!-- Onboarding to Roles -->
+                <mxCell id="arrow1" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="onboardingSection" target="rolesSection">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="190" as="sourcePoint"/>
+                        <mxPoint x="420" y="190" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- Channels to Roles -->
+                <mxCell id="arrow2" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="channelSection" target="rolesSection">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="370" y="390" as="sourcePoint"/>
+                        <mxPoint x="420" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- Roles to Backend -->
+                <mxCell id="arrow3" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rolesSection" target="backendSection">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="770" y="400" as="sourcePoint"/>
+                        <mxPoint x="770" y="420" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- Backend to Outcome -->
+                <mxCell id="arrow4" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="backendSection" target="outcome">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="770" y="540" as="sourcePoint"/>
+                        <mxPoint x="770" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
