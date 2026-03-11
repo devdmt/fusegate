@@ -72,10 +72,10 @@ namespace API.Infrastructure.Application.MSureManager
                 responseDTO.Success = true;
                 responseDTO.ErrorMsg = "";
                 responseDTO.ResponseId = trnId;
-                 responseDTO.TransactionId = msureDTO.transactionId.ToString();
+                 responseDTO.ProductRef = msureDTO.transactionId.ToString();
             } catch(Exception ex){
                 responseDTO.ResponseId = msureDTO.transactionId;
-                responseDTO.TransactionId = msureDTO.transactionId.ToString();
+               
             }
 
             return responseDTO;

@@ -21,17 +21,17 @@
 //        ////    }
 
 //        [HttpPost("CreatePartner")]
-//    public async Task<IActionResult> CreatePartner([FromBody] PartnerDTO parner)
-//    {
-//        var result = await _partnerManager.CreatePartner(parner);
-//        return Ok(result);
-//    }
+//        public async Task<IActionResult> CreatePartner([FromBody] PartnerDTO parner)
+//        {
+//            var result = await _partnerManager.CreatePartner(parner);
+//            return Ok(result);
+//        }
 
-//    [HttpPost("CreatePartnerUser")]
-//    public async Task<IActionResult> CreatePartnerUser([FromBody] PartnerUserDTO user)
-//    {
-//        var result = await _partnerManager.CreatePartnerUser(user);
-//        return Ok(result);
+//        [HttpPost("CreatePartnerUser")]
+//        public async Task<IActionResult> CreatePartnerUser([FromBody] PartnerUserDTO user)
+//        {
+//            var result = await _partnerManager.CreatePartnerUser(user);
+//            return Ok(result);
+//        }
 //    }
-//}
 //}

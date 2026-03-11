@@ -49,7 +49,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -66,6 +66,14 @@
             "EPPlus": {
               "target": "Package",
               "version": "[7.2.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
             },
             "Mapster": {
               "target": "Package",
@@ -151,19 +159,19 @@
             },
             "NJsonSchema": {
               "target": "Package",
-              "version": "[10.8.0, )"
+              "version": "[11.5.2, )"
             },
             "NSwag.Annotations": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.Core": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "OfficeOpenXml.Core.ExcelPackage": {
               "target": "Package",
@@ -202,7 +210,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -247,7 +255,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -302,7 +310,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -351,7 +359,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -360,6 +368,10 @@
             "DotNetEnv": {
               "target": "Package",
               "version": "[3.1.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
             },
             "MediatR": {
               "target": "Package",
@@ -383,6 +395,12 @@
               "target": "Package",
               "version": "[7.0.3, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
             "Microsoft.Office.Excel": {
               "target": "Package",
               "version": "[14.0.4760.1000, )"
@@ -395,13 +413,33 @@
               "target": "Package",
               "version": "[1.19.5, )"
             },
+            "NSwag.ApiDescription.Client": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.Core": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
+            },
+            "NSwag.Core.Yaml": {
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
+            "NSwag.Generation.AspNetCore": {
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
+            "NSwag.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[14.6.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -435,7 +473,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

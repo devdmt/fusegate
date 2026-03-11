@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "Xwzj79/c3BqhUAo318iRPSwbyVRIXRW0e6Fc7dBAG+0=",
-  "Source": "FuseGate",
-  "BasePath": "_content/FuseGate",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"Xwzj79/c3BqhUAo318iRPSwbyVRIXRW0e6Fc7dBAG+0=","Source":"FuseGate","BasePath":"_content/FuseGate","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

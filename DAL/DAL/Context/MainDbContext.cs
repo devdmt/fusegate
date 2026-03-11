@@ -6,7 +6,6 @@ using System.Data;
 using Microsoft.AspNetCore.Identity;
 using DAL.Model;
 using DAL.Models.Interfaces;
-using DAL.Model.Safaricom;
 namespace DAL
 {
     

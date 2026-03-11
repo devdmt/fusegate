@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema.Generation.TypeMappers;
 using NSwag;
 using NSwag.AspNetCore;
+using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
 using API.Infrastructure.OpenApi;
+using NJsonSchema.Generation;
 namespace API.Infrastructure.OpenApi
 {
     internal static class Startup
@@ -76,18 +78,36 @@ namespace API.Infrastructure.OpenApi
                     document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor());
                     document.OperationProcessors.Add(new SwaggerGlobalAuthProcessor());
 
-                    document.TypeMappers.Add(new PrimitiveTypeMapper(typeof(TimeSpan), schema =>
-                    {
-                        schema.Type = NJsonSchema.JsonObjectType.String;
-                        schema.IsNullableRaw = true;
-                        schema.Pattern = @"^([0-9]{1}|(?:0[0-9]|1[0-9]|2[0-3])+):([0-5]?[0-9])(?::([0-5]?[0-9])(?:.(\d{1,9}))?)?$";
-                        schema.Example = "02:00:00";
-                    }));
+                    // Implement a custom TimeSpan schema processor instead of using a lambda or abstract interface
+                   // document.SchemaSettings.SchemaProcessors.Add(new TimeSpanSchemaProcessor());
 
                     document.OperationProcessors.Add(new SwaggerHeaderAttributeProcessor());
 
-                    var fluentValidationSchemaProcessor = serviceProvider.CreateScope().ServiceProvider.GetService<FluentValidationSchemaProcessor>();
-                    document.SchemaProcessors.Add(fluentValidationSchemaProcessor);
+                    // Add the TimeSpanSchemaProcessor class definition (internal)
+                    // It's best to put this class at the end of the file, or in a separate file, but for clarity:
+                    //
+                    // internal class TimeSpanSchemaProcessor : ISchemaProcessor
+                    // {
+                    //     public void Process(NJsonSchema.JsonSchema schema, SchemaProcessorContext context)
+                    //     {
+                    //         if (context.Type == typeof(TimeSpan))
+                    //         {
+                    //             schema.Type = NJsonSchema.JsonObjectType.String;
+                    //             schema.IsNullableRaw = true;
+                    //             schema.Pattern = @"^([0-9]{1}|(?:0[0-9]|1[0-9]|2[0-3])+):([0-5]?[0-9])(?::([0-5]?[0-9])(?:.(\d{1,9}))?)?$";
+                    //             schema.Example = "02:00:00";
+                    //         }
+                    //     }
+                    // }
+
+
+                    // Add FluentValidation schema processor so validation rules appear in the OpenAPI schema
+                    using var scope = serviceProvider.CreateScope();
+                    var fluentValidationSchemaProcessor = scope.ServiceProvider.GetService<FluentValidationSchemaProcessor>();
+                    if (fluentValidationSchemaProcessor is not null)
+                    {
+                        document.SchemaSettings.SchemaProcessors.Add(fluentValidationSchemaProcessor);
+                    }
                 });
                 services.AddScoped<FluentValidationSchemaProcessor>();
             }
@@ -100,11 +120,11 @@ namespace API.Infrastructure.OpenApi
             if (config.GetValue<bool>("SwaggerSettings:Enable"))
             {
                 app.UseOpenApi();
-                app.UseSwaggerUi3(options =>
+                app.UseSwaggerUi(options =>
                 {
-                    options.DefaultModelsExpandDepth = -1;
+                    //options.DefaultModelsExpandDepth = -1;
                     options.DocExpansion = "none";
-                    options.TagsSorter = "alpha";
+                    //options.TagsSorter = "alpha";
                     if (config["SecuritySettings:Provider"].Equals("AzureAd", StringComparison.OrdinalIgnoreCase))
                     {
                         options.OAuth2Client = new OAuth2ClientSettings

@@ -1,0 +1,2 @@
+module: SendCreditwaveSMSAsync  Info:  {"success":false,"message":"Authentication required","error":"Provide client_id and client_secret using HTTP Basic Authentication"}  26/02/2026 06:56:24
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0226034648282-CC99AD7B","delivery_status":"Queued"},"message":"SMS received and is being processed"}  26/02/2026 06:56:34

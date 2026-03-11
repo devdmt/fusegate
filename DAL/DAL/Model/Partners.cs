@@ -1,5 +1,7 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace DAL.Model
 {
     public class Partners: Auditable
@@ -12,5 +14,5 @@ namespace DAL.Model
         public bool Active { get; set; } = true;
 
     }
-   
+  
 }

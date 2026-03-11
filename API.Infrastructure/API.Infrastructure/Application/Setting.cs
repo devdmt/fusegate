@@ -24,7 +24,7 @@ namespace API.Infrastructure.Application;
             " ,[Responded] =@Responded ,[Failed] =@Failed ,[ErrorMsg] =@ErrorMsg,RespondedOn=getdate()  WHERE Id=@Id ";
             var parameters = new
             {
-                RequestName = request.Response,
+                Response = request.Response,
                 Responded = request.Responded,
                 Failed = request.Failed,
                 ErrorMsg = request.ErrorMsg,
@@ -39,15 +39,74 @@ namespace API.Infrastructure.Application;
             LogRequests(ex.Message + "|" + ex.StackTrace, "PensionOnboardingError", RequestType.Error);
         }
         }
+
+            // A general-purpose function to calculate age from a date string supporting multiple formats.
+                        // Returns a tuple: (int age, bool success)
+                     public    (int Age, bool Success) CalculateAge(string input)
+                        {
+                            if (string.IsNullOrWhiteSpace(input))
+                                return (0, false);
+
+                            // Attempt to handle if input is year only
+                            if (int.TryParse(input, out int yearOnly))
+                            {
+                                // Year must be reasonable (between 1900 and current year)
+                                int thisYear = DateTime.Now.Year;
+                                if (yearOnly > 1900 && yearOnly <= thisYear)
+                                {
+                                    int age = thisYear - yearOnly;
+                                    return (age, true);
+                                }
+                                else
+                                {
+                                    return (0, false);
+                                }
+                            }
+
+                            // Potential date formats to try
+                            var formats = new[]
+                            {
+                                "dd-MM-yyyy", "yyyy-MM-dd", "dd-MMM-yyyy", "dd-MM-yy", "d-M-yyyy", "d-MMM-yyyy",
+                                "yyyy/MM/dd", "dd/MM/yyyy", "MM/dd/yyyy", "M/d/yyyy", "d/MM/yyyy", "dd.MM.yyyy",
+                                "d.M.yyyy", "MMM dd, yyyy"
+                            };
+
+                            DateTime dob;
+                            bool parsed = DateTime.TryParseExact(
+                                input,
+                                formats,
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None,
+                                out dob);
+
+                            if (!parsed)
+                            {
+                                // Try general parse as last resort
+                                if (!DateTime.TryParse(input, out dob))
+                                    return (0, false);
+                            }
+
+                            DateTime today = DateTime.Today;
+                            int age2 = today.Year - dob.Year;
+                            if (dob > today.AddYears(-age2)) age2--;
+
+                            if (age2 < 0) // in case of bad future dates
+                                return (0, false);
+
+                            return (age2, true);
+                        }
     public async Task<string> AddRequest(ApiRequestsDTO apiRequestsDTO)
         {
             try
             {
-             var Id= Guid.NewGuid().ToString(); 
+             var Id= Guid.NewGuid().ToString();
             string insertQuery = "INSERT INTO [dbo].[ApiRequests](Id,[RequestName] ,[RequestType] " +
-                ",[ApiName] ,[PayLoad],[CreatedOn] ,[IP] " +
-                ")VALUES (@Id,@RequestName ,@RequestType ,@ApiName ,@PayLoad  " +
-                ",getdate() ,@IP);";
+                ",[ApiName] ,[PayLoad],[IP],[CreatedOn] " +
+                ")VALUES ('" + Id + "','" + apiRequestsDTO.RequestName + "','" + (int)apiRequestsDTO.RequestType + "','" + apiRequestsDTO.ApiName + "'" +
+                ",'" +  apiRequestsDTO.PayLoad + "','" + apiRequestsDTO.IP + "',getdate())";
+                //"" +
+                //",@RequestName ,@RequestType ,@ApiName ,@PayLoad  " +
+                //",@IP);";
                 var parameters = new
                 {
                     Id= Id,
@@ -58,7 +117,7 @@ namespace API.Infrastructure.Application;
                     IP = apiRequestsDTO.IP
 
                 };
-                 await _db.Connection.ExecuteScalarAsync(insertQuery, parameters);
+                 await _db.Connection.ExecuteScalarAsync(insertQuery);
                 return Id;
 
             } catch (Exception ex)
@@ -69,7 +128,7 @@ namespace API.Infrastructure.Application;
         }
     public  string GenerateRadomCode(int length = 8)
     {
-             string Alphabet = "ABCDEFGHIJKLMN0PQRSTUVWXYZ23456789"; // no 0,O,1,I
+             string Alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0,O,1,I
         Span<char> code = stackalloc char[length];
         for (int i = 0; i < length; i++)
         {

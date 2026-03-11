@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DAL.Model;
+using DAL.Model.Pensioner;
+using DAL.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using Microsoft.AspNetCore.Identity;
-using DAL.Model;
-using DAL.Models.Interfaces;
-using DAL.Model.Safaricom;
+
 namespace DAL
 {
    
@@ -17,8 +18,15 @@ namespace DAL
         public DbSet<APIUSER> user { get; set; }
         public DbSet<Partners> Partners { get; set; }       
         public DbSet<MsureRequests> msureRequests { get; set; }
-        public DbSet<Customers> customers { get; set; }
-      
+        public DbSet<PensionCustomer> customers { get; set; }
+        public DbSet<MpesaSettings> mpesaSettings { get; set; }
+        public DbSet<MpesaToken> mpesaToken { get; set; }
+        public DbSet<PensionerBeneficiaries> beneficiaries { get; set; }
+        public DbSet<PensionerBalanceRequest>  pensionerBalanceRequests { get; set; }
+        public DbSet<PensionerFund> PensionerFund { get; set; } 
+          public DbSet<ContributionSettings> contributionSettings { get; set; }
+        public DbSet<Contributions> Contributions { get; set; }
+        public DbSet<PensionerGurdian>  gurdians { get; set; }
         //public DbSet<LabourCost> LabourCosts { get; set; }
         public AkibappDbContext(DbContextOptions<AkibappDbContext> options) : base(options)
         { }
@@ -32,6 +40,9 @@ namespace DAL
             //  builder.Entity<TransactionsUploadTemp>().Property(e => e.Key).ValueGeneratedNever();
             builder.Entity<APIUSER>().ToTable("APIUSERS");
             builder.Entity<Customers>().ToTable("Customers").HasKey(a => a.Id);
+            builder.Entity<PensionerFund>().ToTable("PensionerFund").HasKey(a => a.Id);
+            builder.Entity<Contributions>().ToTable("Contributions").HasKey(a => a.Id);
+            builder.Entity<ContributionSettings>().ToTable("ContributionSettings").HasKey(a => a.Id);
 
 
         }

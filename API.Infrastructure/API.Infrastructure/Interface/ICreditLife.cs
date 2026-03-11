@@ -1,5 +1,6 @@
 ﻿
 using DAL.ModelView;
+using DAL.ModelView.CreditLife;
 
 
 namespace API.Infrastructure.Interface
@@ -9,5 +10,6 @@ namespace API.Infrastructure.Interface
         Task<ResponseDTO> OnboardingRequest(CreditLifeDTO onboardingDto);
         Task<ResponseDTO> ProcessRequest(MsureDTO msureDTO);
         Task<List<ProductDTO>> GetProducts(string partnerCode);
+        Task<QuoteResponseDTO> GetQuote(QuoteRequestDTO request,string partnerCode);
     }
 }

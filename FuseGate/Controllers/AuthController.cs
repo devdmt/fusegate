@@ -5,6 +5,7 @@ using EsbJson.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using DAL.ModelView;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IPP.EsbJson.API.Controllers
 {
@@ -27,6 +28,7 @@ namespace IPP.EsbJson.API.Controllers
         [HttpPost("GenerateToken")]
         [ProducesResponseType(typeof(AuthResponse), 200)]
         [ProducesResponseType(typeof(ErrorResult), 401)]
+        [AllowAnonymous]
         public async Task<IActionResult> GenerateToken()
         {
             var authHeader = Request.Headers[HeaderNames.Authorization].FirstOrDefault();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,13 +12,23 @@ using System.Threading.Tasks;
 namespace DAL.ModelView.Pension
 {
 
-    public class BalanceDTORequest
+    /// <summary>
+    /// Request DTO for initiating a balance request. Used by BalanceRequest.
+    /// Config: Otp:Length (default 6), Otp:ExpiryMinutes (default 5).
+    /// </summary>
+    
+     public class BalanceDTORequest
     {
-           [Required(ErrorMessage ="Customer Id required")]
-          public string CustomerId { get; set; }
-        [Required(ErrorMessage ="Customer Id required")]
-          public ProductTypes ProductType { get; set; } 
-     
+        [Required(ErrorMessage = "Member number is required")]
+        public string MemberNumber { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Partner code is required")]
+        public string PartnerCode { get; set; } = string.Empty;
+
+        /// <summary>Optional agent code for audit; defaults to empty if not provided.</summary>
+        public string? AgentCode { get; set; }
+
+        public ProductTypes ProductType { get; set; }
     }
       public class ViewBalanceDTORequest
     {
@@ -33,10 +43,10 @@ namespace DAL.ModelView.Pension
     public class contributeDTO
     {
       
-        public string CustomerId { get; set; }
+        public string MemberNo { get; set; }
         public ProductTypes ProductType { get; set; }
         public double? Amount { get; set; }
-        public PaymentMode paymentMode { get; set; } = PaymentMode.Mpesa;  
+        //public PaymentMode paymentMode { get; set; } = PaymentMode.Mpesa;  
         public string? phoneNumber { get; set; }
         public string? PaymentReference { get; set; }
         public string callbackUrl { get; set; }
@@ -65,17 +75,28 @@ namespace DAL.ModelView.Pension
         public string MonthlyReturn { get; set; }   
        // public string Bonus { get; set; }   
     }
-    public class PensionOnboardResponseDTO : ResponseDTO
+    public class BeneficiaryResponseDTO : ResponseDTO
     {
         public string BeneficiaryNo { get; set; }
     }
     public class PensionBeneficiaryDTO
     {
-        public List<ProductTypes> productType { get; set; } 
-        public string customerId { get; set; } 
+       // public List<ProductTypes> productType { get; set; } 
+        public string memberNo { get; set; } 
         public List<BeneficiaryDetailsDTO> beneficiaryDetails { get; set; }
 
     }
+  
+    //public class TransferDTO
+    //{
+    //    public string MemberNo { get; set; }
+    //    public string? EmployerName { get; set; }    
+    //    public string? HrEmail { get; set; }
+    //    public string? PensionProvider { get; set; }
+    //    public string YearOfEmployment { get; set; }
+    //    public string? AdditionalInformation { get; set; }
+    //    public string callbackUrl { get; set; }
+    //}
      public class ActivatePensionDTO
     {
         public string CustomerId { get; set; }
@@ -99,16 +120,18 @@ namespace DAL.ModelView.Pension
     }
         public class BeneficiaryDetailsDTO
     {
+        public string? BeneficiaryCode { get; set; }
         [Required(ErrorMessage = "Firstname is required.")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Othernames required.")]
         public string OtherNames { get; set; }
         public string? IDNumber { get; set; }
         public string? Relationship { get; set; }
-        [Required(ErrorMessage = "PhoneNumber is required.")]
-        public string phoneNumber { get; set; }
-        public double Share { get; set; }
-       // public GuardianDetailsDTO? guardianDetailsDTO { get; set; }
+        [Required(ErrorMessage = "Date Of Birth is required.")]
+        public string Date_Of_Birth { get; set; }
+        public string? phoneNumber { get; set; }
+        public double Percentage { get; set; }
+       public GuardianDetailsDTO? guardianDetailsDTO { get; set; }
     }
      public class GuardianDetailsDTO
     {
@@ -116,11 +139,49 @@ namespace DAL.ModelView.Pension
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Othernames required.")]
         public string OtherNames { get; set; }
-        public string? IDNumber { get; set; }
+           [Required(ErrorMessage = "Othernames required.")]
+        public string IDNumber { get; set; }
+            [Required(ErrorMessage = "Othernames required.")]
+        public string Date_Of_Birth { get; set; }
         public string? Relationship { get; set; }
-        [Required(ErrorMessage = "PhoneNumber is required.")]
-        public string phoneNumber { get; set; }
-        public double Share { get; set; }
+      public string? GuardianCode { get; set; } 
+       // [Required(ErrorMessage = "PhoneNumber is required.")]
+        //public string phoneNumber { get; set; }
+    
+    }
+    public class PensionQuoteResponse
+    {
+        public string DateOfBirth { get; set; }
+        public int CurrentAge { get; set; }
+        public string RetirementAge { get; set; }
+        public double TotalPot { get; set; }
+        public double DesiredRetirementIncome { get; set; }
+        public int Age { get; set; }
+        public bool Success { get; set; }
+        public string Error { get; set; }
+
+    }
+    public class PensionCalculatorDTO
+    {
+        [Required]
+        public string Phonenumber { get; set; }
+        [Required]
+        public string DateOfBirth { get; set; }
+        public interestGrowthRate InterestGrowthRate { get; set; } = interestGrowthRate.guaranteed;
+        public ContributionFrequency frequency { get; set; }
+        public double StartingContribution { get; set; } = 0;
+        public double MonthlyContribution { get; set; } =0;
+        public int RetireAge { get; set; } = 1;
+        public double RetireIncome { get; set; } = 0;
+
+    }
+public enum interestGrowthRate
+    {
+        guaranteed,moderate,aggressive
+    }
+    public enum ContributionFrequency
+    {
+       daily, weekly, monthly,once
     }
         public class PensionOnboardingDTO 
     {
@@ -182,11 +243,11 @@ namespace DAL.ModelView.Pension
        [EnumMember(Value = "Group")]  Group
     }
       [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum ProductTypes
+    public enum     ProductTypes
     {
        [EnumMember(Value = "IPP")] IPP,
       // [EnumMember(Value = "Umbrella")] Umbrella,
-       [EnumMember(Value = "PRMS")] PRMS,
+       [EnumMember(Value = "PRMF")] PRMF,
        [EnumMember(Value = "NSSF")] NSSF,
     }
 

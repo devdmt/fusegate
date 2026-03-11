@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mapster;
 using DAL.Model;
-using API.Infrastructure.Common.Services;
+//using API.Infrastructure.Common.Services;
 using Microsoft.EntityFrameworkCore;
 using API.Infrastructure.Auth.Jwt;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Dapper;
 using System.Runtime.InteropServices;
 using YamlDotNet.Core;
+using API.Infrastructure.Interface;
 
 namespace API.Infrastructure.Auth.Services
 {
@@ -25,11 +26,13 @@ namespace API.Infrastructure.Auth.Services
         private readonly ApplicationDbContext _db;
         private readonly IEncryptionService _enc;
         private readonly SecuritySettings _security;
-        public PartnerManager(ApplicationDbContext db, IEncryptionService service, IOptions<SecuritySettings> options)
+        readonly Isettings _isettings;
+        public PartnerManager(ApplicationDbContext db, IEncryptionService service, IOptions<SecuritySettings> options, Isettings isettings)
         {
             _db = db;
             _enc = service;
             _security = options.Value;
+            _isettings = isettings;
         }
 
         public async Task<AuthResponse> AuthenticatePartner(UserLoginDTO userLogin)
@@ -50,8 +53,10 @@ namespace API.Infrastructure.Auth.Services
                     " where ConsumerKey='"+ consumerKey +"'");
                 if (authuser != null)
                 {
+
                     string partnercode = (string)_db.Connection.ExecuteScalar("select [PartnerCode] as partnercode " +
                         "from [dbo].[Partners] where Id='" + authuser.PartnerId + "' ");
+                     _isettings.LogRequests(partnercode, "Partner code AuthenticatePartner", RequestType.Error);
                     //check the password
                     byte[] encsalt = Convert.FromBase64String(authuser.Salt);
                      string salt =  Encoding.UTF8.GetString(encsalt);
@@ -64,12 +69,14 @@ namespace API.Infrastructure.Auth.Services
                 {
                     
                     new Claim("partnerId",partnercode),
+                    new Claim("UserVal",authuser.Id),
                    // new Claim("info",customer.CustomerInfoCustId),
                    new Claim("Name",authuser.FullName),
                         };
                         string token = GenerateEncryptedToken(GetSigningCredentials(), authClaims);
                         response.ExpireTime = _security.jwtSettings.TokenExpirationInMinutes;
                         response.Token = token;
+                        response.partnerCode = partnercode;
                        response.RefreshToken = "";
                     }   
                 }
@@ -77,7 +84,7 @@ namespace API.Infrastructure.Auth.Services
             }
             catch (Exception ex)
             {
-
+ _isettings.LogRequests(ex.Message, "AuthenticatePartner", RequestType.Error);
             }
             return response;
         }
@@ -150,9 +157,10 @@ namespace API.Infrastructure.Auth.Services
                 //  consumerSecret= 
                 var newUser = new APIUSER()
                 {
-                    ConsumerKey = consumerKey,
-                    Salt = saltKey,
-                    ConsumerSecret = consumerSecret,
+                     Id=Guid.NewGuid().ToString(),
+                    ConsumerKey =  Convert.ToBase64String(Encoding.UTF8.GetBytes(consumerKey)),
+                    Salt = Convert.ToBase64String(Encoding.UTF8.GetBytes(saltKey)),
+                    ConsumerSecret = _enc.EncryptText(consumerSecret, saltKey),//consumerSecret,
                     PasswordHash = _enc.EncryptText(consumerSecret, saltKey),
                     FullName = partnerUser.FullName,
                     IpAddress = partnerUser.IpAddress,
@@ -172,7 +180,7 @@ namespace API.Infrastructure.Auth.Services
             }
             catch (Exception ex)
             {
-
+                
             }
             return response;
         }

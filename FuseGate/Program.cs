@@ -1,7 +1,10 @@
 using API.Infrastructure;
+using API.Infrastructure.Application.HealthDeclaration;
 using API.Infrastructure.ClaimEngine;
+using FluentValidation;
 using Sanlam.Configurations;
 using Serilog;
+using System.Text.Json.Serialization;
 
 Log.Logger = new LoggerConfiguration()
    .WriteTo.Console()
@@ -20,7 +23,9 @@ try
         .ReadFrom.Configuration(ctx.Configuration));
 
     //builder.Services.AddHostedService<TransactionAsync>();  
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+    builder.Services.AddValidatorsFromAssemblyContaining<HealthDeclarationRequestValidator>();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle  
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

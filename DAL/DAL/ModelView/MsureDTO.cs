@@ -36,7 +36,24 @@ namespace DAL.ModelView
         other
 
     }
-  
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum IDType
+    {
+        [EnumMember(Value = "NationalID")]
+        NationalID,
+        [EnumMember(Value = "Passport")]
+        Passport,
+        [EnumMember(Value = "MilitaryId")]
+        MilitaryId,
+        [EnumMember(Value = "AllienId")]
+        AllienId,
+        [EnumMember(Value = "driverlicence")] 
+        DriverLicense
+
+    }
+     
+
     public class ProductDTO
     {
         public int Id { get; set; }
