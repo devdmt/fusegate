@@ -8,28 +8,29 @@ namespace DAL.ModelView
 {
     public class ApiRequestsDTO
     {
-
-
-       
         public string? RequestName { get; set; }
         public int? RequestType { get; set; }
         public string? ApiName { get; set; }
         public string? PayLoad { get; set; }
         public string? IP { get; set; }
+        public string? PartnerCode { get; set; }
+        public string? PartnerName { get; set; }
+        public string? Response { get; set; }
+        public int? ResponseCode { get; set; }
+    }
 
-    }
-    public enum ApiRequestType 
+    public enum ApiRequestType
     {
-    Create,Update, Delete, Query
+        Create, Update, Delete, Query
     }
+
     public class UpdateRequestsDTO
     {
         public string Id { get; set; }
         public string? Response { get; set; }
-
         public bool? Responded { get; set; }
         public bool? Failed { get; set; }
         public string? ErrorMsg { get; set; }
-
+        public int? ResponseCode { get; set; }
     }
 }

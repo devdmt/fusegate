@@ -151,8 +151,8 @@ D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\rjimswa.dswa.
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\rjsmrazor.dswa.cache.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\rjsmcshtml.dswa.cache.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\staticwebassets.build.json.cache
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260303.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260304.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260305.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260310.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260311.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260728.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260813.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260826.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260908.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Release\net8.0\Logs\logs20260909.json

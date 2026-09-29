@@ -7,8 +7,10 @@ internal static class Startup
 {
     internal static IServiceCollection AddBackgroundServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddHttpClient(nameof(CallBackResponseProcessingBackgroundService));
         services.Configure<SmsProcessingOptions>(config.GetSection(SmsProcessingOptions.SectionName));
         services.AddHostedService<SmsProcessingBackgroundService>();
+        services.AddHostedService<CallBackResponseProcessingBackgroundService>();
         return services;
     }
 }

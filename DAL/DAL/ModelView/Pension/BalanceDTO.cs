@@ -1,3 +1,4 @@
+using DAL.Model.Pensioner;
 using System;
 
 namespace DAL.ModelView.Pension

@@ -2,8 +2,10 @@ using API.Infrastructure;
 using API.Infrastructure.Application.HealthDeclaration;
 using API.Infrastructure.ClaimEngine;
 using FluentValidation;
+using Microsoft.AspNetCore.HttpOverrides;
 using Sanlam.Configurations;
 using Serilog;
+using System.Net;
 using System.Text.Json.Serialization;
 
 Log.Logger = new LoggerConfiguration()
@@ -21,7 +23,18 @@ try
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()
         .ReadFrom.Configuration(ctx.Configuration));
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor |
+        ForwardedHeaders.XForwardedProto;
 
+    // Replace with the real IP of your NGINX server if different
+    options.KnownProxies.Add(IPAddress.Parse("127.0.0.1"));
+
+    // Default is 1, which is fine for client -> nginx -> app
+    options.ForwardLimit = 1;
+});
     //builder.Services.AddHostedService<TransactionAsync>();  
     builder.Services.AddControllers()
         .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));

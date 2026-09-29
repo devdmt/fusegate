@@ -1,3 +1,4 @@
+using DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -39,12 +40,28 @@ namespace DAL.ModelView.Pension
 
 
     }
-
+      public class TransactionStatusDTO
+    {
+     public string? ErrorMsg { get; set; }
+         public bool Success { get; set; }
+         public bool Approved { get; set; }=false;
+        public string? TransactionStatus { get; set; }   
+        public string? FinalizedTime { get; set; }
+        public string? TransactionId { get; set; }
+        public string? PaymentGatewayReference  { get; set; }
+     }
+    public class ContributionStatusRequest 
+    {
+        public Productenum ProductType { get; set; }
+        public double Amount { get; set; }
+        public string TransactionReference { get; set; }
+         public string? TimeOutUrl { get; set; }
+    }
     public class contributeDTO
     {
       
         public string MemberNo { get; set; }
-        public ProductTypes ProductType { get; set; }
+        public Productenum ProductType { get; set; }
         public double? Amount { get; set; }
         //public PaymentMode paymentMode { get; set; } = PaymentMode.Mpesa;  
         public string? phoneNumber { get; set; }
@@ -156,6 +173,7 @@ namespace DAL.ModelView.Pension
         public string RetirementAge { get; set; }
         public double TotalPot { get; set; }
         public double DesiredRetirementIncome { get; set; }
+        public double TotalInterest { get; set; } 
         public int Age { get; set; }
         public bool Success { get; set; }
         public string Error { get; set; }
@@ -236,14 +254,14 @@ public enum interestGrowthRate
         public string Contact_Phone { get; set; }
     }
 
-     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum CustomerType
-    {
-       [EnumMember(Value = "Individual")]  Individual,
-       [EnumMember(Value = "Group")]  Group
-    }
+    // [JsonConverter(typeof(JsonStringEnumConverter))]
+    //public enum CustomerType
+    //{
+    //   [EnumMember(Value = "Individual")]  Individual,
+    //   [EnumMember(Value = "Group")]  Group
+    //}
       [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum     ProductTypes
+    public enum     ProductTypes    
     {
        [EnumMember(Value = "IPP")] IPP,
       // [EnumMember(Value = "Umbrella")] Umbrella,

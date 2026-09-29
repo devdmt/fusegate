@@ -9,15 +9,16 @@ using DAL.ModelView.Pension;
 using Dapper;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;    
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using DAL.Model.Pensioner;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 namespace API.Infrastructure.Application.Pension
 {
@@ -85,16 +86,117 @@ namespace API.Infrastructure.Application.Pension
 
                 return (age,true,""); // Per original spec: Add 1 to calculated age
             }
+
+
+
+
+
+        public  PensionQuoteResponse CalculateCompoundInterest(
+            decimal contributionAmount,
+            decimal oneTimeCont,
+            decimal annualRate,
+            decimal desiredRetirementIncome,
+            string DateOfBirth,
+            int retirementAge,
+            string type = "both",
+            string frequency = "Monthly")
+        {
+            int periodsPerYear = frequency switch
+            {
+                "Daily" => 365,
+                "Weekly" => 52,
+                "Monthly" => 12,
+                _ => 12
+            };
+
+            var periodRate = (decimal)(
+                Math.Pow((double)(1 + annualRate / 100), 1.0 / periodsPerYear) - 1.0
+            );
+
+            decimal recurringContribution = contributionAmount;
+            decimal oneTimeContribution = oneTimeCont;
+            decimal futureValue = 0m;
+
+            if (type == "both")
+                futureValue = oneTimeContribution;
+
+            if (type == "Recurring")
+                futureValue = recurringContribution;
+
+            if (type == "One-time")
+                futureValue = oneTimeContribution;
+
+            decimal interestEarned = 0m;
+
+            int periods = 0;
+            int currentAge = 0;
+            if (!string.IsNullOrEmpty(DateOfBirth))
+            {
+                var dobResult = CalculateAge(DateOfBirth);
+                if (dobResult.success)
+                {
+                     currentAge = dobResult.age;
+                    // Default retirement age, adjust as per business logic or add as parameter if needed                   
+                    int yearsToRetirement = retirementAge - currentAge;
+                    periods = yearsToRetirement * periodsPerYear;
+                    if (periods < 0) periods = 0;
+                }
+                else
+                {
+                    periods = 0;
+                }
+            }
+            else
+            {
+                periods = 0;
+            }
+    
+
+
+            for (int i = 0; i < periods; i++)
+            {
+                decimal periodInterest = futureValue * periodRate;
+
+                if (type != "One-time")
+                    futureValue += recurringContribution + periodInterest;
+                else
+                    futureValue += periodInterest;
+
+                interestEarned += periodInterest;
+            }
+
+            if (type == "Recurring")
+                futureValue -= recurringContribution;
+            // Convert futureValue and interestEarned to two decimal places
+            futureValue = Math.Round(futureValue, 2);
+            interestEarned = Math.Round(interestEarned, 2);
+    
+
+            return new PensionQuoteResponse()
+            {
+                 Age= currentAge,
+                 RetirementAge= retirementAge.ToString(),
+                 DateOfBirth= DateOfBirth,
+                 CurrentAge= currentAge,
+                 DesiredRetirementIncome= (double)desiredRetirementIncome,
+                 TotalInterest= (double)interestEarned,
+                 TotalPot= (double)futureValue,
+                 Success= true
+            };
+        }
         
         public async Task<PensionQuoteResponse> GetQuote(PensionCalculatorDTO request)
         {
+        
             var response= new PensionQuoteResponse();
             try
             {
                    double monthlycontribution = 0;
+                   double totalcontribution = 0;
                 double contributions = request.MonthlyContribution;
                 int retirementAge = request.RetireAge;
                 int currentage = 0;
+                string contributionMode = "Monthly";
                 var ageresult = CalculateAge(request.DateOfBirth);
                 if (!ageresult.success)
                 {
@@ -103,6 +205,7 @@ namespace API.Infrastructure.Application.Pension
                     return response;
                 }
                 currentage = ageresult.age;
+                totalcontribution = request.StartingContribution;
                 switch (request.frequency)
                 {
                     case  ContributionFrequency.daily:
@@ -115,6 +218,10 @@ namespace API.Infrastructure.Application.Pension
                     case  ContributionFrequency.monthly:
                         monthlycontribution = contributions;
                         
+                        break;
+                        case ContributionFrequency.once:
+                            totalcontribution = request.StartingContribution;
+                        contributionMode = "One-time";
                         break;
                     default:
                          monthlycontribution = contributions * 30;
@@ -135,7 +242,8 @@ namespace API.Infrastructure.Application.Pension
                 }
                 
                 //double.TryParse(res.request, out monthlycontribution);
-                var amt = await CalculateTRP(monthlycontribution, retirementAge, currentage, 0, rate, "Monthly");
+                var amt = await CalculateTRP(monthlycontribution, retirementAge,
+                    currentage,totalcontribution, rate,contributionMode);
                 response.TotalPot = amt;
                 response.DateOfBirth = request.DateOfBirth;
                 response.DesiredRetirementIncome = request.RetireIncome;
@@ -203,14 +311,14 @@ namespace API.Infrastructure.Application.Pension
         }
 
         double interestEarned = 0;
-
-        for (int i = 0; i < months; i++)
+        
+ for (int i = 0; i < months; i++)
         {
             double periodInterest = futureValue * monthlyRate;
 
             if (type != "One-time")
             {
-                futureValue += (monthlyContribution + periodInterest);
+                futureValue += (oneTimeContribution + periodInterest);
             }
             else
             {
@@ -218,7 +326,9 @@ namespace API.Infrastructure.Application.Pension
             }
 
             interestEarned += periodInterest;
-        }
+        
+            }
+           
 
         if (type == "Monthly")
         {
@@ -232,16 +342,18 @@ namespace API.Infrastructure.Application.Pension
         return (retirementAge - currentAge) * 12;
     }
 
-        public async Task<OnboardResponse> OnboardingRequest(PensionOnboardingDTO request, string Ip, string PartnerId)
+        public async Task<OnboardResponse> OnboardingRequest(PensionOnboardingDTO request, string Ip, string PartnerId, string partnerName,string PartnerCode)
         { 
            
         var response = new OnboardResponse();
             string requestId = "";
             try
             {
-             requestId= await _settings.AddRequest( new ApiRequestsDTO() { ApiName="/api/v1/pension/oboarding", IP=Ip,
-                    PayLoad = JsonConvert.SerializeObject(BuildAuditPayload(request)), RequestName="OnboardingRequest", RequestType=(int)ApiRequestType.Create});
-                   var util = PhoneNumberUtil.GetInstance();
+             //requestId= await _settings.AddRequest( new ApiRequestsDTO() { ApiName="/api/v1/pension/oboarding", IP=Ip,
+             //       PayLoad = JsonConvert.SerializeObject(BuildAuditPayload(request)), RequestName="OnboardingRequest",
+             //    RequestType=(int)ApiRequestType.Create});
+                  
+                var util = PhoneNumberUtil.GetInstance();
         // Set default region to Kenya (KE) for phone number parsing
         var parsed = util.Parse(request.PhoneNumber, "KE");
         
@@ -254,7 +366,7 @@ namespace API.Infrastructure.Application.Pension
                 }
 
                 var idNumberExists = await _akiba.Connection.ExecuteScalarAsync<int>(
-                    "SELECT COUNT(1) FROM [dbo].[Customers] WHERE [Idnumber] = @Idnumber and Active='1'",
+                    "SELECT COUNT(1) FROM [dbo].[Customers] WHERE [Idnumber] = @Idnumber",
                     new { Idnumber = request.IDNumber }
                 ) > 0;
 
@@ -266,7 +378,7 @@ namespace API.Infrastructure.Application.Pension
                     return response;
                 }
                  var phoneNumberExists = await _akiba.Connection.ExecuteScalarAsync<int>(
-                    "SELECT COUNT(1) FROM [dbo].[Customers] WHERE right(PhoneNumber,9) = @PhoneNumber and Active='1'", new {PhoneNumber = parsed.NationalNumber.ToString() }) > 0;
+                    "SELECT COUNT(1) FROM [dbo].[Customers] WHERE right(PhoneNumber,9) = @PhoneNumber", new {PhoneNumber = parsed.NationalNumber.ToString() }) > 0;
 
                 if (phoneNumberExists)
                 {
@@ -275,7 +387,57 @@ namespace API.Infrastructure.Application.Pension
                     response.ResponseId = string.Empty;
                     return response;
                 }
-                 
+                   string userId = "";
+                do { userId =  Guid.NewGuid().ToString(); }
+while (_akiba.Connection.ExecuteScalar<int>("select " +
+"count(1) from [dbo].[Accounts] where [Id]='"+ userId +"'") >0);
+                ;
+              
+
+                string insertUserQuery = @"
+                    INSERT INTO Accounts
+                        (Id,Email, PhoneNumber, UserName, FirstName, LastName,  PinSalt,
+                         PinHash, PhoneNumberConfirmed, EmailConfirmed, IsActive, Created, CreatedBy,
+                          Deleted,TwoFactorEnabled,LockoutEnabled,AcountVerified,ConfirmedOn,RegisterChannel,SecurityStamp)
+                    VALUES
+                        (@Id, @Email, @PhoneNumber, @UserName, @FirstName, @LastName,  @PinSalt, @PinHash, 
+                        @PhoneNumberConfirmed, @EmailConfirmed, @IsActive, @Created, @CreatedBy, @Deleted,'0','0','0'
+                         ,getdate(),@channel,NEWID());
+                ";
+
+                await _akiba.Connection.ExecuteScalarAsync(
+                    insertUserQuery,
+                new
+                    {
+                     Email = request.Email,
+                    PhoneNumber = parsed.NationalNumber.ToString(),
+                    UserName = request.Email,
+                    FirstName = request.FirstName,
+                    LastName = request.OtherNames ?? "",
+                    PasswordHash = "",
+                    CountryCode =  "+254",
+
+                        Id = userId,
+                        PinSalt = "",
+                        PinHash = "",
+                        PhoneNumberConfirmed = false,
+                        EmailConfirmed = false,
+                        IsActive = true,
+                        Created = DateTime.UtcNow,
+                        CreatedBy = "",
+                        Deleted = (DateTime?)null,
+                        channel=(int)RegistrationChannel.Web
+                      
+                    }
+                );
+                var customerroles = new CustomerRoles
+                {
+                    RoleId = CustomerRoleId.customer,
+                    UserId = userId
+                };
+
+                await _akiba.customerRoles.AddAsync(customerroles);
+                await _akiba.SaveChangesAsync();
                 
                 string countrycode=parsed.CountryCode.ToString();
               string customerId=Guid.NewGuid().ToString();
@@ -300,9 +462,9 @@ while (await _akiba.Connection.ExecuteScalarAsync<int>("select " +
                     " , " +
                     " [Residency] ,[CountryCode] " +
                     ",[RefferalCode] " +
-                    ",[RegisterChannel]) VALUES (@Id,@Fullname,@CustomerType,@DateOfBirth,@Email,@PhoneNumber,@KRAPin,@AddressLine1,getdate(),@CreatedBy,@CreatedFromIP," +
+                    ",[RegisterChannel],UserId) VALUES (@Id,@Fullname,@CustomerType,@DateOfBirth,@Email,@PhoneNumber,@KRAPin,@AddressLine1,getdate(),@CreatedBy,@CreatedFromIP," +
                     "@Approved,@Confirmed,@ApprovalStatus,@Firstname,@Lastname,@MemberNumber,@Gender,@Idnumber," +
-                    "@Residency,@CountryCode,@RefferalCode,@RegisterChannel)";
+                    "@Residency,@CountryCode,@RefferalCode,@RegisterChannel,@UserId)";
                 var customerPayload = new
                 {
                     Id = customerId,
@@ -332,9 +494,31 @@ while (await _akiba.Connection.ExecuteScalarAsync<int>("select " +
                     request.Residency,
                     CountryCode = countrycode,
                     RefferalCode = referalcode,
-                    RegisterChannel = (int)RegistrationChannel.API
+                    RegisterChannel = (int)RegistrationChannel.API,
+                    UserId=userId
                 };
                 await _akiba.Connection.ExecuteAsync(addcustomerQuery, customerPayload);
+
+               
+                
+
+                   
+                        const string addCustomerPartnerQuery = "INSERT INTO [dbo].[PartnerCustomers] " +
+                            "([CustomerId],[PartnerId],[PartnerCode],[PartnerName],[AgentCode],[Created],[MemberRef]) " +
+                            "VALUES (@CustomerId,@PartnerId,@PartnerCode,@PartnerName,@AgentCode,@Created,@MemberRef)";
+
+                        await _akiba.Connection.ExecuteAsync(addCustomerPartnerQuery, new
+                        {
+                            CustomerId = customerId,
+                            PartnerId = PartnerId,
+                            PartnerCode,
+                            partnerName,
+                            AgentCode = request.Agent_code ?? string.Empty,
+                            Created = DateTime.Now,
+                            MemberRef = memberNo
+                        });
+                  
+              
 foreach(var product in request.Product_Type)
 {
 
@@ -371,7 +555,8 @@ foreach(var product in request.Product_Type)
             }
             catch (Exception ex)
             {
-                  _settings.UpdateRequest(new UpdateRequestsDTO() { ErrorMsg = ex.Message, Failed = true, 
+                Console.Error.WriteLine($"Error in OnboardingRequest: {ex.Message}\n{ex.StackTrace}");
+                _settings.UpdateRequest(new UpdateRequestsDTO() { ErrorMsg = ex.Message, Failed = true, 
                     Id = requestId, Responded = true, Response = JsonConvert.SerializeObject(response) });
                 _settings.LogRequests( ex.Message + "|" + ex.StackTrace,"PensionOnboardingError",RequestType.Error);
                 // throw new RecovXException(ex.Message);
@@ -405,5 +590,18 @@ foreach(var product in request.Product_Type)
             var suffix = safeUnmasked == 0 ? string.Empty : value[^safeUnmasked..];
             return new string('*', maskedLength) + suffix;
         }
+    }
+
+           public class CompoundInterestResult
+{
+    public decimal TotalInterest { get; set; }
+    public decimal TotalAmount { get; set; }
+}
+
+    public class DistributionPartnerDetails
+    {
+        public int Id { get; set; }
+        public string? PartnerCode { get; set; }
+        public string? PartnerName { get; set; }
     }
 }

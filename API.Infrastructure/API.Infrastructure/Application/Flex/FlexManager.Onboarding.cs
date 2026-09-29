@@ -161,6 +161,7 @@ namespace API.Infrastructure.Application.Flex
 
                     await _db.SaveChangesAsync();
                     await InsertCustomerProductAsync(customerWithIdNumber.Id,(int)Productenum.flex,Guid.NewGuid().ToString().Replace("-",""),0);
+                    await AddCustomerPartnerAsync(customerWithIdNumber.Id, PartnerId, customerWithIdNumber.MemberNo);
                     return new OnboardResponse { Success = true, ErrorMsg = "Customer information updated successfully." };
                 }
                 else
@@ -228,7 +229,8 @@ namespace API.Infrastructure.Application.Flex
                     await _db.SaveChangesAsync();
                     string trnId = Guid.NewGuid().ToString().Replace("-", "");
                     await InsertCustomerProductAsync(newCustomer.Id,(int)Productenum.flex,trnId,0);
-                    return new OnboardResponse { 
+                    await AddCustomerPartnerAsync(newCustomer.Id, PartnerId, newCustomer.MemberNo);
+                    return new OnboardResponse {
                         Success = true,
                         ErrorMsg = "Customer added successfully.",
                         MemberNo=newCustomer.MemberNo, 
@@ -283,8 +285,53 @@ namespace API.Infrastructure.Application.Flex
             return new ResponseDTO { Success = false, ErrorMsg = ex.Message };
         }
     }
+
+    private async Task AddCustomerPartnerAsync(string customerId, string partnerCode, string? memberRef)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(partnerCode))
+            {
+                return;
+            }
+
+            var distributionPartner = await _db.Connection.QueryFirstOrDefaultAsync<DistributionPartnerDetails>(
+                "SELECT [Id],[PartnerCode],[PartnerName] FROM [dbo].[Partners] WHERE [PartnerCode] = @PartnerCode",
+                new { PartnerCode = partnerCode });
+
+            if (distributionPartner == null)
+            {
+                _isettings.LogRequests($"Distribution partner not found for PartnerCode {partnerCode}", "AddCustomerPartnerAsync", Interface.RequestType.Info);
+                return;
+            }
+
+            const string addCustomerPartnerQuery = "INSERT INTO [dbo].[PartnerCustomers] " +
+                "([CustomerId],[PartnerId],[PartnerCode],[PartnerName],[AgentCode],[Created],[MemberRef]) " +
+                "VALUES (@CustomerId,@PartnerId,@PartnerCode,@PartnerName,@AgentCode,@Created,@MemberRef)";
+
+            await _db.Connection.ExecuteAsync(addCustomerPartnerQuery, new
+            {
+                CustomerId = customerId,
+                PartnerId = distributionPartner.Id,
+                distributionPartner.PartnerCode,
+                distributionPartner.PartnerName,
+                AgentCode = string.Empty,
+                Created = DateTime.Now,
+                MemberRef = memberRef ?? string.Empty
+            });
+        }
+        catch (Exception ex)
+        {
+            _isettings.LogRequests($"Error in AddCustomerPartnerAsync: {ex.Message}", "AddCustomerPartnerAsync", Interface.RequestType.Error);
+        }
+    }
     }
 
-
+    public class DistributionPartnerDetails
+    {
+        public int Id { get; set; }
+        public string? PartnerCode { get; set; }
+        public string? PartnerName { get; set; }
+    }
 
 }

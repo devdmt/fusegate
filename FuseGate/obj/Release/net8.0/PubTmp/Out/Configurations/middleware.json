@@ -1,6 +1,7 @@
 {
   "MiddlewareSettings": {
     "EnableHttpsLogging": false,
-    "EnableLocalization": true
+    "EnableLocalization": true,
+    "EnableApiRequestAudit": true
   }
 }

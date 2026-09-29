@@ -192,6 +192,32 @@
   },
   {
     "ContainingType": "FuseGate.Controllers.MSure.InsureController",
+    "Method": "GetContributionStatus",
+    "RelativePath": "api/v1/insure/getcontributionstatus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.Pension.ContributionStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.ResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.MSure.InsureController",
     "Method": "GetMyProducts",
     "RelativePath": "api/v1/insure/getmyproducts",
     "HttpMethod": "POST",
@@ -345,6 +371,32 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "req",
+        "Type": "DAL.ModelView.Pension.PensionCalculatorDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.ResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
+    "Method": "GetQuote2",
+    "RelativePath": "api/v1/pension/getquote2",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
         "Name": "withdrawal",
         "Type": "DAL.ModelView.Pension.PensionCalculatorDTO",
         "IsRequired": true
@@ -446,17 +498,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "DAL.ModelView.ResponseDTO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "IPP.EsbJson.API.Controllers.Pension.PensionController",
@@ -566,5 +608,37 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.Pension.PaymentsController",
+    "Method": "ProcessPensionSTKResult",
+    "RelativePath": "processresult",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "api-version",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.Pension.PaymentsController",
+    "Method": "ProcessInsureSTKResult",
+    "RelativePath": "processresult/processinsurestkresult",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "api-version",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

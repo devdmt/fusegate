@@ -167,10 +167,16 @@ namespace EsbJson.API.Migrations
                     b.Property<bool>("IsLocked")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MemberNo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("OtherNames")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartnerBeneficiaryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartnerResponseCode")
@@ -210,6 +216,300 @@ namespace EsbJson.API.Migrations
                     b.ToTable("Beneficiaries", (string)null);
                 });
 
+            modelBuilder.Entity("DAL.Model.CallBackResponse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("CallbackProcessed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CallbackUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Callbackerror")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrelationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PartnerCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ProcessResponse")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Productenum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Request")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Responded")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RespondedAT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CallBackResponse", (string)null);
+                });
+
+            modelBuilder.Entity("DAL.Model.Contribution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Acknowledged")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("AcknowledgedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("CompletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CustomerProductId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ErrorCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FailedReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("MemberNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Narration")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("PartnerId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PaymentGatewayRef")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("PaymentMode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentReference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Processed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Product")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductRef")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RefNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contribution", (string)null);
+                });
+
+            modelBuilder.Entity("DAL.Model.CustomerApiLeads", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("MonthlyContribution")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Names")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("PartnerCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("ProductEnum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RetirementAge")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("StartingContribution")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerApiLeads", (string)null);
+                });
+
+            modelBuilder.Entity("DAL.Model.CustomerProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool?>("Activated")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ActivationMode")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AgentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Complete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Filebytes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Filelocation")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsPicked")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("MailSentOn")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("MailSentOn");
+
+                    b.Property<DateTime?>("NextRetryPeriod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("PaymentComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("PaymentCompletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Processed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Product")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("RequestCreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RequestSource")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RetryCount")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Validated")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ValidationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ValidationErrorCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ValidationErrors")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("customerProducts");
+                });
+
             modelBuilder.Entity("DAL.Model.Customers", b =>
                 {
                     b.Property<string>("Id")
@@ -218,20 +518,17 @@ namespace EsbJson.API.Migrations
                     b.Property<string>("AdditionalSourceOfIncome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AverageIncomeId")
-                        .HasColumnType("int");
+                    b.Property<double?>("AverageIncome")
+                        .HasColumnType("float");
 
                     b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Complete")
+                    b.Property<bool?>("Complete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DateOfBirth")
                         .HasColumnType("nvarchar(max)");
@@ -243,6 +540,12 @@ namespace EsbJson.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmploymentTerms")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Gender")
@@ -260,11 +563,14 @@ namespace EsbJson.API.Migrations
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("MailSent")
+                    b.Property<bool?>("MailSent")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("MailSentOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("MemberNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("Modified")
                         .HasColumnType("bit");
@@ -294,13 +600,13 @@ namespace EsbJson.API.Migrations
                     b.Property<string>("PolicyPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Processed")
+                    b.Property<bool?>("Processed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("RecordProcessed")
+                    b.Property<bool?>("RecordProcessed")
                         .HasColumnType("bit");
 
                     b.Property<string>("RequestDate")
@@ -327,17 +633,14 @@ namespace EsbJson.API.Migrations
                     b.Property<string>("SourceOfIncome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Stage")
+                    b.Property<int?>("Stage")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Step")
+                    b.Property<int?>("Step")
                         .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaxIdNumber")
                         .HasColumnType("nvarchar(max)");
@@ -360,6 +663,192 @@ namespace EsbJson.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.FuneralExpenseOnboarding", b =>
+                {
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AgentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CallbackUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MonthlyIncomeRange")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PolicyStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuoteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Residency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SignatureBase64")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MemberId");
+
+                    b.ToTable("FuneralExpenseOnboardings");
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.MemberHealth", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("ChronicConditions")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DrugOrAlcoholAbuse")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ExistingConditions")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HeartOrCirculation")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("ImmuneOrViral")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MemberId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PriorDeclinedInsurance")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("QuoteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Respiratory")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Senses")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Wellness")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MemberHealths");
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.MemberPayment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("MpesaNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentContributionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PaymentMode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentReference")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentContributionId");
+
+                    b.ToTable("MemberPayments");
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.PaymentContribution", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CallbackUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentContributions");
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.PolicyActivation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MemberId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SignatureBase64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PolicyActivations");
                 });
 
             modelBuilder.Entity("DAL.Model.Guardian", b =>
@@ -388,6 +877,9 @@ namespace EsbJson.API.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("DateOfBirth")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DeletedById")
                         .HasColumnType("nvarchar(max)");
 
@@ -396,9 +888,6 @@ namespace EsbJson.API.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Dob")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -530,6 +1019,239 @@ namespace EsbJson.API.Migrations
                     b.ToTable("CustomerHealthDeclarationAnswers", (string)null);
                 });
 
+            modelBuilder.Entity("DAL.Model.LastExpense.FuneralExpenseQuotation", b =>
+                {
+                    b.Property<string>("QuoteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("AccidentialDeath")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AgentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CallbackUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CompensationLevy")
+                        .HasColumnType("float");
+
+                    b.Property<double>("CoverPremium")
+                        .HasColumnType("float");
+
+                    b.Property<decimal?>("CriticalIllness")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CustomerPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Maturity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("NaturalDeath")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PTDAccidental")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PTDNatural")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PartnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentFrequency")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PolicyFee")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PolicyTerm")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PolicyType")
+                        .HasColumnType("int");
+
+                    b.Property<double>("SumAssured")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalPremium")
+                        .HasColumnType("float");
+
+                    b.HasKey("QuoteId");
+
+                    b.ToTable("FuneralExpenseQuotations");
+                });
+
+            modelBuilder.Entity("DAL.Model.LastExpense.OTPOnboarding", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailPlaceHolder")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("ISsent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UsedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OTPOnboardings");
+                });
+
+            modelBuilder.Entity("DAL.Model.MpesaSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AppName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuthCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("B2CUtilityAccountAvailableFunds")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("B2CWorkingAccountAvailableFunds")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConsumerKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConsumerSecret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("DefaultPaybill")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DeletedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GrantType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MpesaUsername")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaybillId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaybillName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaybillPass")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phonenumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Registered")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SaltKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityCredential")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Shortcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueURLCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("paybillType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("mpesaSettings");
+                });
+
+            modelBuilder.Entity("DAL.Model.MpesaToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Access_token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Expires_in")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MpesaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("createdon")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("paybillid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MpesaId");
+
+                    b.ToTable("mpesaToken");
+                });
+
             modelBuilder.Entity("DAL.Model.MsureRequests", b =>
                 {
                     b.Property<string>("Id")
@@ -578,6 +1300,95 @@ namespace EsbJson.API.Migrations
                     b.HasIndex("ProductsId");
 
                     b.ToTable("msureRequests");
+                });
+
+            modelBuilder.Entity("DAL.Model.OTP", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailPlaceHolder")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EmailTemplateType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("ISSMSSent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ISsent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsEmailSent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LinkCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("LinkGenerated")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phonenumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductRef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SendTrial")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SentError")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UsedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UsedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("isEmailPicked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("notificationType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OTPs", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Model.Partners", b =>
@@ -658,25 +1469,61 @@ namespace EsbJson.API.Migrations
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("PartnerId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PartnerId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("PartnerId1")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PartnerId1");
+                    b.HasIndex("PartnerId");
 
-                    b.ToTable("PartnersProducts");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("partnersProducts");
+                });
+
+            modelBuilder.Entity("DAL.Model.Products", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Emailtemplate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prefix")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("productenum")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("DAL.Model.Beneficiaries", b =>
@@ -688,6 +1535,15 @@ namespace EsbJson.API.Migrations
                     b.Navigation("Guardian");
                 });
 
+            modelBuilder.Entity("DAL.Model.FuneralExpense.MemberPayment", b =>
+                {
+                    b.HasOne("DAL.Model.FuneralExpense.PaymentContribution", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("PaymentContributionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DAL.Model.HealthDeclaration.CustomerHealthDeclarationAnswer", b =>
                 {
                     b.HasOne("DAL.Model.HealthDeclaration.CustomerHealthDeclaration", "Declaration")
@@ -697,6 +1553,17 @@ namespace EsbJson.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Declaration");
+                });
+
+            modelBuilder.Entity("DAL.Model.MpesaToken", b =>
+                {
+                    b.HasOne("DAL.Model.MpesaSettings", "Mpesa")
+                        .WithMany()
+                        .HasForeignKey("MpesaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mpesa");
                 });
 
             modelBuilder.Entity("DAL.Model.MsureRequests", b =>
@@ -720,11 +1587,20 @@ namespace EsbJson.API.Migrations
                 {
                     b.HasOne("DAL.Model.Partners", "Partner")
                         .WithMany()
-                        .HasForeignKey("PartnerId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PartnerId");
+
+                    b.HasOne("DAL.Model.Products", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Partner");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DAL.Model.FuneralExpense.PaymentContribution", b =>
+                {
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("DAL.Model.HealthDeclaration.CustomerHealthDeclaration", b =>

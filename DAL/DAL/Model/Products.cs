@@ -53,12 +53,12 @@ namespace DAL.Model
         creditlife=1,
         [EnumMember(Value = "lastexpense")]
         lastexpense=2,
-       [EnumMember(Value = "nssf")]
-        nssf=3,
-       [EnumMember(Value = "prmf")]
-        prmf=4,
-        [EnumMember(Value = "ipp")]
-        ipp=5,
+       [EnumMember(Value = "NSSF")]
+        NSSF=3,
+       [EnumMember(Value = "PRMF")]
+        PRMF=4,
+        [EnumMember(Value = "IPP")]
+        IPP=5,
          [EnumMember(Value = "flex")]
         flex=6
     }

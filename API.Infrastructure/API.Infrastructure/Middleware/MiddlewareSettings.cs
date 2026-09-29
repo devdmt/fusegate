@@ -4,4 +4,5 @@ public class MiddlewareSettings
 {
     public bool EnableHttpsLogging { get; set; } = true;
     public bool EnableLocalization { get; set; } = false;
+    public bool EnableApiRequestAudit { get; set; } = false;
 }

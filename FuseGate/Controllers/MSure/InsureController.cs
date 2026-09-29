@@ -3,11 +3,14 @@ using API.Infrastructure.Common;
 using API.Infrastructure.Interface;
 using API.Infrastructure.OpenApi;
 using DAL.Core.Interface;
+using DAL.Model;
 using DAL.ModelView;
 using DAL.ModelView.Flex;
 using DAL.ModelView.HealthDeclaration;
+using DAL.ModelView.Pension;
 using EsbJson.Controllers;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FuseGate.Controllers.MSure
@@ -38,10 +41,11 @@ namespace FuseGate.Controllers.MSure
             {
 
                 var partnerCode = GetPartnerCode();
-                if (partnerCode == null) {
-
-                    return BadRequest("Invalid credentials");
-                
+                var tokenPartnerCode = _currentUsers.PartnerCode();
+                if (string.IsNullOrEmpty(partnerCode) || !string.Equals(partnerCode, tokenPartnerCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    _logger.LogWarning("Partner code mismatch on GetMyProducts. Token: {TokenPartnerCode}, Header: {HeaderPartnerCode}", tokenPartnerCode, partnerCode);
+                    return BadRequest("Invalid partner code");
                 }
 
                 var result = await _iflexManager.GetMyProducts(partnerCode);
@@ -84,12 +88,14 @@ namespace FuseGate.Controllers.MSure
         }
         [HttpPost("GetQuote/FlexEducator")]
         [PartnerCodeHeader]
+        [AllowAnonymous]
         public async Task<IActionResult> GetQuote([FromBody] RateSDTO rateSDTO)
         {
             try
             {
-                var partnerCode = GetPartnerCode();
-                var result = await _iflexManager.CalculateRates(rateSDTO);
+                
+               // var partnerCode = GetPartnerCode();
+                var result = await _iflexManager.CalculateRates(rateSDTO,Productenum.flex);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -104,6 +110,13 @@ namespace FuseGate.Controllers.MSure
             try
             {
                 var partnerCode = GetPartnerCode();
+                var tokenPartnerCode = _currentUsers.PartnerCode();
+                if (string.IsNullOrEmpty(partnerCode) || !string.Equals(partnerCode, tokenPartnerCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    _logger.LogWarning("Partner code mismatch on Onboarding. Token: {TokenPartnerCode}, Header: {HeaderPartnerCode}", tokenPartnerCode, partnerCode);
+                    return BadRequest("Invalid partner code");
+                }
+
                 var claim= User.Claims.FirstOrDefault(c => c.Type == "client_id")?.Value;
                 var result = await _iflexManager.OnBoarding(customer, partnerCode);
                 return Ok(result);
@@ -114,7 +127,7 @@ namespace FuseGate.Controllers.MSure
             }
         }
 
-    
+
          [HttpPost("beneficiaries")]
         
     public async Task<IActionResult> AddBeneficiary([FromBody] BeneficiaryCreateDTO dto)
@@ -156,11 +169,50 @@ namespace FuseGate.Controllers.MSure
             }
             return BadRequest("Error processing request");
     }
-               [HttpPost("Contribute")]
+
+         [HttpPost("GetContributionStatus")]
+        [ProducesResponseType(typeof(ResponseDTO), 200)]
+        [PartnerCodeHeader]
+        public async Task<IActionResult> GetContributionStatus(ContributionStatusRequest request)
+        {
+            try
+            {
+                var partnerCode = GetPartnerCode();
+                var tokenPartnerCode = _currentUsers.PartnerCode();
+                if (string.IsNullOrEmpty(partnerCode) || !string.Equals(partnerCode, tokenPartnerCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    _logger.LogWarning("Partner code mismatch on GetContributionStatus. Token: {TokenPartnerCode}, Header: {HeaderPartnerCode}", tokenPartnerCode, partnerCode);
+                    return BadRequest("Invalid partner code");
+                }
+
+                var response = await _iflexManager.GetContributionStatus(request);
+                return Ok(response);
+            } catch(Exception ex)
+            {
+
+                return BadRequest("Unable to process your request. Please try again."+ex.Message);
+            }
+        }
+
+        [HttpPost("Contribute")]
+        [PartnerCodeHeader]
     public async Task<IActionResult> Contribute([FromBody] ContributeDTO dto)
     {
+           
+        var partnerCode = GetPartnerCode();
+        var tokenPartnerCode = _currentUsers.PartnerCode();
+        if (string.IsNullOrEmpty(partnerCode) || !string.Equals(partnerCode, tokenPartnerCode, StringComparison.OrdinalIgnoreCase))
+        {
+            _logger.LogWarning("Partner code mismatch on Contribute. Token: {TokenPartnerCode}, Header: {HeaderPartnerCode}", tokenPartnerCode, partnerCode);
+            return BadRequest("Invalid partner code");
+        }
 
-            return BadRequest("Error processing request");
+        var response = await _iflexManager.Contribute(dto, partnerCode);
+        if (!response.Success)
+        {
+            return BadRequest(response);
+        }
+        return Ok(response);
     }
 
           [HttpPost("{memberno}/health-declaration")]

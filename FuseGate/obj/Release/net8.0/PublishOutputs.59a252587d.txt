@@ -12,11 +12,11 @@ D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Co
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Configurations\security.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Configurations\securityheaders.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Configurations\signalr.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260303.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260304.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260305.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260310.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260311.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260728.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260813.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260826.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260908.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\Logs\logs20260909.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\FuseGate.dll
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\FuseGate.runtimeconfig.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Release\net8.0\PubTmp\Out\FuseGate.pdb

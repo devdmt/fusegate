@@ -140,7 +140,8 @@ namespace API.Infrastructure.Application.Flex
                 await _db.SaveChangesAsync();
 
                 response.Success = true;
-                response.AddError("validation field", "Activation completed successfully.");
+                    response.ErrorMsg = "Activation completed successfully.";
+                //response.AddError("validation field", "Activation completed successfully.");
                 return response;
             }
             else if (customerProduct.ActivationMode == (int)ActivationMode.Signature)
@@ -203,7 +204,7 @@ namespace API.Infrastructure.Application.Flex
                 }
 
                 customerProduct.ActivationMode = (int)request.activationMode;
-
+                var customer = await _db.customers.Where(a => a.Id == customerProduct.CustomerId).FirstOrDefaultAsync();
                 if (request.activationMode == ActivationMode.OTP)
                 {
                     var otpCode = _isettings.GenerateRadomCode(6);
@@ -211,6 +212,7 @@ namespace API.Infrastructure.Application.Flex
                     {
                         Id = Guid.NewGuid(),
                         CustomerId = customerProduct.CustomerId,
+                         Phonenumber=customer?.PhoneNumber??"",
                         Code = otpCode,
                         Message = otpCode,
                          ProductRef=request.ProductRef,

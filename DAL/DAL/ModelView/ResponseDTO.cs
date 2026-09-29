@@ -61,7 +61,15 @@ namespace DAL.ModelView
             };
         }
     }
-
+    public class ContributionCallbackResponseDTO
+    { 
+        public string ErrorMsg { get; set; } = string.Empty;
+         public bool Success { get; set; }
+        public string RequestId { get; set; } = string.Empty;
+        public string TransactionId { get; set; } = string.Empty;
+        public string ProductRef { get; set; } = string.Empty;
+     
+    }
     public class ResponseDTO
     {
         public string ErrorMsg { get; set; } = string.Empty;

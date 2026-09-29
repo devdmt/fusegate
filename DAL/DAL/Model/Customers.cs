@@ -59,7 +59,7 @@ namespace DAL.Model
 
     // Group / Membership
     public bool? IsGroupMember { get; set; }
-    public bool? MemberNumber { get; set; }
+   // public bool? MemberNumber { get; set; }
     // Documents & Signatures
     public string? Signature { get; set; }
     public string? SignaturePath { get; set; }

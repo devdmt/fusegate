@@ -27,7 +27,7 @@
     "dbprovider": "mssql",
     "MainConnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=sanlamuat;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
     "MainConnectionstringEnvironmentVariable": "FUSEGATE__DB__MAIN",
-    "ESBConnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=FuseGate;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
+    "ESBConnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=fusegate;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
     "ESBConnectionstringEnvironmentVariable": "FUSEGATE__DB__ESB",
     "Akibaconnectionstring": "data source=MNDOGOH\\MNDOGOH;user id=sa;password=Unknown@123;initial catalog=akibalvs;integrated security=true;multipleactiveresultsets=true;TrustServerCertificate=True",
     "AkibaconnectionstringEnvironmentVariable": "FUSEGATE__DB__AKIBA",

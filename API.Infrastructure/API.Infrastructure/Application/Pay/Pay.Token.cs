@@ -75,7 +75,7 @@ namespace API.Infrastructure.Application.Pay
                 /// comment the above
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("Authorization", "Basic " + authcode + "");
-                var url = (string)await _akiba.Connection.ExecuteScalarAsync("SELECT Value from " +
+                var url = (string)await _db.Connection.ExecuteScalarAsync("SELECT Value from " +
                     " endpointssettings where endPointType =" +
                     (int)EndPointType.Mpesa_Token + ";");
                 if (url == null)

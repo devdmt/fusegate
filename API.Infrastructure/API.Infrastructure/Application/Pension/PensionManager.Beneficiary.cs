@@ -1,4 +1,4 @@
-﻿using API.Infrastructure.Interface;
+using API.Infrastructure.Interface;
 using Azure;
 using DAL.Model;
 using DAL.ModelView;
@@ -17,10 +17,9 @@ namespace API.Infrastructure.Application.Pension
 {
     internal partial class PensionManager
     {
-        public async Task<ResponseDTO<BeneficiaryDetailsDTO>> AddBeneficiaries(PensionBeneficiaryDTO pensionerBeneficiarieAddDTO)
+        public async Task<ResponseDTO<List<BeneficiaryDetailsDTO>>> AddBeneficiaries(PensionBeneficiaryDTO pensionerBeneficiarieAddDTO)
         {
-            var response = new ResponseDTO<BeneficiaryDetailsDTO>();
-            var responsebeneficiary = new BeneficiaryDetailsDTO();
+            var response = new ResponseDTO<List<BeneficiaryDetailsDTO>> { Result = new List<BeneficiaryDetailsDTO>() };
 
             try
             {
@@ -31,16 +30,17 @@ namespace API.Infrastructure.Application.Pension
                     return response;
                 }
 
-
-
-                long benefiaryId = 0;
-                long guardianId = 0;
-                string ssm = DateTime.Now.ToString("yy") + "-" + _settings.GenerateRadomCode(6);
-                var klbeneficiary = new KLBeneficiary();
-                var klguadian = new KLGuardian();
                 var pensionerdetails = await _akiba.Connection.QueryFirstOrDefaultAsync<PensionerDetails>("select" +
                     "  Convert(nvarchar(100),Id) as CustomerId,MemberNumber ,Fullname as PensionerName  from Customers where" +
                     " MemberNumber='" + pensionerBeneficiarieAddDTO.memberNo + "'");
+                if (pensionerdetails == null || string.IsNullOrWhiteSpace(pensionerdetails.CustomerId))
+                {
+                    response.Success = false;
+                    response.AddError("add beneficiary", "Member number was not found.");
+                    return response;
+                }
+
+                var customerId = Guid.Parse(pensionerdetails.CustomerId);
                 foreach (var beneficiary in pensionerBeneficiarieAddDTO.beneficiaryDetails)
                 {
                     var beneficiaries = new PensionerBeneficiaries();
@@ -67,7 +67,7 @@ namespace API.Infrastructure.Application.Pension
                         if (!string.IsNullOrWhiteSpace(beneficiary.IDNumber))
                         {
                             var existsByIdNumber = await _akiba.beneficiaries
-                                .AnyAsync(b => b.CustomerId == Guid.Parse(pensionerdetails.CustomerId)
+                                .AnyAsync(b => b.CustomerId == customerId
                                     && b.IdNumber == beneficiary.IDNumber);
                             if (existsByIdNumber)
                             {
@@ -115,7 +115,7 @@ namespace API.Infrastructure.Application.Pension
                         if (!string.IsNullOrWhiteSpace(beneficiary.phoneNumber))
                         {
                             var existsByPhone = await _akiba.beneficiaries
-                                .AnyAsync(b => b.CustomerId == Guid.Parse(pensionerdetails.CustomerId)
+                                .AnyAsync(b => b.CustomerId == customerId
                                     && b.Phone == beneficiary.phoneNumber);
                             if (existsByPhone)
                             {
@@ -128,7 +128,7 @@ namespace API.Infrastructure.Application.Pension
                         // check if dob is 18 years we need id
 
                         var existbeneficiary = await _akiba.beneficiaries.Where(a => a.CustomerId ==
-                   Guid.Parse(pensionerdetails.CustomerId)).ToListAsync();
+                   customerId).ToListAsync();
                         if (existbeneficiary.Count > 0)
                         {
                             int totalallocation = existbeneficiary.Sum(a => Convert.ToInt16(a.Percentage));
@@ -137,20 +137,24 @@ namespace API.Infrastructure.Application.Pension
                                 response.Success = false;
                                 response.AddError("Beneficiary", $"Your total beneficiary allocation exceed 100%");
                                 return response;
-                            }
+                            }   
                         }
 
 
                         beneficiaries = beneficiary.Adapt<PensionerBeneficiaries>();
+                        beneficiaries.Firstname = beneficiary.FirstName;
+                        beneficiaries.OtherNames = beneficiary.OtherNames;
+                        beneficiaries.Relationship = beneficiary.Relationship;
                         beneficiaries.Phone = beneficiary.phoneNumber;
-                        beneficiaries.CustomerId = Guid.Parse(pensionerdetails.CustomerId);
+                        beneficiaries.CustomerId = customerId;
                         beneficiaries.PartnerBeneficiaryCode = _settings.GenerateRadomCode(8);
                         beneficiaries.IdNumber = beneficiary.IDNumber;
                         beneficiaries.Date_of_birth = beneficiary.Date_Of_Birth;
+                        beneficiaries.Percentage = Convert.ToInt32(beneficiary.Percentage);
                         beneficiaries.Confirmed = true;
                         _akiba.beneficiaries.Add(beneficiaries);
                         await _akiba.SaveChangesAsync();
-                        responsebeneficiary = beneficiary.Adapt<BeneficiaryDetailsDTO>();
+                        var responsebeneficiary = beneficiary.Adapt<BeneficiaryDetailsDTO>();
                         responsebeneficiary.BeneficiaryCode = beneficiaries.PartnerBeneficiaryCode;
                         if (beneficiary.guardianDetailsDTO != null)
                         {
@@ -160,19 +164,25 @@ namespace API.Infrastructure.Application.Pension
                             if (guardianDto != null)
                             {
 
-
+                                //va
                                 var guardian = guardianDto.Adapt<PensionerGurdian>();
                                 guardian.BeneficiaryId = beneficiaries.Id; // Link guardian to beneficiary
                                 guardian.CustomerId = beneficiaries.CustomerId;
-                                _akiba.gurdians.Add(guardian);
+                                guardian.GuardianCode=_settings.GenerateRadomCode(8);
+                                guardian.DOB = guardianDto.Date_Of_Birth;
+                                guardian.IdNumber = guardianDto.IDNumber;
+                                guardian.Surname = guardianDto.OtherNames;
+                                guardian.Relationship = guardianDto.Relationship;
+
+                                _akiba.gurdian.Add(guardian);
                                 await _akiba.SaveChangesAsync();
 
-                                // Optionally map back to DTO for response
-                                var guardianResponseDto = guardian.Adapt<PensionerGurdian>();
+                                responsebeneficiary.guardianDetailsDTO = guardianDto.Adapt<GuardianDetailsDTO>();
+                                responsebeneficiary.guardianDetailsDTO.GuardianCode = guardian.GuardianCode;
 
                             }
                         }
-                        response.Result = responsebeneficiary;
+                        response.Result!.Add(responsebeneficiary);
                         response.Success = true;
 
                     }
@@ -180,27 +190,47 @@ namespace API.Infrastructure.Application.Pension
                     else
                     {
                         beneficiaries = await _akiba.beneficiaries.Where(a => a.PartnerBeneficiaryCode == beneficiary.BeneficiaryCode
-                        && a.CustomerId == Guid.Parse(pensionerdetails.CustomerId)).FirstOrDefaultAsync();
-                        if (beneficiary != null)
+                        && a.CustomerId == customerId).FirstOrDefaultAsync();
+                        if (beneficiaries != null)
                         {
-                            _akiba.Entry(beneficiary).CurrentValues.SetValues(beneficiary);
+                            beneficiaries.Firstname = beneficiary.FirstName;
+                            beneficiaries.OtherNames = beneficiary.OtherNames;
+                            beneficiaries.Relationship = beneficiary.Relationship;
+                            beneficiaries.Phone = beneficiary.phoneNumber;
+                            beneficiaries.IdNumber = beneficiary.IDNumber;
+                            beneficiaries.Date_of_birth = beneficiary.Date_Of_Birth;
+                            beneficiaries.Percentage = Convert.ToInt32(beneficiary.Percentage);
                             await _akiba.SaveChangesAsync();
-                            //var editedbe = beneficiary.Adapt<PensionerBeneficiariesDTO>();
-                            // response.ErrorMsg;
-
+                            var edited = beneficiary.Adapt<BeneficiaryDetailsDTO>();
+                            edited.BeneficiaryCode = beneficiaries.PartnerBeneficiaryCode;
+                            response.Result!.Add(edited);
                             response.Success = true;
+                        }
+                        else
+                        {
+                            response.Success = false;
+                            response.AddError("Beneficiary", "Beneficiary not found for update.");
+                            return response;
                         }
 
                         if (beneficiary.guardianDetailsDTO != null)
                         {
-                            var gurdians = await _akiba.gurdians.Where(a => a.GuardianCode == beneficiary.guardianDetailsDTO.GuardianCode).FirstOrDefaultAsync();
+                            if(string.IsNullOrEmpty(beneficiary.guardianDetailsDTO.GuardianCode))
+                            {
+                                response.Success = false;
+
+                        response.AddError("Beneficiary", $"No Guardian code on the record");
+                                return response;
+                            }
+                            var gurdians = await _akiba.gurdian.Where(a => a.GuardianCode == beneficiary.guardianDetailsDTO.GuardianCode).FirstOrDefaultAsync();
                             if (gurdians != null)
                             {
-                                _akiba.Entry(gurdians).CurrentValues.SetValues(beneficiary.guardianDetailsDTO);
+                                gurdians.Surname = beneficiary.guardianDetailsDTO.OtherNames;
+                                gurdians.OtherNames = beneficiary.guardianDetailsDTO.OtherNames;
+                                gurdians.IdNumber = beneficiary.guardianDetailsDTO.IDNumber;
+                                gurdians.DOB = beneficiary.guardianDetailsDTO.Date_Of_Birth;
+                                gurdians.Relationship = beneficiary.guardianDetailsDTO.Relationship;
                                 await _akiba.SaveChangesAsync();
-                                var editedgurdian = gurdians.Adapt<PensionerGurdian>();
-
-
                                 response.Success = true;
                             }
 
@@ -211,6 +241,8 @@ namespace API.Infrastructure.Application.Pension
             }
             catch (Exception ex)
             {
+                response.Success = false;
+                response.AddError("Beneficiary", $"an error occured while creating a beneficiary");
                 _settings.LogRequests(ex.Message, "AddBeneficiaries", RequestType.Error);
             }
             return response;

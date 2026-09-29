@@ -4,6 +4,7 @@ using DAL.Model;
 using DAL.Model.FuneralExpense;
 using DAL.Model.HealthDeclaration;
 using DAL.Model.LastExpense;
+using DAL.ModelView;
 
 using DAL.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,9 @@ namespace DAL
         public DbSet<PaymentContribution> PaymentContributions { get; set; }
         public DbSet<MemberPayment> MemberPayments { get; set; }
         public DbSet<CustomerProduct> customerProducts { get; set; }
+        public DbSet<Contribution> Contributions { get; set; }
+        public DbSet<CallBackResponse>  callBackResponse { get; set; }
+        public DbSet<CustomerApiLeads> CustomerApiLeads { get; set; }
         public DbSet<MpesaToken> mpesaToken { get; set; }
         public DbSet<Guardian> Guardians { get; set; }
         public DbSet<MpesaSettings> mpesaSettings { get; set; }
@@ -45,6 +49,28 @@ namespace DAL
         public DbSet<CustomerHealthDeclarationAnswer> CustomerHealthDeclarationAnswers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
+
+        /// <summary>
+        /// Shared partner lookup by PartnerCode or Id. Returns a slim DTO, or null if not found.
+        /// </summary>
+        public Task<PartnerLookupDTO?> GetPartnerAsync(string partnerKey)
+        {
+            if (string.IsNullOrWhiteSpace(partnerKey))
+                return Task.FromResult<PartnerLookupDTO?>(null);
+
+            var key = partnerKey.Trim();
+            return Partners
+                .AsNoTracking()
+                .Where(x => x.PartnerCode == key || x.Id.ToString() == key)
+                .Select(x => new PartnerLookupDTO
+                {
+                    Id = x.Id,
+                    PartnerCode = x.PartnerCode,
+                    PartnerName = x.PartnerName
+                })
+                .FirstOrDefaultAsync();
+        }
+
           public Task<PartnersProducts?> GetPartnerProductsAsync(string partnerCode)
         {
             // Using EF Core LINQ to mirror the provided SQL logic:
@@ -120,8 +146,25 @@ namespace DAL
             //  builder.Entity<TransactionsUploadTemp>().Property(e => e.Key).ValueGeneratedNever();
             builder.Entity<APIUSER>().ToTable("APIUSERS");
             builder.Entity<Customers>().ToTable("Customers").HasKey(a => a.Id);
+            builder.Entity<Contribution>(e =>
+            {
+                e.ToTable("Contribution");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Amount).HasPrecision(18, 2);
+            });
             builder.Entity<Guardian>().ToTable("Guardian").HasKey(a => a.Id);
             builder.Entity<Beneficiaries>().ToTable("Beneficiaries").HasKey(a => a.Id);
+            builder.Entity<CallBackResponse>().ToTable("CallBackResponse").HasKey(a => a.Id);
+
+            builder.Entity<CustomerApiLeads>(e =>
+            {
+                e.ToTable("CustomerApiLeads");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.StartingContribution).HasPrecision(18, 2);
+                e.Property(x => x.MonthlyContribution).HasPrecision(18, 2);
+            });
+
+           
             builder.Entity<OTP>().ToTable("OTPs").HasKey(a => a.Id);
             // Health declarations
             builder.Entity<CustomerHealthDeclaration>(e =>

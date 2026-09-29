@@ -58,8 +58,8 @@ namespace API.Infrastructure.Application.Pension
                 }
 
                 // 2) Confirm partner exists and is mapped to pension product (prmf or ipp)
-                var partnerProduct = await _db.GetPartnerProductsAsync(Productenum.ipp, partnerCode)
-                    ?? await _db.GetPartnerProductsAsync(Productenum.prmf, partnerCode);
+                var partnerProduct = await _db.GetPartnerProductsAsync(Productenum.IPP, partnerCode)
+                    ?? await _db.GetPartnerProductsAsync(Productenum.PRMF, partnerCode);
 
                 if (partnerProduct == null)
                 {

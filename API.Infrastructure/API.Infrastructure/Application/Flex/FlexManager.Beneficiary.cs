@@ -110,9 +110,9 @@ namespace API.Infrastructure.Application.Flex
                 {
                     Beneficiaries beneficiary;
                     GuardianCreateDTO? guardianEntity;
-                    var isUpdate = !string.IsNullOrEmpty(dto.BeneficiaryCode);
+                    var isUpdate = false;// !string.IsNullOrEmpty(dto.BeneficiaryCode);
                     // Check if the same MemberNo has a beneficiary with the same IdNumber
-                    if (!string.IsNullOrWhiteSpace(dto.IdNumber))
+                    if (!string.IsNullOrWhiteSpace(dto.IdNumber) && age.age>17)
                     {
                         var existingBeneficiary = await _db.Beneficiaries
                             .FirstOrDefaultAsync(b => b.MemberNo == dto.Memberno && b.IdNumber == dto.IdNumber)
@@ -198,6 +198,7 @@ namespace API.Infrastructure.Application.Flex
                             MemberNo = dto.Memberno,
                             Firstname = dto.Firstname,
                             OtherNames = dto.OtherNames,
+                             Surname= dto.Surname,
                             Relationship = dto.Relationship,
                             PartnerBeneficiaryCode = beneficiaryCode,
                             Percentage = dto.Percentage,

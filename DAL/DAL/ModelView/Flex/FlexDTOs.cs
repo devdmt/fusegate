@@ -1,4 +1,4 @@
-﻿using DAL.Model;
+using DAL.Model;
 using DAL.ModelView.LastExpense;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace DAL.ModelView.Flex
     }
       public class MainRateRiderResponse : RateResponse
     {
-        public List<RiderAmount>? Riders { get; set; }
+        public List<Benefits>? Benefits { get; set; }
     }
 
       public class RiderAmount
@@ -50,6 +50,8 @@ namespace DAL.ModelView.Flex
     {
         public int OptionId { get; set; }
         public string Description { get; set; }
+        public string? MainRate { get; set; }
+        public string? ExtendedRate { get; set; }
         public bool? HasGroup { get;set; }
     }
     public class RateResponse
@@ -98,20 +100,49 @@ namespace DAL.ModelView.Flex
        [EnumMember(Value = "death")] death=1,
         [EnumMember(Value = "criticalillness")]criticalillness=2,
         [EnumMember(Value = "disability")]disability=3,
-        [EnumMember(Value = "waiverretirement")]waiverretirement=4,
-        [EnumMember(Value = "waivercriticalillness")]waivercriticalillness=5,
-        [EnumMember(Value = "waiverdisability")]waiverdisability=6
+        [EnumMember(Value = "waiverretirement")]waiverretirement=4
+        //[EnumMember(Value = "waivercriticalillness")]waivercriticalillness=5,
+        //[EnumMember(Value = "waiverdisability")]waiverdisability=6
+    }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum BenefitType
+    {
+       [EnumMember(Value = "NaturalDeath")] NaturalDeath,
+        [EnumMember(Value = "AccidentalDeath")]AccidentalDeath,
+        [EnumMember(Value = "CriticalIllness")]CriticalIllness,
+        [EnumMember(Value = "PermanentTotalDisability")]PermanentTotalDisability,
+        [EnumMember(Value = "MaturityBenefit")]MaturityBenefit
+        //[EnumMember(Value = "WaiverCriticalIllness")]WaiverCriticalIllness=5,
+        //[EnumMember(Value = "WaiverDisability")]WaiverDisability=6
+    }
+    public class  Benefits
+    {
+        public string BenefitType { get; set; }
+        public double PayImmediately { get; set; }
+        public double Paypartial { get; set; }
+        public double PaySumAssured { get; set; }
+        public double TotalPayout { get; set; }
+        public List<PartialPayment>? PartialPayments { get; set; }
+    }
+    public class PartialPayment
+    {
+        public string Description { get; set; }
+        public double Amount { get; set; }
+    }
+    public class NaturalDeathBenefits 
+    {
+        public RiderType Amount { get; set; }
     }
     public class RateSDTO
     {
          
-        public Productenum ProductType { get; set; }
+      
         public float Sumassured { get; set; }
         public int Term { get; set; }
         public string DateOfBirth { get; set; }
         //public int MaturityNumber { get; set; }
         public int? DeathBenefits { get;set; }
-        public List<RiderType>? Riders { get; set; }
+        ///public List<RiderType>? Riders { get; set; }
        // public int? productId { get; set; }
         public Frequency frequency { get; set; } = Frequency.monthly;
       //  public Productenum  productenum { get; set; }

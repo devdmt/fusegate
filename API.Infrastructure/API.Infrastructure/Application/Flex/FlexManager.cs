@@ -1,10 +1,11 @@
-﻿using API.Infrastructure.Interface;
+using API.Infrastructure.Interface;
 using DAL;
 using DAL.Model;
 using DAL.Model.LastExpense;
 using DAL.ModelView;
 using DAL.ModelView.Flex;
 using DAL.ModelView.FuneralExpense;
+using DAL.ModelView.Pension;
 using Dapper;
 using Mapster;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 namespace API.Infrastructure.Application.Flex
@@ -19,15 +21,19 @@ namespace API.Infrastructure.Application.Flex
     internal partial class FlexManager:IflexManager
     {
         readonly ApplicationDbContext _db;
+        readonly AkibappDbContext _akiba;
         readonly Isettings _isettings;
         readonly ILogger<FlexManager> _logger;
     readonly IComunication _icomm;
-        public FlexManager(ApplicationDbContext db, Isettings isettings, ILogger<FlexManager> logger, IComunication icomm)
+        readonly IPay _ipay;
+        public FlexManager(ApplicationDbContext db, AkibappDbContext akiba, Isettings isettings, ILogger<FlexManager> logger, IComunication icomm, IPay ipay)
         {
             _db = db;
             _isettings = isettings;
             _logger = logger;
             _icomm = icomm;
+            _ipay = ipay;
+            _akiba = akiba;
         }
 
         // Validates if the input string is a valid phone number in E.164 or local formats (basic check)
@@ -387,7 +393,8 @@ VALUES
         {
             try
             {
-                string query = "SELECT [OptionId] as OptionId ,[Description] ,[isGroup] as HasGroup FROM [dbo].[LastExpense]" +
+                string query = "SELECT [OptionId] as OptionId ,[Description] ,[isGroup] as HasGroup," +
+                    "MainRate,ExtendedRate FROM [dbo].[LastExpense]" +
                     " where isGroup ='0'";
                 var result = await _db.Connection.QueryAsync<LastExpenseOptions>(query);
 
@@ -399,42 +406,49 @@ VALUES
             }
             return null;
         }
-     public async Task<RateResponse> CalculateLastExpense(LastExpenseCalcDTO request)
+     public async Task<RateResponse> CalculateLastExpense(LastExpenseCalcDTO lastExpenseRequest)
         {
             var ratersponse = new RateResponse();
             try
             {
-                int hasParent = 0;
+               int hasParent = 0;
                 int childcount = 0;
                 double total = 0;
-                if (request != null)
+                if (lastExpenseRequest != null)
                 {
                     //hasParent = (int)_db.Connection.ExecuteScalar("select count(1) as hasParent from fadhiliFamilyMembers a,[dbo].[relationShips] b " +
-                    //    "where a.relationShip=b.id and a.productId=" + request.productId + " and b.RelationType=" + (int)RelationType.parent + " ");
+                    //    "where a.relationShip=b.id and a.productId=" + lastExpenseRequest. + " and b.RelationType=" + (int)RelationType.parent + " ");
                     //childcount = (int)_db.Connection.ExecuteScalar("select count(1) as hasParent from fadhiliFamilyMembers a,[dbo].[relationShips] b " +
-                    //        "where a.relationShip=b.id and a.productId=" + request.productId + " and b.RelationType=" + (int)RelationType.child + " ");
+                    //        "where a.relationShip=b.id and a.productId=" + lastExpenseRequest.productId + " and b.RelationType=" + (int)RelationType.child + " ");
                    
                     //if (hasParent > 0)
                     //{
                     //    total = (double)await _db.Connection.ExecuteScalarAsync("select ExtendedRate from" +
-                    //        " [dbo].[LastExpenseNCBA] where OptionId=" + (int)request.optionType + " and isGroup='"+ request.group +"' ");
+                    //        " [dbo].[LastExpense] where OptionId=" + (int)lastExpenseRequest.optionType + " and isGroup='"+ lastExpenseRequest.group +"' ");
 
                     //}
                     //else
                     //{
                     //    total = (double)await _db.Connection.ExecuteScalarAsync("select MainRate from [dbo].[LastExpenseNCBA] where" +
-                    //        " OptionId=" + (int)request.optionType + " and isGroup='"+ request.group +"'");
+                    //        " OptionId=" + (int)lastExpenseRequest.optionType + " and isGroup='"+ lastExpenseRequest.group +"'");
                     //}
 
                     //if (childcount > 4)
                     //{
                     //    double childrates = ((double)await _db.Connection.ExecuteScalarAsync("select ChildRate from [dbo].[LastExpenseNCBA] where " +
-                    //        "OptionId=" + (int)request.optionType + " and isGroup='"+ request.group +"'") * (childcount - 4));
+                    //        "OptionId=" + (int)lastExpenseRequest.optionType + " and isGroup='"+ lastExpenseRequest.group +"'") * (childcount - 4));
                     //    total += childrates;
                     //}
                 }
+                ratersponse.Success = true; ;
+                ratersponse.Errormsg = "";
+                ratersponse.CoverPremium = total;
+                ratersponse.Processed = true;
+                ratersponse.TotalPremium = total;
+                return ratersponse;
+                }
 
-            }
+            
             catch (Exception ex)
             {
                 _isettings.LogRequests(ex.Message, "CalculateNCBALastExpense", RequestType.Error);
@@ -442,15 +456,14 @@ VALUES
             return ratersponse;
 
         }
-        public  async Task<MainRateRiderResponse> CalculateRates(RateSDTO rateSDTO)
+        public  async Task<MainRateRiderResponse> CalculateRates(RateSDTO rateSDTO,Productenum product)
         {
 
 
             var response = new MainRateRiderResponse();
             try
             {
-                if(rateSDTO.ProductType==Productenum.flex)
-                {
+                
                      var v_rate = _db.Connection.ExecuteScalar("select isnull([Rate],0) as v_rate from [dbo].[MainRates] where [MainRatesSAId]=(select top 1 Id from [dbo].[MainRatesSA]" +
                     " where  "+ rateSDTO.Sumassured +""
                     + " between FromAmt and ToAmt) and [MainTermsId]=(select Id from [dbo].[MainTerms] where [Term]=" + rateSDTO.Term + ") and productenum=" + (int)Productenum.flex + "");
@@ -484,7 +497,7 @@ VALUES
                     CurrentAge = agedetails.age.ToString(),
                     DateOfBirth = rateSDTO.DateOfBirth,
                     SumAssured = rateSDTO.Sumassured.ToString(),
-                    Product = rateSDTO.ProductType,
+                    Product = product,
                     OtherDetails = JsonConvert.SerializeObject(rateSDTO),
                     CreatedOn=DateTime.Now
                       
@@ -494,76 +507,76 @@ VALUES
                 double rate = Convert.ToDouble(v_rate);
                 var basicPremium = Math.Round(rate * (rateSDTO.Sumassured / 1000), 0);
                 string premiumquery = "SELECT [Id],[PolicyFee],[CompensationRate],[DiscountMonthly],[DiscountQuartely],[DiscountSemi],[DsicountAnuall] " +
-                    " FROM [dbo].[MainPremiumSettings] where Productenum=" + (int)rateSDTO.ProductType  + " and [DefaultSetup]='0'";
+                    " FROM [dbo].[MainPremiumSettings] where Productenum=" + (int)product  + " and [DefaultSetup]='0'";
                 var premiumsettings = await _db.Connection.QueryFirstOrDefaultAsync<PremiumSettings>(premiumquery);
-
+                var benefits = await GetBenefits(rateSDTO.Sumassured, rateSDTO.Term);
+                response.Benefits = benefits;
                 switch (rateSDTO.frequency)
                 {
                     case Frequency.monthly:
-                        var riders = await GetRiderAmount(rateSDTO, 1);
-                        response.Riders = riders;
+                       
+                       // response.Riders = riders;
                         response.Discount = Math.Round(premiumsettings.DiscountMonthly * basicPremium, 0);
                         response.CoverPremium = basicPremium - response.Discount;
                         response.PolicyFee = premiumsettings.PolicyFee;
-                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + response.PolicyFee + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
-                        response.TotalPremium = Math.Round(response.CoverPremium + response.PolicyFee + response.CompensationLevy, 0) + Math.Round(riders.Sum(a => a.Amount), 0);
+                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + response.PolicyFee), 0);
+                        response.TotalPremium = Math.Round(response.CoverPremium + response.PolicyFee + response.CompensationLevy, 0);
                         response.Success = true;
                         response.Processed = true;
                         return response;
                         break;
                     case Frequency.quarterly:
-                        riders = await GetRiderAmount(rateSDTO, 3);
-                        response.Riders = riders;
+                       
                         basicPremium = basicPremium * 3;
-                        response.Discount = Math.Round(premiumsettings.DiscountQuartely / 100 * (basicPremium + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
+                        response.Discount = Math.Round(premiumsettings.DiscountQuartely / 100 * (basicPremium), 0);
                         response.CoverPremium = basicPremium - response.Discount;
                         response.PolicyFee = premiumsettings.PolicyFee * 3;
-                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium - response.Discount + response.PolicyFee + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
-                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy + Math.Round(riders.Sum(a => a.Amount), 0);
+                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium - response.Discount + response.PolicyFee), 0);
+                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy;
                         response.Success = true;
                         response.Processed = true;
                         return response;
                         break;
                     case Frequency.halfyearly:
-                        riders = await GetRiderAmount(rateSDTO, 6);
-                        response.Riders = riders;
+                        //riders = await GetRiderAmount(rateSDTO, 6);
+                        //response.Riders = riders;
                         basicPremium = basicPremium * 6;
-                        response.Discount = Math.Round(premiumsettings.DiscountSemi / 100 * (basicPremium + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
+                        response.Discount = Math.Round(premiumsettings.DiscountSemi / 100 * (basicPremium), 0);
                         response.CoverPremium = basicPremium - response.Discount;
                         response.PolicyFee = premiumsettings.PolicyFee * 6;
-                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + Math.Round(riders.Sum(a => a.Amount), 0) - response.Discount + response.PolicyFee), 0);
-                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy + Math.Round(riders.Sum(a => a.Amount), 0);
+                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium - response.Discount + response.PolicyFee), 0);
+                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy;
                         response.Success = true;
                         response.Processed = true;
                         return response;
                         break;
                     case Frequency.yearly:
-                        riders = await GetRiderAmount(rateSDTO, 12);
-                        response.Riders = riders;
+                        //riders = await GetRiderAmount(rateSDTO, 12);
+                       // response.Riders = riders;
                         basicPremium = basicPremium * 12;
-                        response.Discount = Math.Round(premiumsettings.DsicountAnuall / 100 * (basicPremium + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
+                        response.Discount = Math.Round(premiumsettings.DsicountAnuall / 100 * (basicPremium), 0);
                         response.CoverPremium = basicPremium - response.Discount;
                         response.PolicyFee = premiumsettings.PolicyFee * 12;
-                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + Math.Round(riders.Sum(a => a.Amount), 0) - response.Discount + response.PolicyFee), 0);
-                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy + Math.Round(riders.Sum(a => a.Amount), 0);
+                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium - response.Discount + response.PolicyFee), 0);
+                        response.TotalPremium = response.CoverPremium + response.PolicyFee + response.CompensationLevy;
                         response.Success = true;
                         response.Processed = true;
                         return response;
                         break;
                     default:
-                        riders = await GetRiderAmount(rateSDTO, 1);
-                        response.Riders = riders;
+                        
+                        //response.Riders = riders;
                         response.Discount = Math.Round(premiumsettings.DiscountMonthly * basicPremium, 0);
                         response.CoverPremium = basicPremium - response.Discount;
                         response.PolicyFee = premiumsettings.PolicyFee;
-                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + response.PolicyFee + Math.Round(riders.Sum(a => a.Amount), 0)), 0);
-                        response.TotalPremium = Math.Round(response.CoverPremium + response.PolicyFee + response.CompensationLevy, 0) + Math.Round(riders.Sum(a => a.Amount), 0);
+                        response.CompensationLevy = Math.Round((premiumsettings.CompensationRate / 100) * (basicPremium + response.PolicyFee ), 0);
+                        response.TotalPremium = Math.Round(response.CoverPremium + response.PolicyFee + response.CompensationLevy, 0) ;
                         response.Success = true;
                         response.Processed = true;
                         return response;
                         break;
                 }
-                }
+                
                
 
             }
@@ -575,114 +588,201 @@ VALUES
             response.Success = true;
             return response;
         }
-
-          public async Task<List<RiderAmount>> GetRiderAmount(RateSDTO rate, int frequency)
+        public async Task<List<Benefits>> GetBenefits(double sumassured, int term)
         {
-            var response = new List<RiderAmount>();
-            try
+            var response = new List<Benefits>();
+
+            foreach (BenefitType BenefitType in Enum.GetValues(typeof(BenefitType)))
             {
-                if (rate.Riders != null && rate.Riders.Count > 0)
+                switch (BenefitType)
                 {
-                    for (int i = 0; i < rate.Riders.Count; i++)
-
-                    {
-                        double sumassurred = 0;
-                        double maturityBenefit = 0;
-                        var Age = CalculateAge(rate.DateOfBirth);
-                        string getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.flex + " and AgeBandId=(select Id from AgeBand" +
-                           " where " + Age.age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)rate.Riders[i] + " and MainTermsId=(select Id from [dbo].[MainTerms] where [Term]=" + rate.Term + ")  ";
-                        if (rate.Riders[i] == RiderType.waiverretirement)
+                    case BenefitType.NaturalDeath:
+                        response.Add(new Benefits()
                         {
-
-                            getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.flex + " " +
-                                " and  RiderTYPE=" + (int)rate.Riders[i] + " and MainTermsId=(select Id from [dbo].[MainTerms] where [Term]=" + rate.Term + ")  ";
-                        }
-
-                        var scalarResult = await _db.Connection.ExecuteScalarAsync(getdatequery);
-                        var ratevalue = scalarResult != null ? Convert.ToDouble(scalarResult) : 0;
-
-                        double rideramount = 0;
-
-                        if (rate.Riders[i] != RiderType.death)
-                        {
-                            rideramount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0);
-                            if (rate.Riders[i] == RiderType.criticalillness)
-                            {
-                                rideramount = Math.Round(ratevalue * 0.5 * rate.Sumassured / 1000 * frequency, 0);
-                            }
-                        }
-                        switch (rate.Riders[i])
-                        {
-                            case RiderType.death:
-                                if (rate.DeathBenefits > 0)
-                                {
-
-                                    //string getdeathquery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.ncba + " and AgeBandId=(select Id from AgeBand" +
-                                    //      " where " + rate.Age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)RiderType.death + " and MainTermsId=" + (int)rate.TermId + " ";
-
-                                    //var deatyhratevalue = (double)await _db.Connection.ExecuteScalarAsync(getdeathquery);
-
-                                    string deathquery = "select  Rate from [dbo].[DeathBenefits] where Alias='" + rate.DeathBenefits + "';";
-                                    var deathrate = (double)await _db.Connection.ExecuteScalarAsync(deathquery);
-                                    ratevalue = ratevalue * deathrate;
-                                    rideramount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0);
-                                    sumassurred = Math.Round(deathrate * rate.Sumassured,0);
-                                maturityBenefit = 0;
-                                    //for(int j =0; j < rate.MaturityNumber; j++)
-                                    //{
-                                    //    //maturityBenefit += Math.Round(rate.Sumassured/rate.MaturityNumber *(1+);
-                                    //}
-                                }
-                                
-                                break;
-                            case RiderType.criticalillness:
-                                sumassurred = Math.Round(.5 * rate.Sumassured, 0);
-                                break;
-                            case RiderType.disability:
-                                sumassurred = rate.Sumassured; break;
-
-                        }
-
-
-
-
-                        response.Add(new RiderAmount()
-                        {
-                            Amount = rideramount,
-                            Rider = rate.Riders[i].ToString(),
-                            SumAssured = sumassurred,
-                            MaturityBenefit = maturityBenefit,
+                            BenefitType = "Natural Death",
+                            PayImmediately = sumassured,
+                            Paypartial = sumassured,
+                            PaySumAssured = sumassured,
+                            TotalPayout = sumassured*3
                         });
-
-
-                    }
+                        break;
+                        case BenefitType.AccidentalDeath:
+                        response.Add(new Benefits()
+                        {
+                            BenefitType = "Accidental Death",
+                            PayImmediately = sumassured*2,
+                            Paypartial = sumassured,
+                            PaySumAssured = sumassured,
+                            TotalPayout = (sumassured*2)+sumassured+sumassured
+                        });
+                        break;
+                        case BenefitType.CriticalIllness:
+                        response.Add(new Benefits()
+                        {
+                            BenefitType = "Critical Illness",
+                            PayImmediately = sumassured*0.5,
+                            Paypartial = sumassured,
+                            PaySumAssured = sumassured,
+                            TotalPayout = (sumassured*0.5)+sumassured+sumassured
+                        });
+                        break;
+                        case BenefitType.PermanentTotalDisability:
+                        response.Add(new Benefits()
+                        {
+                            BenefitType = "Permanent and Total Disability",
+                            PayImmediately = sumassured,
+                            Paypartial = sumassured,
+                            PaySumAssured = sumassured,
+                            TotalPayout = sumassured*3
+                        });
+                        break;
+                         case BenefitType.MaturityBenefit:
+                        List<PartialPayment> partialPayments = null;
+                        // The policy begins paying survival benefits 4 years before maturity:
+                        // 4 payments of 25% of the sum assured (years term-4 .. term-1),
+                        // then 100% of the sum assured at maturity (year term). Total = 200%.
+                        if (term - 4 >= 1)
+                        {
+                            partialPayments = new List<PartialPayment>();
+                            double survivalAmount = Math.Round(sumassured * 0.25, 0);
+                            for (int year = term - 4; year <= term - 1; year++)
+                            {
+                                partialPayments.Add(new PartialPayment
+                                {
+                                    Description = $"Survival Benefit - Year {year}",
+                                    Amount = survivalAmount
+                                });
+                            }
+                            partialPayments.Add(new PartialPayment
+                            {
+                                Description = $"Maturity Benefit - Year {term}",
+                                Amount = sumassured
+                            });
+                        }
+                        response.Add(new Benefits()
+                        {
+                            BenefitType = "Maturity Benefit",
+                            PayImmediately = sumassured,
+                            Paypartial = sumassured,
+                            PaySumAssured = sumassured,
+                            TotalPayout = sumassured*2,
+                            PartialPayments = partialPayments
+                        });
+                        break;
                 }
-                //if (rate.DeathBenefits > 0)
-                //{
-
-                //    string getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.ncba + " and AgeBandId=(select Id from AgeBand" +
-                //          " where " + rate.Age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)RiderType.death + " and MainTermsId=" + (int)rate.TermId + " ";
-
-                //    var ratevalue = (double)await _db.Connection.ExecuteScalarAsync(getdatequery);
-
-                //    string deathquery = "select  Rate from [dbo].[DeathBenefits] where id='" + rate.DeathBenefits + "';";
-                //    var deathrate = (double)await _db.Connection.ExecuteScalarAsync(deathquery);
-                //    ratevalue = ratevalue * deathrate;
-                //    response.Add(new RiderAmount()
-                //    {
-                //        Amount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0),
-                //        Rider = "death"
-                //    });
-                //}
-
-            }
-            catch (Exception ex) {
-
-                _isettings.LogRequests(ex.Message, "GetRiderAmount", RequestType.Error);
             }
             return response;
+
         }
+                
+        }
+        //  public async Task<List<RiderAmount>> GetRiderAmount(RateSDTO rate, int frequency)
+        //{
+        //    var response = new List<RiderAmount>();
+        //    try
+        //    {
+        //        if (rate.Riders != null && rate.Riders.Count > 0)
+        //        {
+        //            for (int i = 0; i < rate.Riders.Count; i++)
+
+        //            {
+        //                double sumassurred = 0;
+        //                double maturityBenefit = 0;
+        //                var Age = CalculateAge(rate.DateOfBirth);
+        //                string getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.flex + " and AgeBandId=(select Id from AgeBand" +
+        //                   " where " + Age.age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)rate.Riders[i] + " and MainTermsId=(select Id from [dbo].[MainTerms] where [Term]=" + rate.Term + ")  ";
+        //                if (rate.Riders[i] == RiderType.waiverretirement)
+        //                {
+
+        //                    getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.flex + " " +
+        //                        " and  RiderTYPE=" + (int)rate.Riders[i] + " and MainTermsId=(select Id from [dbo].[MainTerms] where [Term]=" + rate.Term + ")  ";
+        //                }
+
+        //                var scalarResult = await _db.Connection.ExecuteScalarAsync(getdatequery);
+        //                var ratevalue = scalarResult != null ? Convert.ToDouble(scalarResult) : 0;
+
+        //                double rideramount = 0;
+
+        //                if (rate.Riders[i] != RiderType.death)
+        //                {
+        //                    rideramount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0);
+        //                    if (rate.Riders[i] == RiderType.criticalillness)
+        //                    {
+        //                        rideramount = Math.Round(ratevalue * 0.5 * rate.Sumassured / 1000 * frequency, 0);
+        //                    }
+        //                }
+        //                switch (rate.Riders[i])
+        //                {
+        //                    case RiderType.death:
+        //                        if (rate.DeathBenefits > 0)
+        //                        {
+
+        //                            //string getdeathquery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.ncba + " and AgeBandId=(select Id from AgeBand" +
+        //                            //      " where " + rate.Age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)RiderType.death + " and MainTermsId=" + (int)rate.TermId + " ";
+
+        //                            //var deatyhratevalue = (double)await _db.Connection.ExecuteScalarAsync(getdeathquery);
+
+        //                            string deathquery = "select  Rate from [dbo].[DeathBenefits] where Alias='" + rate.DeathBenefits + "';";
+        //                            var deathrate = (double)await _db.Connection.ExecuteScalarAsync(deathquery);
+        //                            ratevalue = ratevalue * deathrate;
+        //                            rideramount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0);
+        //                            sumassurred = Math.Round(deathrate * rate.Sumassured,0);
+        //                        maturityBenefit = 0;
+        //                            //for(int j =0; j < rate.MaturityNumber; j++)
+        //                            //{
+        //                            //    //maturityBenefit += Math.Round(rate.Sumassured/rate.MaturityNumber *(1+);
+        //                            //}
+        //                        }
+                                
+        //                        break;
+        //                    case RiderType.criticalillness:
+        //                        sumassurred = Math.Round(.5 * rate.Sumassured, 0);
+        //                        break;
+        //                    case RiderType.disability:
+        //                        sumassurred = rate.Sumassured; break;
+
+        //                }
+
+
+
+
+        //                response.Add(new RiderAmount()
+        //                {
+        //                    Amount = rideramount,
+        //                    Rider = rate.Riders[i].ToString(),
+        //                    SumAssured = sumassurred,
+        //                    MaturityBenefit = maturityBenefit,
+        //                });
+
+
+        //            }
+        //        }
+        //        //if (rate.DeathBenefits > 0)
+        //        //{
+
+        //        //    string getdatequery = "SELECT   [Rate]  FROM [dbo].[MainRidersRates] where productenum=" + (int)Productenum.ncba + " and AgeBandId=(select Id from AgeBand" +
+        //        //          " where " + rate.Age + " between MinAge and MaxAge) and   RiderTYPE=" + (int)RiderType.death + " and MainTermsId=" + (int)rate.TermId + " ";
+
+        //        //    var ratevalue = (double)await _db.Connection.ExecuteScalarAsync(getdatequery);
+
+        //        //    string deathquery = "select  Rate from [dbo].[DeathBenefits] where id='" + rate.DeathBenefits + "';";
+        //        //    var deathrate = (double)await _db.Connection.ExecuteScalarAsync(deathquery);
+        //        //    ratevalue = ratevalue * deathrate;
+        //        //    response.Add(new RiderAmount()
+        //        //    {
+        //        //        Amount = Math.Round(ratevalue * rate.Sumassured / 1000 * frequency, 0),
+        //        //        Rider = "death"
+        //        //    });
+        //        //}
+
+        //    }
+        //    catch (Exception ex) {
+
+        //        _isettings.LogRequests(ex.Message, "GetRiderAmount", RequestType.Error);
+        //    }
+        //    return response;
+        //}
 
 
     }
-}
+

@@ -18,6 +18,7 @@ using Dapper;
 using System.Runtime.InteropServices;
 using YamlDotNet.Core;
 using API.Infrastructure.Interface;
+using Microsoft.Extensions.Logging;
 
 namespace API.Infrastructure.Auth.Services
 {
@@ -27,12 +28,14 @@ namespace API.Infrastructure.Auth.Services
         private readonly IEncryptionService _enc;
         private readonly SecuritySettings _security;
         readonly Isettings _isettings;
-        public PartnerManager(ApplicationDbContext db, IEncryptionService service, IOptions<SecuritySettings> options, Isettings isettings)
+        readonly ILogger<PartnerManager> _logger;
+        public PartnerManager(ApplicationDbContext db, IEncryptionService service, IOptions<SecuritySettings> options, Isettings isettings,ILogger<PartnerManager> logger)
         {
             _db = db;
             _enc = service;
             _security = options.Value;
             _isettings = isettings;
+            _logger = logger;
         }
 
         public async Task<AuthResponse> AuthenticatePartner(UserLoginDTO userLogin)
@@ -53,7 +56,7 @@ namespace API.Infrastructure.Auth.Services
                     " where ConsumerKey='"+ consumerKey +"'");
                 if (authuser != null)
                 {
-
+                  //  _isettings.LogRequests(string.Format("yes..{0}",authuser.PartnerId), "AuthenticatePartner", RequestType.Info);
                     string partnercode = (string)_db.Connection.ExecuteScalar("select [PartnerCode] as partnercode " +
                         "from [dbo].[Partners] where Id='" + authuser.PartnerId + "' ");
                      _isettings.LogRequests(partnercode, "Partner code AuthenticatePartner", RequestType.Error);
@@ -78,7 +81,11 @@ namespace API.Infrastructure.Auth.Services
                         response.Token = token;
                         response.partnerCode = partnercode;
                        response.RefreshToken = "";
-                    }   
+                    }
+                }
+                else
+                {
+                      _isettings.LogRequests("No", "AuthenticatePartner", RequestType.Info);
                 }
                 
             }

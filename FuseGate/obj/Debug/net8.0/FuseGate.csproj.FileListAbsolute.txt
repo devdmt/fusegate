@@ -138,7 +138,6 @@ D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\scopedcss\bundl
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.build.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.development.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\FuseGate.csproj.Up2Date
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\FuseGate.dll
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\refint\FuseGate.dll
@@ -150,9 +149,10 @@ D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\rjimswa.dswa.ca
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.build.json.cache
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260303.json
 D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\FuseGate.MvcApplicationPartsAssemblyInfo.cs
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260304.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260305.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260310.json
-D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260311.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260813.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260826.json
+d:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260908.json
+d:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260909.json
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\Playground\source\DMIT\IPP\FuseGate\FuseGate\bin\Debug\net8.0\Logs\logs20260915.json

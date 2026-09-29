@@ -19,20 +19,25 @@ namespace API.Infrastructure.Application;
         {
         try
         {
-
-            string insertQuery = "UPDATE [dbo].[ApiRequests]  SET [Response] =@Response " +
-            " ,[Responded] =@Responded ,[Failed] =@Failed ,[ErrorMsg] =@ErrorMsg,RespondedOn=getdate()  WHERE Id=@Id ";
+            const string updateQuery = @"
+UPDATE [dbo].[ApiRequests]
+SET [Response] = @Response,
+    [Responded] = @Responded,
+    [Failed] = @Failed,
+    [ErrorMsg] = @ErrorMsg,
+    [ResponseCode] = COALESCE(@ResponseCode, [ResponseCode]),
+    RespondedOn = getdate()
+WHERE Id = @Id";
             var parameters = new
             {
                 Response = request.Response,
                 Responded = request.Responded,
                 Failed = request.Failed,
                 ErrorMsg = request.ErrorMsg,
+                ResponseCode = request.ResponseCode,
                 Id = request.Id
-
             };
-             _db.Connection.ExecuteScalar(insertQuery, parameters);
-
+            _db.Connection.Execute(updateQuery, parameters);
         }
         catch (Exception ex)
         {
@@ -99,32 +104,42 @@ namespace API.Infrastructure.Application;
         {
             try
             {
-             var Id= Guid.NewGuid().ToString();
-            string insertQuery = "INSERT INTO [dbo].[ApiRequests](Id,[RequestName] ,[RequestType] " +
-                ",[ApiName] ,[PayLoad],[IP],[CreatedOn] " +
-                ")VALUES ('" + Id + "','" + apiRequestsDTO.RequestName + "','" + (int)apiRequestsDTO.RequestType + "','" + apiRequestsDTO.ApiName + "'" +
-                ",'" +  apiRequestsDTO.PayLoad + "','" + apiRequestsDTO.IP + "',getdate())";
-                //"" +
-                //",@RequestName ,@RequestType ,@ApiName ,@PayLoad  " +
-                //",@IP);";
+                var id = Guid.NewGuid().ToString();
+                var hasResponse = !string.IsNullOrEmpty(apiRequestsDTO.Response) || apiRequestsDTO.ResponseCode.HasValue;
+                const string insertQuery = @"
+INSERT INTO [dbo].[ApiRequests]
+    (Id, [RequestName], [RequestType], [ApiName], [PayLoad], [IP], [CreatedOn],
+     [PartnerCode], [PartnerName], [Response], [ResponseCode], [Responded], [Failed], RespondedOn)
+VALUES
+    (@Id, @RequestName, @RequestType, @ApiName, @PayLoad, @IP, getdate(),
+     @PartnerCode, @PartnerName, @Response, @ResponseCode, @Responded, @Failed, @RespondedOn)";
+
                 var parameters = new
                 {
-                    Id= Id,
+                    Id = id,
                     RequestName = apiRequestsDTO.RequestName,
                     RequestType = apiRequestsDTO.RequestType,
                     ApiName = apiRequestsDTO.ApiName,
                     PayLoad = apiRequestsDTO.PayLoad,
-                    IP = apiRequestsDTO.IP
-
+                    IP = apiRequestsDTO.IP,
+                    PartnerCode = apiRequestsDTO.PartnerCode,
+                    PartnerName = apiRequestsDTO.PartnerName,
+                    Response = apiRequestsDTO.Response,
+                    ResponseCode = apiRequestsDTO.ResponseCode,
+                    Responded = hasResponse,
+                    Failed = apiRequestsDTO.ResponseCode is >= 400,
+                    RespondedOn = hasResponse ? (DateTime?)DateTime.UtcNow : null
                 };
-                 await _db.Connection.ExecuteScalarAsync(insertQuery);
-                return Id;
 
-            } catch (Exception ex)
-            {
-                LogRequests(ex.Message + "|" + ex.StackTrace, "PensionOnboardingError", RequestType.Error);
+                await _db.Connection.ExecuteAsync(insertQuery, parameters);
+                return id;
             }
-          return null;
+            catch (Exception ex)
+            {
+                LogRequests(ex.Message + "|" + ex.StackTrace, "AddRequest", RequestType.Error);
+            }
+
+            return null;
         }
     public  string GenerateRadomCode(int length = 8)
     {

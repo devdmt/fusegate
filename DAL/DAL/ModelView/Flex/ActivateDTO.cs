@@ -1,4 +1,5 @@
-﻿using System;
+using DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,10 +28,13 @@ namespace DAL.ModelView.Flex
 
     public class ContributeDTO
     {
-       public string ProductRef { get; set; } 
-        public string? MemberNO { get; set; }
-        public string? Amount { get; set; } 
-        public string? phoneNumber { get; set; }
+        public string MemberNo { get; set; } = string.Empty;
+        public Productenum Product { get; set; } = Productenum.flex;
+        public decimal Amount { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string PaymentReference { get; set; } = string.Empty;
+        public string? Narration { get; set; }
+        public string? CallbackUrl { get; set; }
     }
     public class CompleteActivation
     {

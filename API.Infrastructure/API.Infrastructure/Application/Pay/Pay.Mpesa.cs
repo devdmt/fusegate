@@ -15,7 +15,7 @@ namespace API.Infrastructure.Application.Pay
         {
             var res = new AcknowledgementDTO();
 
-
+              Console.WriteLine("request mpesa express");
             var jsonrequest = JsonSerializer.Serialize(sTkPushRequestDTO);
             _setting.LogRequests(jsonrequest, "RequestMpesaExpress", RequestType.Info);
             var mpesaresponse = await ProcessJsonManager.ProcessJsonAsync(requesturl, token, jsonrequest,

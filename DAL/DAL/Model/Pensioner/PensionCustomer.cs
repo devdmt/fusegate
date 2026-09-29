@@ -160,5 +160,20 @@ namespace DAL.Model.Pensioner
     {
        [EnumMember(Value = "pending")] pending, [EnumMember(Value = "approved")] approved, [EnumMember(Value = "declined")] declined
     }
+    public class CustomerRoles
+    {
+        public long Id { get; set; }
+        public CustomerRoleId RoleId { get; set; }
+        public string UserId { get; set; }
+        public string? GroupId { get; set; }
+        public bool Isdeleted { get; set; }
+    }
+    public enum CustomerRoleId
+    {
+        customer = 100,
+        group = 222,
+        partner = 320
+    }
+
     }
 

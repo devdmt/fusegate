@@ -25,8 +25,9 @@ namespace DAL
         public DbSet<PensionerBalanceRequest>  pensionerBalanceRequests { get; set; }
         public DbSet<PensionerFund> PensionerFund { get; set; } 
           public DbSet<ContributionSettings> contributionSettings { get; set; }
-        public DbSet<Contributions> Contributions { get; set; }
-        public DbSet<PensionerGurdian>  gurdians { get; set; }
+        public DbSet<PensionContributions> pensionContributions { get; set; }
+          public DbSet<CustomerRoles> customerRoles { get; set; }
+        public DbSet<PensionerGurdian>  gurdian { get; set; }
         //public DbSet<LabourCost> LabourCosts { get; set; }
         public AkibappDbContext(DbContextOptions<AkibappDbContext> options) : base(options)
         { }
@@ -40,8 +41,9 @@ namespace DAL
             //  builder.Entity<TransactionsUploadTemp>().Property(e => e.Key).ValueGeneratedNever();
             builder.Entity<APIUSER>().ToTable("APIUSERS");
             builder.Entity<Customers>().ToTable("Customers").HasKey(a => a.Id);
+            builder.Entity<PensionerGurdian>().ToTable("Gurdian").HasKey(a => a.Id);
             builder.Entity<PensionerFund>().ToTable("PensionerFund").HasKey(a => a.Id);
-            builder.Entity<Contributions>().ToTable("Contributions").HasKey(a => a.Id);
+            builder.Entity<PensionContributions>().ToTable("Contributions").HasKey(a => a.Id);
             builder.Entity<ContributionSettings>().ToTable("ContributionSettings").HasKey(a => a.Id);
 
 

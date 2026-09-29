@@ -2,11 +2,49 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DAL.Model
 {
+     public class STKRst
+    {
+        public string productId { get; set; }
+        public int trnId { get; set; }
+        public bool ProcessBatch { get; set; }
+        //public CustomerType CustomerType { get; set; } = CustomerType.Individual;
+       
+    }
+   
+     public class MpesaSTKResult
+        {
+        public Body? Body { get; set; }
+
+    }
+    public class Body
+    {
+        public stkCallback? stkCallback { get; set; }
+    }
+    public class stkCallback
+    {
+        public string? MerchantRequestID { get; set; }
+        public string? CheckoutRequestID { get; set; }
+        public int? ResultCode { get; set; }
+        public string? ResultDesc { get; set; }
+        public CallbackMetadata? CallbackMetadata { get; set; }
+    }
+
+    public class CallbackMetadata
+    {
+        public List<Item>? Item { get; set; }
+    }
+    public class Item
+    {
+        public string? Name { get; set; }
+        public object? Value { get; set; }
+    }
       public class MpesaSettings //: AuditableEntity
     {
         [Required]
@@ -26,8 +64,8 @@ namespace DAL.Model
         public string? SecurityCredential { get; set; }
         public string? GrantType { get; set; }
         public string? PaybillName { get; set; }
-        public string? ReceiverPartyIdentifierType { get; set; }    
-        public string? TransactionType { get; set; }
+        //public string? ReceiverPartyIdentifierType { get; set; }    
+        //public string? TransactionType { get; set; }
         public bool Active { get; set; }
         public string? B2CUtilityAccountAvailableFunds { get; set; }
         public string? B2CWorkingAccountAvailableFunds { get; set; }
@@ -51,7 +89,8 @@ namespace DAL.Model
         Mpesa_Pension_STK_CallbackUrl = 3,
         Mpesa_STK_RequestUrl = 2,
         Mpesa_Ratiba_CallBack=4,
-        Mpesa_Ratiba_Request=5
+        Mpesa_Ratiba_Request=5,
+         Mpesa_STK_Insure_CallbackUrl = 6,
     }
     public enum PaybillType
     {
