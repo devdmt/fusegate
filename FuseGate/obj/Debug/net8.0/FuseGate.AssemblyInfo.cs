@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FuseGate")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+187b6e66dca5095a2b498364c76ea5e3211133cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b47ec6fa8bb221a7d830fa32f8b0b1b9a12706bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("FuseGate")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FuseGate")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
