@@ -81,5 +81,28 @@ namespace FuseGate.Controllers.Pension
 
             return Ok();
         }
+
+        [HttpPost("ProcessFlexiFutureSTKResult")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ProcessFlexiFutureSTKResult()
+        {
+            using var reader = new StreamReader(HttpContext.Request.Body);
+            var body = await reader.ReadToEndAsync();
+            try
+            {
+                if (!string.IsNullOrEmpty(body))
+                {
+                    _isettings.LogRequests(body, "ProcessFlexiFutureSTKResult", RequestType.Info);
+                    var stkre = JsonSerializer.Deserialize<MpesaSTKResult>(body);
+                    await _mpesa.ProcessFlexiSTKResult(body, stkre);
+                }
+            }
+            catch (Exception ex)
+            {
+                _isettings.LogRequests(ex.Message, "ProcessFlexiFutureSTKResult", RequestType.Error);
+            }
+
+            return Ok();
+        }
     }
 }

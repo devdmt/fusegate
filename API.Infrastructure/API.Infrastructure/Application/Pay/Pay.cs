@@ -1,4 +1,4 @@
-﻿using API.Infrastructure.Interface;
+using API.Infrastructure.Interface;
 
 using DAL;
 using DAL.Model;
@@ -500,6 +500,169 @@ namespace API.Infrastructure.Application.Pay
             {
             _setting.LogRequests(ex.Message,"ProcessSTK",RequestType.Error);
             }
+            return response;
+        }
+
+        public async Task<ResponseDTO> ProcessFlexiSTKResult(string? body, MpesaSTKResult sTKResult)
+        {
+            var response = new ResponseDTO();
+            try
+            {
+                var callback = sTKResult?.Body?.stkCallback;
+                if (callback == null
+                    || string.IsNullOrWhiteSpace(callback.MerchantRequestID)
+                    || string.IsNullOrWhiteSpace(callback.CheckoutRequestID))
+                {
+                    response.ErrorMsg = "Invalid callback payload.";
+                    return response;
+                }
+
+                const string lookup = @"SELECT isnull(Id,0) as trnId, ContributionTrnId as productId, CustomerType, ProcessBatch
+                    FROM sTKPushMpesaTransactions
+                    WHERE MerchantRequestID = @MerchantRequestID
+                      AND CheckoutRequestID = @CheckoutRequestID
+                      AND Processed = '0'";
+
+                var trn = await _akiba.Connection.QueryFirstOrDefaultAsync<STKRst>(lookup, new
+                {
+                    MerchantRequestID = callback.MerchantRequestID,
+                    CheckoutRequestID = callback.CheckoutRequestID
+                });
+
+                if (trn == null || trn.trnId <= 0 || string.IsNullOrWhiteSpace(trn.productId))
+                {
+                    response.ErrorMsg = "No matching unprocessed transaction.";
+                    return response;
+                }
+
+                var succeeded = callback.ResultCode == 0;
+                var receipt = callback.CallbackMetadata?.Item?
+                    .FirstOrDefault(i => string.Equals(i.Name, "MpesaReceiptNumber", StringComparison.OrdinalIgnoreCase))?
+                    .Value?.ToString();
+                var amount = callback.CallbackMetadata?.Item?
+                    .FirstOrDefault(i => string.Equals(i.Name, "Amount", StringComparison.OrdinalIgnoreCase))?
+                    .Value?.ToString();
+                var transactionDate = callback.CallbackMetadata?.Item?
+                    .FirstOrDefault(i => string.Equals(i.Name, "TransactionDate", StringComparison.OrdinalIgnoreCase))?
+                    .Value?.ToString();
+
+                await _akiba.Connection.ExecuteAsync(
+                    @"UPDATE sTKPushMpesaTransactions
+                         SET Finalized = '1',
+                             Processed = '1',
+                             Body = @Body,
+                             Amount = @Amount,
+                             MpesaReceiptNumber = @Receipt,
+                             TransactionDate = @TransactionDate,
+                             ResultCode = @ResultCode,
+                             ResultDesc = @ResultDesc,
+                             ResultOn = getdate()
+                       WHERE Id = @TrnId",
+                    new
+                    {
+                        Body = body,
+                        Amount = amount,
+                        Receipt = receipt,
+                        TransactionDate = transactionDate,
+                        ResultCode = callback.ResultCode?.ToString(),
+                        ResultDesc = callback.ResultDesc,
+                        TrnId = trn.trnId
+                    });
+
+                var affected = succeeded
+                    ? await _akiba.Connection.ExecuteAsync(
+                        @"UPDATE FlexiContributions
+                             SET Approved = '1',
+                                 PaymentAcknowledged = '1',
+                                 Reference = @Receipt,
+                                 ThirdpartyRef = @Receipt,
+                                 PaymentStatus = @PaymentStatus,
+                                 ApprovedOn = SYSDATETIMEOFFSET(),
+                                 ApprovedDate = GETDATE(),
+                                 ApprovedBy = 'MPESA',
+                                 EffectiveDate = ISNULL(EffectiveDate, GETDATE()),
+                                 LastModified = SYSDATETIMEOFFSET(),
+                                 LastModifiedBy = 'MPESA'
+                           WHERE CONVERT(nvarchar(50), Id) = @ProductId
+                             AND ISNULL(PaymentAcknowledged, '0') = '0'
+                             AND ISNULL(Approved, '0') = '0'",
+                        new
+                        {
+                            Receipt = receipt,
+                            PaymentStatus = (int)PaymentStatus.Approved,
+                            ProductId = trn.productId
+                        })
+                    : await _akiba.Connection.ExecuteAsync(
+                        @"UPDATE FlexiContributions
+                             SET Approved = '0',
+                                 PaymentAcknowledged = '0',
+                                 PaymentStatus = @PaymentStatus,
+                                 RejectedReason = @RejectedReason,
+                                 RejectedBy = 'MPESA',
+                                 RejectedDate = GETDATE(),
+                                 LastModified = SYSDATETIMEOFFSET(),
+                                 LastModifiedBy = 'MPESA'
+                           WHERE CONVERT(nvarchar(50), Id) = @ProductId
+                             AND ISNULL(PaymentAcknowledged, '0') = '0'",
+                        new
+                        {
+                            PaymentStatus = (int)PaymentStatus.Rejected,
+                            RejectedReason = callback.ResultDesc,
+                            ProductId = trn.productId
+                        });
+
+                if (succeeded && affected > 0)
+                {
+                    await _akiba.Connection.ExecuteAsync(
+                        @"UPDATE f
+                             SET f.TotalFunds = ISNULL(f.TotalFunds, 0) + ISNULL(c.Total_Contribution, 0),
+                                 f.LastModified = SYSDATETIMEOFFSET(),
+                                 f.LastModifiedBy = 'MPESA'
+                          FROM dbo.FlexiFund f
+                          INNER JOIN dbo.FlexiContributions c
+                            ON (c.FlexiFundId IS NOT NULL AND f.Id = c.FlexiFundId)
+                            OR (c.FlexiFundId IS NULL
+                                AND f.PolicyId = CONVERT(nvarchar(50), c.FlexiFuturePolicyId))
+                         WHERE CONVERT(nvarchar(50), c.Id) = @ProductId",
+                        new { ProductId = trn.productId });
+
+                    var callbackRow = await _db.callBackResponse
+                        .Where(a => a.CorrelationId == trn.trnId.ToString())
+                        .FirstOrDefaultAsync();
+
+                    if (callbackRow != null)
+                    {
+                        var payload = new ContributionCallbackResponseDTO
+                        {
+                            Success = true,
+                            ErrorMsg = "Payment completed successfully.",
+                            RequestId = callbackRow.RequestId,
+                            TransactionId = receipt ?? string.Empty,
+                            ProductRef = trn.productId
+                        };
+
+                        await _db.Connection.ExecuteAsync(
+                            "UPDATE CallBackResponse SET ProcessResponse='1', Response=@Response WHERE Id=@Id",
+                            new
+                            {
+                                Response = JsonSerializer.Serialize(payload),
+                                Id = callbackRow.Id
+                            });
+                    }
+                }
+
+                response.Success = succeeded;
+                response.ErrorMsg = succeeded
+                    ? "Payment reconciled successfully."
+                    : callback.ResultDesc ?? "Payment was not completed.";
+            }
+            catch (Exception ex)
+            {
+                _setting.LogRequests(ex.Message, "ProcessFlexiSTKResult", RequestType.Error);
+                response.Success = false;
+                response.ErrorMsg = "Failed to process the M-Pesa callback.";
+            }
+
             return response;
         }
     }

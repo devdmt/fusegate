@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -60,7 +60,9 @@ namespace DAL.Model
         [EnumMember(Value = "IPP")]
         IPP=5,
          [EnumMember(Value = "flex")]
-        flex=6
+        flex=6,
+        [EnumMember(Value = "flexifutureplus")]
+        flexifutureplus=7
     }
      public class Terms
     {

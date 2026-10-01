@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -91,6 +91,7 @@ namespace DAL.Model
         Mpesa_Ratiba_CallBack=4,
         Mpesa_Ratiba_Request=5,
          Mpesa_STK_Insure_CallbackUrl = 6,
+         Mpesa_STK_FlexiFuture_CallbackUrl = 7,
     }
     public enum PaybillType
     {
