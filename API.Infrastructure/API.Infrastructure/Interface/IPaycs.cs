@@ -1,4 +1,4 @@
-﻿using Azure;
+using Azure;
 using DAL.Model;
 using DAL.ModelView;
 using DAL.ModelView.Pension;
@@ -16,5 +16,6 @@ namespace API.Infrastructure.Interface
          Task<ResponseDTO>  ProcessSTK_Insure(STKContributionDTO request, EndPointType endPointType = EndPointType.Mpesa_Pension_STK_CallbackUrl);
         Task<ResponseDTO> ProcessPensionSTKResult(string? body, MpesaSTKResult sTKResult); 
         Task<ResponseDTO> ProcessInsureSTKResult(string? body, MpesaSTKResult sTKResult);
+        Task<ResponseDTO> ProcessFlexiSTKResult(string? body, MpesaSTKResult sTKResult);
     }
 }

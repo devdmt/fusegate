@@ -83,33 +83,22 @@ namespace API.Infrastructure.OpenApi
 
                     document.OperationProcessors.Add(new SwaggerHeaderAttributeProcessor());
 
-                    // Add the TimeSpanSchemaProcessor class definition (internal)
-                    // It's best to put this class at the end of the file, or in a separate file, but for clarity:
-                    //
-                    // internal class TimeSpanSchemaProcessor : ISchemaProcessor
-                    // {
-                    //     public void Process(NJsonSchema.JsonSchema schema, SchemaProcessorContext context)
-                    //     {
-                    //         if (context.Type == typeof(TimeSpan))
-                    //         {
-                    //             schema.Type = NJsonSchema.JsonObjectType.String;
-                    //             schema.IsNullableRaw = true;
-                    //             schema.Pattern = @"^([0-9]{1}|(?:0[0-9]|1[0-9]|2[0-3])+):([0-5]?[0-9])(?::([0-5]?[0-9])(?:.(\d{1,9}))?)?$";
-                    //             schema.Example = "02:00:00";
-                    //         }
-                    //     }
-                    // }
-
-
-                    // Add FluentValidation schema processor so validation rules appear in the OpenAPI schema
-                    using var scope = serviceProvider.CreateScope();
-                    var fluentValidationSchemaProcessor = scope.ServiceProvider.GetService<FluentValidationSchemaProcessor>();
-                    if (fluentValidationSchemaProcessor is not null)
+                    document.SchemaSettings.TypeMappers.Add(new PrimitiveTypeMapper(typeof(DateOnly), schema =>
                     {
-                        document.SchemaSettings.SchemaProcessors.Add(fluentValidationSchemaProcessor);
-                    }
+                        schema.Type = NJsonSchema.JsonObjectType.String;
+                        schema.Format = "date";
+                    }));
+                    document.SchemaSettings.TypeMappers.Add(new PrimitiveTypeMapper(typeof(DateOnly?), schema =>
+                    {
+                        schema.Type = NJsonSchema.JsonObjectType.String;
+                        schema.Format = "date";
+                        schema.IsNullableRaw = true;
+                    }));
+
+                    // FluentValidation rules in OpenAPI schema — use root provider; a scoped provider is disposed before Swagger runs.
+                    document.SchemaSettings.SchemaProcessors.Add(
+                        new FluentValidationSchemaProcessor(serviceProvider));
                 });
-                services.AddScoped<FluentValidationSchemaProcessor>();
             }
 
             return services;
