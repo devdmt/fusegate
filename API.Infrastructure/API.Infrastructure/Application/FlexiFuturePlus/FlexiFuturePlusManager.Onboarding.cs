@@ -606,10 +606,18 @@ public partial class FlexiFuturePlusManager
 
         var quote = await _akiba.FlexiFutureQuotes
             .AsNoTracking()
+            .Include(q => q.Spouses)
             .FirstOrDefaultAsync(q => q.Id == policy.QuoteId, cancellationToken)
             ?? throw new InvalidOperationException($"Quote '{policy.QuoteId}' was not found.");
 
-        await ValidateFamilyMembersAsync(familyMembers, quote.IssueDate, cancellationToken);
+        await ValidateFamilyMembersAsync(familyMembers, quote, cancellationToken);
+
+        var customer = await _akiba.customers
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == policy.CustomerId, cancellationToken);
+
+        var mainGender = ResolveMainLifeGenderForSpouseDerivation(customer, quote);
+        var derivedSpouseGender = DeriveSpouseGender(mainGender);
 
         var existing = await _akiba.FlexiFutureFamilyMembers
             .Where(f => f.PolicyId == policy.Id)
@@ -619,13 +627,17 @@ public partial class FlexiFuturePlusManager
         var now = DateTime.UtcNow;
         foreach (var member in familyMembers)
         {
+            var memberGender = IsSpouseFamilyContext(member.Context)
+                ? derivedSpouseGender
+                : member.Gender?.Trim();
+
             _akiba.FlexiFutureFamilyMembers.Add(new FlexiFutureFamilyMember
             {
                 Id = Guid.NewGuid(),
                 PolicyId = policy.Id,
                 OtherNames = member.OtherNames.Trim(),
                 Surname = member.Surname.Trim(),
-                Gender = member.Gender?.Trim(),
+                Gender = memberGender,
                 EmailAddress = member.EmailAddress?.Trim(),
                 PhoneNumber = member.PhoneNumber?.Trim(),
                 IDNumber = member.IdNumber?.Trim(),
@@ -640,7 +652,7 @@ public partial class FlexiFuturePlusManager
 
     private async Task ValidateFamilyMembersAsync(
         IReadOnlyList<FlexiFuturePlusFamilyMemberDto> familyMembers,
-        DateOnly issueDate,
+        FlexiFutureQuote quote,
         CancellationToken cancellationToken)
     {
         var spouseContexts = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -648,6 +660,8 @@ public partial class FlexiFuturePlusManager
         var pack = await GetActiveRatesAsync(cancellationToken);
         var minEntryAge = pack.Settings.MinEntryAge;
         var maxEntryAge = pack.Settings.MaxEntryAge;
+        var maxSpouses = pack.Settings.MaxSpouses;
+        var issueDate = quote.IssueDate;
 
         foreach (var member in familyMembers)
         {
@@ -716,8 +730,28 @@ public partial class FlexiFuturePlusManager
             }
         }
 
-        if (spouseContexts.Count > 2)
-            throw new InvalidOperationException("Maximum 2 spouse family members allowed.");
+        var expectedSpouseCount = quote.Spouses.Count > 0
+            ? quote.Spouses.Max(s => s.SpouseIndex)
+            : 0;
+
+        for (var i = 1; i <= expectedSpouseCount; i++)
+        {
+            var requiredContext = i switch
+            {
+                1 => FlexiFuturePartnerHealthQuestionContexts.Spouse1,
+                2 => FlexiFuturePartnerHealthQuestionContexts.Spouse2,
+                _ => $"Spouse{i}"
+            };
+
+            if (!spouseContexts.Contains(requiredContext))
+            {
+                throw new InvalidOperationException(
+                    $"familyMembers must include context '{requiredContext}' to match the quote.");
+            }
+        }
+
+        if (spouseContexts.Count > maxSpouses)
+            throw new InvalidOperationException($"Maximum {maxSpouses} spouse family members allowed.");
         if (childContexts.Count > 6)
             throw new InvalidOperationException("Maximum 6 child family members allowed.");
     }
@@ -1187,6 +1221,66 @@ public partial class FlexiFuturePlusManager
             return DAL.Model.Pensioner.Gender.Female;
 
         throw new InvalidOperationException($"Invalid gender value '{gender}'.");
+    }
+
+    private static string DeriveSpouseGender(string? mainGender)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(mainGender))
+            {
+                throw new InvalidOperationException(
+                    "Main life gender is required before spouse gender can be derived.");
+            }
+
+            return ParseGender(mainGender) == DAL.Model.Pensioner.Gender.Male ? "Female" : "Male";
+        }
+        catch (InvalidOperationException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Failed to derive spouse gender.", ex);
+        }
+    }
+
+    private static bool IsSpouseFamilyContext(string? context)
+    {
+        try
+        {
+            return !string.IsNullOrWhiteSpace(context)
+                   && context.Trim().StartsWith("Spouse", StringComparison.OrdinalIgnoreCase);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Failed to evaluate spouse family context.", ex);
+        }
+    }
+
+    private static string ResolveMainLifeGenderForSpouseDerivation(
+        PensionCustomer? customer,
+        FlexiFutureQuote quote)
+    {
+        try
+        {
+            if (customer != null && customer.Gender != default)
+                return customer.Gender.ToString();
+
+            if (!string.IsNullOrWhiteSpace(quote.Gender))
+                return quote.Gender.Trim();
+
+            throw new InvalidOperationException(
+                "Main life gender must be set on the quote or customer before saving spouse family members.");
+        }
+        catch (InvalidOperationException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Failed to resolve main life gender.", ex);
+        }
     }
 
     private static bool IsUsResidencyOrCitizenship(string? citizenship, string? residency)
