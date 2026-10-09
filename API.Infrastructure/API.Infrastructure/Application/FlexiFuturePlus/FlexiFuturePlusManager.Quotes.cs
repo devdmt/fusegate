@@ -600,7 +600,7 @@ public partial class FlexiFuturePlusManager
                     SpouseIndex = spouseIndex,
                     Name = $"{m.OtherNames} {m.Surname}".Trim(),
                     DateOfBirth = m.DateOfBirth,
-                    Gender = m.Gender,
+                    Gender = DeriveSpouseGender(quote.Gender),
                     SelectedRiders = GetStoredSpouseRiders(quote, spouseIndex)
                 };
             })
@@ -746,7 +746,7 @@ public partial class FlexiFuturePlusManager
                     SpouseIndex = entity.SpouseIndex,
                     Name = entity.Name,
                     DateOfBirth = entity.DateOfBirth,
-                    Gender = entity.Gender,
+                    Gender = DeriveSpouseGender(existing.Gender),
                     SelectedRiders = selectedRiders
                 };
             })
@@ -791,7 +791,7 @@ public partial class FlexiFuturePlusManager
 
             spouse.Name = prior.Name;
             spouse.DateOfBirth = prior.DateOfBirth;
-            spouse.Gender = prior.Gender;
+            spouse.Gender = DeriveSpouseGender(existing.Gender);
         }
 
         var priorChildren = existing.Children.ToList();
@@ -863,7 +863,7 @@ public partial class FlexiFuturePlusManager
                 SumAssured = spouse.SumAssured,
                 PremiumTotal = spouse.PremiumTotal,
                 DateOfBirth = request.Spouses.FirstOrDefault(s => s.SpouseIndex == spouse.SpouseIndex)?.DateOfBirth,
-                Gender = request.Spouses.FirstOrDefault(s => s.SpouseIndex == spouse.SpouseIndex)?.Gender
+                Gender = DeriveSpouseGender(request.Client.Gender)
             });
         }
 

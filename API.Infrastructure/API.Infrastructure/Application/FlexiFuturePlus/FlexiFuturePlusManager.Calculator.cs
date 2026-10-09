@@ -134,6 +134,136 @@ public partial class FlexiFuturePlusManager
                 if (life != null)
                     ValidateRiderAge(life, anb);
             }
+
+            ValidateQuoteSpouses(request, pack);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private static void ValidateQuoteSpouses(
+        FlexiFutureComputeRequestDto request,
+        FlexiFutureRatePack pack)
+    {
+        try
+        {
+            var spouses = (request.Spouses ?? new List<FlexiFutureSpouseDto>())
+                .Select(s => (
+                    s.SpouseIndex,
+                    s.DateOfBirth,
+                    s.Name,
+                    (IReadOnlyList<string>?)s.SelectedRiders))
+                .ToList();
+
+            ValidateQuoteSpouseEntries(
+                request.IssueDate,
+                request.Frequency,
+                pack,
+                spouses);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private static void ValidateQuoteSpouses(
+        FlexiFutureCoverPremiumsRequestDto request,
+        FlexiFutureRatePack pack)
+    {
+        try
+        {
+            var spouses = (request.Spouses ?? new List<FlexiFutureCoverPremiumsSpouseDto>())
+                .Select(s => (
+                    s.SpouseIndex,
+                    s.DateOfBirth,
+                    (string?)null,
+                    (IReadOnlyList<string>?)s.SelectedRiders))
+                .ToList();
+
+            ValidateQuoteSpouseEntries(
+                request.IssueDate,
+                request.Frequency,
+                pack,
+                spouses);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private static void ValidateQuoteSpouseEntries(
+        DateOnly issueDate,
+        string frequency,
+        FlexiFutureRatePack pack,
+        IReadOnlyList<(int SpouseIndex, DateOnly? DateOfBirth, string? Name, IReadOnlyList<string>? SelectedRiders)> spouses)
+    {
+        try
+        {
+            if (spouses.Count == 0)
+                return;
+
+            var settings = pack.Settings;
+            if (spouses.Count > settings.MaxSpouses)
+            {
+                throw new InvalidOperationException($"Maximum {settings.MaxSpouses} spouses allowed.");
+            }
+
+            var premiumMode = RateLookup.ResolvePremiumMode(frequency);
+            var seenIndices = new HashSet<int>();
+
+            foreach (var spouse in spouses)
+            {
+                if (spouse.SpouseIndex < 1 || spouse.SpouseIndex > settings.MaxSpouses)
+                {
+                    throw new InvalidOperationException(
+                        $"spouses[].spouseIndex must be between 1 and {settings.MaxSpouses}.");
+                }
+
+                if (!seenIndices.Add(spouse.SpouseIndex))
+                {
+                    throw new InvalidOperationException(
+                        $"Duplicate spouses[].spouseIndex '{spouse.SpouseIndex}'.");
+                }
+
+                var label = string.IsNullOrWhiteSpace(spouse.Name)
+                    ? $"Spouse {spouse.SpouseIndex}"
+                    : spouse.Name.Trim();
+
+                if (!spouse.DateOfBirth.HasValue)
+                {
+                    throw new InvalidOperationException(
+                        $"spouses[].dateOfBirth is required for '{label}' (spouseIndex {spouse.SpouseIndex}).");
+                }
+
+                var dateOfBirth = spouse.DateOfBirth.Value;
+                if (dateOfBirth > issueDate)
+                {
+                    throw new InvalidOperationException(
+                        $"spouses[].dateOfBirth for '{label}' cannot be after the issue date.");
+                }
+
+                var anb = ComputeAnb(dateOfBirth, issueDate);
+                if (anb < settings.MinEntryAge || anb > settings.MaxEntryAge)
+                {
+                    throw new InvalidOperationException(
+                        $"Spouse '{label}' ANB must be between {settings.MinEntryAge} and {settings.MaxEntryAge} (got {anb}).");
+                }
+
+                foreach (var code in spouse.SelectedRiders ?? Array.Empty<string>())
+                {
+                    if (string.Equals(code, FlexiFutureRateCodes.ChildLe, StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    var table = RateLookup.GetTable(pack, code, premiumMode)
+                                ?? RateLookup.GetTable(pack, code, FlexiFuturePremiumModes.Regular);
+                    if (table != null)
+                        ValidateRiderAge(table, anb);
+                }
+            }
         }
         catch (Exception)
         {
@@ -246,7 +376,7 @@ public partial class FlexiFuturePlusManager
                         {
                             SpouseIndex = s.SpouseIndex,
                             DateOfBirth = s.DateOfBirth,
-                            Gender = s.Gender,
+                            Gender = DeriveSpouseGender(request.Client.Gender),
                             SelectedRiders = spouseSelected.ToList()
                         };
                     })
@@ -1345,6 +1475,8 @@ public partial class FlexiFuturePlusManager
 
             if (sumAssured.HasValue)
                 ValidateSaTermRules(s, sumAssured.Value, request.PolicyTerm);
+
+            ValidateQuoteSpouses(request, pack);
 
             foreach (var child in request.Children ?? new List<FlexiFutureChildDto>())
             {
