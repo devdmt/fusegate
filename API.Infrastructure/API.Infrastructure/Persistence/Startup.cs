@@ -1,4 +1,5 @@
-﻿
+
+using API.Infrastructure.Otp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,10 @@ namespace API.Infrastructure.Persistence
 
         internal static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration config)
         {
+            services.AddOptions<OtpSettings>()
+                .BindConfiguration(OtpSettings.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
             services.AddOptions<DatabaseSettings>()
                 .BindConfiguration(nameof(DatabaseSettings))
                 .PostConfigure(databaseSettings =>

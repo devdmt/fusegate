@@ -1,0 +1,6 @@
+module: SendCreditwaveSMSAsync  Info:  {"success":false,"message":"Authentication required","error":"Provide client_id and client_secret using HTTP Basic Authentication"}  05/03/2026 16:06:15
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0305130301746-B7DB3515","delivery_status":"Queued"},"message":"SMS received and is being processed"}  05/03/2026 16:11:06
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0305130536038-2F966844","delivery_status":"Queued"},"message":"SMS received and is being processed"}  05/03/2026 16:13:40
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0305134635302-147791A1","delivery_status":"Queued"},"message":"SMS received and is being processed"}  05/03/2026 16:54:39
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0305134843318-D9F5A64C","delivery_status":"Queued"},"message":"SMS received and is being processed"}  05/03/2026 16:56:47
+module: SendCreditwaveSMSAsync  Info:  {"success":true,"data":{"tracking_id":"SMS-356F-0305135113868-6650233D","delivery_status":"Queued"},"message":"SMS received and is being processed"}  05/03/2026 16:59:18

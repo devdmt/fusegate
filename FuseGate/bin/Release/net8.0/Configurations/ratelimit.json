@@ -1,0 +1,48 @@
+{
+  "RateLimitSettings": {
+    "Enabled": true,
+    "GlobalPolicy": {
+      "PermitLimit": 100,
+      "WindowSeconds": 60,
+      "QueueLimit": 0,
+      "AutoReplenishment": true
+    },
+    "FixedWindow": {
+      "PermitLimit": 50,
+      "WindowSeconds": 60,
+      "QueueLimit": 0,
+      "AutoReplenishment": true
+    },
+    "SlidingWindow": {
+      "PermitLimit": 100,
+      "WindowSeconds": 60,
+      "SegmentsPerWindow": 1,
+      "QueueLimit": 0
+    },
+    "TokenBucket": {
+      "TokenLimit": 100,
+      "TokensPerPeriod": 10,
+      "ReplenishmentPeriodSeconds": 60,
+      "AutoReplenishment": true,
+      "QueueLimit": 0
+    },
+    "Concurrency": {
+      "PermitLimit": 10,
+      "QueueLimit": 0
+    },
+    "EndpointPolicies": [
+      {
+        "Endpoint": "/api/msure/creditlife/*",
+        "PolicyName": "CreditLifePolicy",
+        "PermitLimit": 20,
+        "WindowSeconds": 60
+      },
+      {
+        "Endpoint": "/api/partners/*",
+        "PolicyName": "PartnersPolicy",
+        "PermitLimit": 30,
+        "WindowSeconds": 60
+      }
+    ]
+  }
+}

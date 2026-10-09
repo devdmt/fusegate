@@ -6,5 +6,22 @@
     "Password": "vAKmWQB8CyPUBg8rBQ",
     "Port": 587,
     "UserName": "adaline.pfannerstill49@ethereal.email"
+  },
+  "CreditwaveSMS": {
+    "BaseURL": "http://105.27.231.9:9094",
+    "TokenendPoint": "api/v1/auth/generate-token",
+    "SMSendPoint": "api/v1/sms/send",
+    "EmailendPoint": "api/v1/email/send",
+    "client_Id": "sanlam-kenya-c9a8091f",
+    "client_secret": "YygbRaFw6gfK4y4WKnw8uciejxX4xItJ",
+    "sender_Id": "Sanlam Info",
+    "from_email": "akibaplus@sanlam.co.ke",
+    "Email": "akibaplus@sanlam.co.ke",
+    "SendEmailWithCredwave": "true",
+    "SendSMSWithCredwave": "false"
+  },
+  "LinkSetting": {
+    "baselink": "http://localhost:3030/akiba-plus",
+    "linktime": 24
   }
 }

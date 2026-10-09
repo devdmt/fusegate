@@ -14,10 +14,16 @@ internal static class Startup
 
     internal static IServiceCollection AddRequestLogging(this IServiceCollection services, IConfiguration config)
     {
-        if (GetMiddlewareSettings(config).EnableHttpsLogging)
+        var settings = GetMiddlewareSettings(config);
+        if (settings.EnableHttpsLogging)
         {
             services.AddSingleton<RequestLoggingMiddleware>();
             services.AddScoped<ResponseLoggingMiddleware>();
+        }
+
+        if (settings.EnableApiRequestAudit)
+        {
+            services.AddScoped<ApiRequestAuditMiddleware>();
         }
 
         return services;
@@ -25,15 +31,21 @@ internal static class Startup
 
     internal static IApplicationBuilder UseRequestLogging(this IApplicationBuilder app, IConfiguration config)
     {
-        if (GetMiddlewareSettings(config).EnableHttpsLogging)
+        var settings = GetMiddlewareSettings(config);
+        if (settings.EnableHttpsLogging)
         {
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseMiddleware<ResponseLoggingMiddleware>();
+        }
+
+        if (settings.EnableApiRequestAudit)
+        {
+            app.UseMiddleware<ApiRequestAuditMiddleware>();
         }
 
         return app;
     }
 
     private static MiddlewareSettings GetMiddlewareSettings(IConfiguration config) =>
-        config.GetSection(nameof(MiddlewareSettings)).Get<MiddlewareSettings>();
+        config.GetSection(nameof(MiddlewareSettings)).Get<MiddlewareSettings>() ?? new MiddlewareSettings();
 }

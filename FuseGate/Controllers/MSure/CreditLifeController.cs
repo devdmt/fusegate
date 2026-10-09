@@ -1,6 +1,8 @@
 ﻿using API.Infrastructure.Interface;
+using API.Infrastructure.OpenApi;
 using Azure;
 using DAL.ModelView;
+using DAL.ModelView.CreditLife;
 using EsbJson.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +22,7 @@ namespace EsbJson.API.Controllers.MSure
         }
 
         //[AllowAnonymous]
-        [HttpPost("onboarding")]
+        [HttpPost("customerOnboarding")]
         public async Task<IActionResult> OnboardingRequest([FromBody] CreditLifeDTO onboardingDto)
         {
             try
@@ -30,6 +32,10 @@ namespace EsbJson.API.Controllers.MSure
                 {
                     return BadRequest(ModelState);
                 }
+                               _logger.LogInformation("Created Onboarding Request successfully Post Request at Controller: {controller}, " +
+                    "at action:{action} , at time: {time} , with result: {r}",
+                    nameof(CreditLifeController), nameof(OnboardingRequest), DateTime.Now,
+                    JsonConvert.SerializeObject(onboardingDto));
 
                 var result = await _msure.OnboardingRequest(onboardingDto);
 
@@ -49,18 +55,37 @@ namespace EsbJson.API.Controllers.MSure
             }
 
         }
-
+         [HttpPost("GetQuote")]
+        [PartnerCodeHeader]
+        public async Task<IActionResult> GetQuote([FromBody] QuoteRequestDTO msure)
+        {
+            var partnerCode = GetPartnerCode();
+            var result = await _msure.GetQuote(msure,partnerCode);
+            return Ok(result);
+        }
         [HttpPost("InsureRequest")]
+        [PartnerCodeHeader]
         public async Task<IActionResult> InsureRequest([FromBody] MsureDTO msure)
         {
+            var partnerCode = GetPartnerCode();
+            if (!string.IsNullOrEmpty(partnerCode))
+            {
+                msure.partnerCode = partnerCode;
+            }
             var result = await _msure.ProcessRequest(msure);
             return Ok(result);
         }
 
-        [HttpPost("GetProduct/{PartnerCode}")]
-        public async Task<IActionResult> GetProduct(string PartnerCode)
+        [HttpPost("GetProduct")]
+        [PartnerCodeHeader]
+        public async Task<IActionResult> GetProduct()
         {
-            var result = await _msure.GetProducts(PartnerCode);
+            var partnerCode = GetPartnerCode();
+            if (string.IsNullOrEmpty(partnerCode))
+            {
+                return BadRequest("PartnerCode header is required");
+            }
+            var result = await _msure.GetProducts(partnerCode);
             return Ok(result);
         }
     }

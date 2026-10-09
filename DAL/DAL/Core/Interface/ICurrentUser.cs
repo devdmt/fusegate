@@ -8,8 +8,8 @@ public interface ICurrentUser
 
     Guid GetUserId();
 
-    //string? GetUserEmail();
-
+    // string? GetUserEmail();
+    string? PartnerCode();
     bool IsAuthenticated();
 
     bool IsInRole(string role);

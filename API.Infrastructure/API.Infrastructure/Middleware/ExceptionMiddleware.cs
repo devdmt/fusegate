@@ -29,7 +29,7 @@ internal class ExceptionMiddleware : IMiddleware
         {
             await next(context);
         }
-        catch (Exception exception)
+            catch (Exception exception)
         {
             //string email = _currentUser.GetUserEmail() is string userEmail ? userEmail : "Anonymous";
             //var userId = _currentUser.GetUserId();

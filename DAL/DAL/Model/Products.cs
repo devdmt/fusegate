@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,13 +13,24 @@ namespace DAL.Model
     public class PartnersProducts
     {
         public int Id { get; set; }
+
         [MaxLength(50)]
-        public string Name { get; set; }        
-        
-        public virtual Partners Partner { get; set; }
-        public string? PartnerId { get; set; }
+        public string Name { get; set; } = null!;
+
+        [MaxLength(100)]
+        public string? Description { get; set; }
+
+        public int? PartnerId { get; set; } 
+        public virtual Partners? Partner { get; set; }
+
+        public int?     ProductId { get; set; }
+        public virtual Products? Product { get; set; }
+
+        [MaxLength(50)]
         public string? Image { get; set; }
-        public bool Active { get; set; } =false;
+
+        public bool Active { get; set; }
+
         public DateTime? CreatedOn { get; set; }
         public string? CreatedBy { get; set; }
     }
@@ -42,11 +53,20 @@ namespace DAL.Model
         creditlife=1,
         [EnumMember(Value = "lastexpense")]
         lastexpense=2,
-       [EnumMember(Value = "nssf")]
-        nssf=2,
-       [EnumMember(Value = "prmf")]
-        prmf=2,
-        [EnumMember(Value = "ipp")]
-        ipp=2,
+       [EnumMember(Value = "NSSF")]
+        NSSF=3,
+       [EnumMember(Value = "PRMF")]
+        PRMF=4,
+        [EnumMember(Value = "IPP")]
+        IPP=5,
+         [EnumMember(Value = "flex")]
+        flex=6,
+        [EnumMember(Value = "flexifutureplus")]
+        flexifutureplus=7
+    }
+     public class Terms
+    {
+        public int Id { get; set; }
+        public int Term { get; set; }
     }
 }

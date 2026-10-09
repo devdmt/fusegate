@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using System.Text;
 using API.Infrastructure.Common.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +31,9 @@ public class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions
             return;
         }
 
+        // Keep JWT claim types as-is (e.g. "partnerId", "Name") instead of mapping to .NET claim URIs
+        options.MapInboundClaims = false;
+
         byte[] key = Encoding.UTF8.GetBytes(ResolveSigningKey());
 
         options.RequireHttpsMetadata = !_env.IsDevelopment();
@@ -42,7 +45,8 @@ public class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidateIssuer = true,
             ValidateLifetime = true,
-            ValidateAudience = true,
+             //LifetimeValidator = (before, expires, token, parameters) => expires > DateTime.UtcNow,
+            //ValidateAudience = true,
             ValidIssuer = _jwtSettings.ValidIssuer,
             ValidAudience = _jwtSettings.ValidAudience,
             RoleClaimType = ClaimTypes.Role,

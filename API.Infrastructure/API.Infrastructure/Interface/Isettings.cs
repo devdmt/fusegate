@@ -10,6 +10,7 @@ namespace API.Infrastructure.Interface
         string GenerateRadomCode(int length = 8);
         Task<string> AddRequest(ApiRequestsDTO apiRequestsDTO);
        void UpdateRequest(UpdateRequestsDTO updateRequests);
+          (int Age, bool Success) CalculateAge(string input);
 
     }
 

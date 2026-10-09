@@ -1,6 +1,7 @@
-﻿using API.Infrastructure.Persistence;
+using API.Infrastructure.Persistence;
 using API.Infrastructure.OpenApi;
 using API.Infrastructure.Common;
+using API.Infrastructure.BackgroundServices;
 using Microsoft.AspNetCore.HttpOverrides;
 using API.Infrastructure.Middleware;
 using API.Infrastructure.Cors;
@@ -10,6 +11,7 @@ using API.Infrastructure.Localization;
 using FCB.Infrastructure.Caching;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
+using API.Infrastructure.RateLimit;
 
 namespace API.Infrastructure
 {
@@ -23,15 +25,18 @@ namespace API.Infrastructure
                 .AddCorsPolicy(config)
                 .AddExceptionMiddleware()
                 .AddLocalization(config)
+                .AddCredWaveSetting(config)
+                .AddEndpointsApiExplorer()
                 .AddCaching(config)
                 .AddOpenApiDocumentation(config)
                 .AddRouting(options => options.LowercaseUrls = true)
-               
+                //.AddRateLimit(config)
                 .AddPersistence(config)
                 .AddAkibaAppPersistence(config)
                 .AddMainDBPersistence(config)
                 .AddRequestLogging(config)
-                .AddServices();
+                .AddServices()
+                .AddBackgroundServices(config);
         }
         private static IServiceCollection AddApiVersioning(this IServiceCollection services) =>
    services.AddApiVersioning(config =>
@@ -66,8 +71,10 @@ namespace API.Infrastructure
               .UseExceptionMiddleware()
                 .UseRouting()
                  .UseCorsPolicy()
+               // .UseRateLimit(config)
                 .UseAuthentication()
                 .UseAuthorization()
+                .UseCurrentUser()
                  .UseRequestLogging(config);
 
 

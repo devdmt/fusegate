@@ -45,8 +45,9 @@ namespace API.Infrastructure.Application.Account
                 var bytes = Convert.FromBase64String(base64);
                 decoded = Encoding.UTF8.GetString(bytes);
             }
-            catch
+            catch(Exception e)
             {
+                _isettings.LogRequests(e.Message, "GenerateToken-Convert.FromBase64String", RequestType.Error);
                 return new AuthResponse();
             }
 

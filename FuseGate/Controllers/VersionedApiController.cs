@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using API.Infrastructure.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Versioning;
 namespace EsbJson.Controllers;
 
 [Route("api/v{version:apiVersion}/[controller]")]
+[Authorize]
 public class VersionedApiController : BaseApiController
 {
 }

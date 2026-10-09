@@ -19,57 +19,131 @@ namespace API.Infrastructure.Application;
         {
         try
         {
-
-            string insertQuery = "UPDATE [dbo].[ApiRequests]  SET [Response] =@Response " +
-            " ,[Responded] =@Responded ,[Failed] =@Failed ,[ErrorMsg] =@ErrorMsg,RespondedOn=getdate()  WHERE Id=@Id ";
+            const string updateQuery = @"
+UPDATE [dbo].[ApiRequests]
+SET [Response] = @Response,
+    [Responded] = @Responded,
+    [Failed] = @Failed,
+    [ErrorMsg] = @ErrorMsg,
+    [ResponseCode] = COALESCE(@ResponseCode, [ResponseCode]),
+    RespondedOn = getdate()
+WHERE Id = @Id";
             var parameters = new
             {
-                RequestName = request.Response,
+                Response = request.Response,
                 Responded = request.Responded,
                 Failed = request.Failed,
                 ErrorMsg = request.ErrorMsg,
+                ResponseCode = request.ResponseCode,
                 Id = request.Id
-
             };
-             _db.Connection.ExecuteScalar(insertQuery, parameters);
-
+            _db.Connection.Execute(updateQuery, parameters);
         }
         catch (Exception ex)
         {
             LogRequests(ex.Message + "|" + ex.StackTrace, "PensionOnboardingError", RequestType.Error);
         }
         }
+
+            // A general-purpose function to calculate age from a date string supporting multiple formats.
+                        // Returns a tuple: (int age, bool success)
+                     public    (int Age, bool Success) CalculateAge(string input)
+                        {
+                            if (string.IsNullOrWhiteSpace(input))
+                                return (0, false);
+
+                            // Attempt to handle if input is year only
+                            if (int.TryParse(input, out int yearOnly))
+                            {
+                                // Year must be reasonable (between 1900 and current year)
+                                int thisYear = DateTime.Now.Year;
+                                if (yearOnly > 1900 && yearOnly <= thisYear)
+                                {
+                                    int age = thisYear - yearOnly;
+                                    return (age, true);
+                                }
+                                else
+                                {
+                                    return (0, false);
+                                }
+                            }
+
+                            // Potential date formats to try
+                            var formats = new[]
+                            {
+                                "dd-MM-yyyy", "yyyy-MM-dd", "dd-MMM-yyyy", "dd-MM-yy", "d-M-yyyy", "d-MMM-yyyy",
+                                "yyyy/MM/dd", "dd/MM/yyyy", "MM/dd/yyyy", "M/d/yyyy", "d/MM/yyyy", "dd.MM.yyyy",
+                                "d.M.yyyy", "MMM dd, yyyy"
+                            };
+
+                            DateTime dob;
+                            bool parsed = DateTime.TryParseExact(
+                                input,
+                                formats,
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None,
+                                out dob);
+
+                            if (!parsed)
+                            {
+                                // Try general parse as last resort
+                                if (!DateTime.TryParse(input, out dob))
+                                    return (0, false);
+                            }
+
+                            DateTime today = DateTime.Today;
+                            int age2 = today.Year - dob.Year;
+                            if (dob > today.AddYears(-age2)) age2--;
+
+                            if (age2 < 0) // in case of bad future dates
+                                return (0, false);
+
+                            return (age2, true);
+                        }
     public async Task<string> AddRequest(ApiRequestsDTO apiRequestsDTO)
         {
             try
             {
-             var Id= Guid.NewGuid().ToString(); 
-            string insertQuery = "INSERT INTO [dbo].[ApiRequests](Id,[RequestName] ,[RequestType] " +
-                ",[ApiName] ,[PayLoad],[CreatedOn] ,[IP] " +
-                ")VALUES (@Id,@RequestName ,@RequestType ,@ApiName ,@PayLoad  " +
-                ",getdate() ,@IP);";
+                var id = Guid.NewGuid().ToString();
+                var hasResponse = !string.IsNullOrEmpty(apiRequestsDTO.Response) || apiRequestsDTO.ResponseCode.HasValue;
+                const string insertQuery = @"
+INSERT INTO [dbo].[ApiRequests]
+    (Id, [RequestName], [RequestType], [ApiName], [PayLoad], [IP], [CreatedOn],
+     [PartnerCode], [PartnerName], [Response], [ResponseCode], [Responded], [Failed], RespondedOn)
+VALUES
+    (@Id, @RequestName, @RequestType, @ApiName, @PayLoad, @IP, getdate(),
+     @PartnerCode, @PartnerName, @Response, @ResponseCode, @Responded, @Failed, @RespondedOn)";
+
                 var parameters = new
                 {
-                    Id= Id,
+                    Id = id,
                     RequestName = apiRequestsDTO.RequestName,
                     RequestType = apiRequestsDTO.RequestType,
                     ApiName = apiRequestsDTO.ApiName,
                     PayLoad = apiRequestsDTO.PayLoad,
-                    IP = apiRequestsDTO.IP
-
+                    IP = apiRequestsDTO.IP,
+                    PartnerCode = apiRequestsDTO.PartnerCode,
+                    PartnerName = apiRequestsDTO.PartnerName,
+                    Response = apiRequestsDTO.Response,
+                    ResponseCode = apiRequestsDTO.ResponseCode,
+                    Responded = hasResponse,
+                    Failed = apiRequestsDTO.ResponseCode is >= 400,
+                    RespondedOn = hasResponse ? (DateTime?)DateTime.UtcNow : null
                 };
-                 await _db.Connection.ExecuteScalarAsync(insertQuery, parameters);
-                return Id;
 
-            } catch (Exception ex)
-            {
-                LogRequests(ex.Message + "|" + ex.StackTrace, "PensionOnboardingError", RequestType.Error);
+                await _db.Connection.ExecuteAsync(insertQuery, parameters);
+                return id;
             }
-          return null;
+            catch (Exception ex)
+            {
+                LogRequests(ex.Message + "|" + ex.StackTrace, "AddRequest", RequestType.Error);
+            }
+
+            return null;
         }
     public  string GenerateRadomCode(int length = 8)
     {
-             string Alphabet = "ABCDEFGHIJKLMN0PQRSTUVWXYZ23456789"; // no 0,O,1,I
+             string Alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0,O,1,I
         Span<char> code = stackalloc char[length];
         for (int i = 0; i < length; i++)
         {

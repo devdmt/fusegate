@@ -1,0 +1,14 @@
+{
+  "SwaggerSettings": {
+    "Enable": true,
+    "Title": "FuseGate",
+    "Version": "v1",
+    "Description": "Sanlam  API ",
+    "ContactName": "Sanlam Dev Team",
+    "ContactEmail": "developer@lumo.com",
+    "ContactUrl": "",
+    "License": true,
+    "LicenseName": "MIT Sanlam",
+    "LicenseUrl": "E"
+  }
+}

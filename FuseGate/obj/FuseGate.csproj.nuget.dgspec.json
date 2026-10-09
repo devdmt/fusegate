@@ -1,40 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\FuseGate.csproj": {}
+    "/Users/mac/Desktop/work/BackendApis/FuseGate/FuseGate/FuseGate.csproj": {}
   },
   "projects": {
-    "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj": {
+    "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/API.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj",
+        "projectUniqueName": "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/API.Infrastructure.csproj",
         "projectName": "API.Infrastructure",
-        "projectPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\mndog\\.nuget\\packages\\",
-        "outputPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\obj\\",
+        "projectPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/API.Infrastructure.csproj",
+        "packagesPath": "/Users/mac/.nuget/packages/",
+        "outputPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mndog\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mac/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\DAL.csproj"
+              "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/DAL.csproj": {
+                "projectPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/DAL.csproj"
               }
             }
           }
@@ -49,7 +42,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -66,6 +59,14 @@
             "EPPlus": {
               "target": "Package",
               "version": "[7.2.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
             },
             "Mapster": {
               "target": "Package",
@@ -151,19 +152,19 @@
             },
             "NJsonSchema": {
               "target": "Package",
-              "version": "[10.8.0, )"
+              "version": "[11.5.2, )"
             },
             "NSwag.Annotations": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.Core": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "OfficeOpenXml.Core.ExcelPackage": {
               "target": "Package",
@@ -202,33 +203,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\DAL.csproj": {
+    "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\DAL.csproj",
+        "projectUniqueName": "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\DAL.csproj",
-        "packagesPath": "C:\\Users\\mndog\\.nuget\\packages\\",
-        "outputPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\obj\\",
+        "projectPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/DAL.csproj",
+        "packagesPath": "/Users/mac/.nuget/packages/",
+        "outputPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/DAL/DAL/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mndog\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mac/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -247,7 +241,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -302,41 +296,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\FuseGate.csproj": {
+    "/Users/mac/Desktop/work/BackendApis/FuseGate/FuseGate/FuseGate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\FuseGate.csproj",
+        "projectUniqueName": "/Users/mac/Desktop/work/BackendApis/FuseGate/FuseGate/FuseGate.csproj",
         "projectName": "FuseGate",
-        "projectPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\FuseGate.csproj",
-        "packagesPath": "C:\\Users\\mndog\\.nuget\\packages\\",
-        "outputPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\",
+        "projectPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/FuseGate/FuseGate.csproj",
+        "packagesPath": "/Users/mac/.nuget/packages/",
+        "outputPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/FuseGate/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mndog\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mac/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj": {
-                "projectPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj"
+              "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/API.Infrastructure.csproj": {
+                "projectPath": "/Users/mac/Desktop/work/BackendApis/FuseGate/API.Infrastructure/API.Infrastructure/API.Infrastructure.csproj"
               }
             }
           }
@@ -351,7 +338,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -360,6 +347,10 @@
             "DotNetEnv": {
               "target": "Package",
               "version": "[3.1.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
             },
             "MediatR": {
               "target": "Package",
@@ -383,6 +374,12 @@
               "target": "Package",
               "version": "[7.0.3, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
             "Microsoft.Office.Excel": {
               "target": "Package",
               "version": "[14.0.4760.1000, )"
@@ -395,13 +392,33 @@
               "target": "Package",
               "version": "[1.19.5, )"
             },
+            "NSwag.ApiDescription.Client": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
             },
             "NSwag.Core": {
               "target": "Package",
-              "version": "[13.18.2, )"
+              "version": "[14.6.3, )"
+            },
+            "NSwag.Core.Yaml": {
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
+            "NSwag.Generation.AspNetCore": {
+              "target": "Package",
+              "version": "[14.6.3, )"
+            },
+            "NSwag.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[14.6.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -435,7 +452,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

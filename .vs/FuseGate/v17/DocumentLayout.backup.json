@@ -1,0 +1,1147 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\modelview\\flex\\flexdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\modelview\\flex\\flexdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\msure\\insurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\msure\\insurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\middleware.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\middleware.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\pension\\pensioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\pension\\pensioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\middleware\\apirequestauditmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\middleware\\apirequestauditmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\msure\\partnerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\msure\\partnerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\msuremanager\\creditlifemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\msuremanager\\creditlifemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\msure\\lastexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\msure\\lastexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\msure\\creditlifecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\msure\\creditlifecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.onboarding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.onboarding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\interface\\ipension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\interface\\ipension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\msurerequests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\msurerequests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\interface\\iflexmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\interface\\iflexmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\pension\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\pension\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pay\\pay.mpesa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pay\\pay.mpesa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pay\\pay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pay\\pay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.contributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.contributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\mpesasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\mpesasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\interface\\ipaycs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\interface\\ipaycs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\modelview\\pension\\balancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\modelview\\pension\\balancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\modelview\\pension\\pensiononboardingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\modelview\\pension\\pensiononboardingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\modelview\\healthdeclaration\\healthdeclarationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\modelview\\healthdeclaration\\healthdeclarationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\partners\\partnermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\partners\\partnermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\pension\\beneficiiarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\pension\\beneficiiarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\healthdeclaration\\healthdeclarationrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\healthdeclaration\\healthdeclarationrequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.contribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.contribution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\pensioncontributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\pensioncontributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\account\\authcore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\account\\authcore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.transfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.transfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\security.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\security.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\ratelimit.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\ratelimit.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\openapi.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\openapi.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\mail.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\mail.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\cache.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\cache.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\cors.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\cors.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\database.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\database.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\logger.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\logger.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\hangfire.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\hangfire.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\signalr.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\signalr.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\securityheaders.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\securityheaders.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\configurations\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\configurations\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\context\\akibadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\context\\akibadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\leads\\leadmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\leads\\leadmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\customerapileads.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\customerapileads.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\backgroundservices\\callbackresponseprocessingbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\backgroundservices\\callbackresponseprocessingbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\interface\\ileads.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\interface\\ileads.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\modelview\\responsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\modelview\\responsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.balances.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.balances.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\callbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\callbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\otp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\otp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.activate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\flex\\flexmanager.activate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\funeralexpense\\funeralexpensemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\funeralexpense\\funeralexpensemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pay\\pay.token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pay\\pay.token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\migrations\\20260419142528_contributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\migrations\\20260419142528_contributions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\dal\\dal\\model\\pensioner\\pensioncustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1D3E970-11FE-490C-A94D-4E8180BEE30F}|DAL\\DAL\\DAL.csproj|solutionrelative:dal\\dal\\model\\pensioner\\pensioncustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB181502-1671-4B63-9D73-533559F9612B}|API.Infrastructure\\API.Infrastructure\\API.Infrastructure.csproj|solutionrelative:api.infrastructure\\api.infrastructure\\application\\pension\\pensionmanager.beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|d:\\playground\\source\\dmit\\ipp\\fusegate\\fusegate\\migrations\\20260312124153_callbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3940E91C-9D7C-4F8E-823F-4582D9227838}|FuseGate\\FuseGate.csproj|solutionrelative:fusegate\\migrations\\20260312124153_callbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 17,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "middleware.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\middleware.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\middleware.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\middleware.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\middleware.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:31.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApiRequestAuditMiddleware.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Middleware\\ApiRequestAuditMiddleware.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Middleware\\ApiRequestAuditMiddleware.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Middleware\\ApiRequestAuditMiddleware.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Middleware\\ApiRequestAuditMiddleware.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAlwBwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-15T09:58:44.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreditLifeController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\CreditLifeController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\MSure\\CreditLifeController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\CreditLifeController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\MSure\\CreditLifeController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAqwEcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T05:45:59.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CreditLifeManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\MSureManager\\CreditLifeManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\MSureManager\\CreditLifeManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\MSureManager\\CreditLifeManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\MSureManager\\CreditLifeManager.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAawNMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-08T07:27:16.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PartnersController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\PartnersController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\MSure\\PartnersController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\PartnersController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\MSure\\PartnersController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAEwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T07:10:32.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PensionController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\PensionController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\Pension\\PensionController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\PensionController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\Pension\\PensionController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAlwD8AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T06:56:10.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PensionManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.cs",
+              "ViewState": "AgIAAFgBAAAAAAAAAIA3wGIBAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:08:11.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Program.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Program.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Program.cs",
+              "RelativeToolTip": "FuseGate\\Program.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAADcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:18:24.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InsureController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\InsureController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\MSure\\InsureController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\InsureController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\MSure\\InsureController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAhwFsAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T13:48:05.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LastExpenseController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\LastExpenseController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\MSure\\LastExpenseController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\MSure\\LastExpenseController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\MSure\\LastExpenseController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T07:24:30.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Startup.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Startup.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Startup.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Startup.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAASwCQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-15T12:29:05.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FlexDTOs.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Flex\\FlexDTOs.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ModelView\\Flex\\FlexDTOs.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Flex\\FlexDTOs.cs",
+              "RelativeToolTip": "DAL\\DAL\\ModelView\\Flex\\FlexDTOs.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAnwJEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T07:27:38.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FlexManager.Onboarding.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Onboarding.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Onboarding.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Onboarding.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Onboarding.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAhwB8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T06:08:21.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IPension.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IPension.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Interface\\IPension.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IPension.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Interface\\IPension.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:08:16.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FlexManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.cs",
+              "ViewState": "AgIAAIMBAAAAAAAAAAAlwI4BAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T14:07:25.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Products.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Products.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\Products.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Products.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\Products.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAMwDUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T09:59:04.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MsureRequests.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\MsureRequests.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\MsureRequests.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\MsureRequests.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\MsureRequests.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAASwBIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-08T07:26:50.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PensionOnboardingDTO.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Pension\\PensionOnboardingDTO.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ModelView\\Pension\\PensionOnboardingDTO.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Pension\\PensionOnboardingDTO.cs",
+              "RelativeToolTip": "DAL\\DAL\\ModelView\\Pension\\PensionOnboardingDTO.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAIA6wDQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T07:39:58.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\Pension\\PaymentsController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\PaymentsController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\Pension\\PaymentsController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAawEYAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:41:38.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MpesaSettings.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\MpesaSettings.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\MpesaSettings.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\MpesaSettings.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\MpesaSettings.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAIA3wFwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:31:25.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IflexManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IflexManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Interface\\IflexManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IflexManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Interface\\IflexManager.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAswBkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T13:29:30.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BalanceDTO.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Pension\\BalanceDTO.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ModelView\\Pension\\BalanceDTO.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\Pension\\BalanceDTO.cs",
+              "RelativeToolTip": "DAL\\DAL\\ModelView\\Pension\\BalanceDTO.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAIA5wCMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T07:47:20.718Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Pay.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.cs",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAhwKgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T10:50:05.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FlexManager.Contributions.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Contributions.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Contributions.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Contributions.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Contributions.cs",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAAABIBAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-20T07:36:01.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Pay.Mpesa.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Mpesa.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Mpesa.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Mpesa.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Mpesa.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAASwBcAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-28T09:23:53.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "HealthDeclarationRequestDto.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\HealthDeclaration\\HealthDeclarationRequestDto.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ModelView\\HealthDeclaration\\HealthDeclarationRequestDto.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\HealthDeclaration\\HealthDeclarationRequestDto.cs",
+              "RelativeToolTip": "DAL\\DAL\\ModelView\\HealthDeclaration\\HealthDeclarationRequestDto.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAzwAkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T07:27:42.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "PartnerManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Partners\\PartnerManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Partners\\PartnerManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Partners\\PartnerManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Partners\\PartnerManager.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAhwJkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T10:12:49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IPaycs.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IPaycs.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Interface\\IPaycs.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\IPaycs.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Interface\\IPaycs.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAlwBAAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T13:29:49.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ApplicationDbContext.cs",
+              "RelativeToolTip": "DAL\\DAL\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAApwCQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T12:39:38.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "BeneficiiaryController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\BeneficiiaryController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\Pension\\BeneficiiaryController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\Pension\\BeneficiiaryController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\Pension\\BeneficiiaryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-13T05:09:23.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "HealthDeclarationRequestValidator.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\HealthDeclaration\\HealthDeclarationRequestValidator.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\HealthDeclaration\\HealthDeclarationRequestValidator.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\HealthDeclaration\\HealthDeclarationRequestValidator.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\HealthDeclaration\\HealthDeclarationRequestValidator.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwBAAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T07:28:08.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "PensionManager.Contribution.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Contribution.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Contribution.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Contribution.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Contribution.cs",
+              "ViewState": "AgIAALYAAAAAAAAAAAAuwMgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T12:34:45.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "PensionContributions.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\PensionContributions.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\PensionContributions.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\PensionContributions.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\PensionContributions.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAA9wEUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-13T05:29:03.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "PensionManager.Transfer.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Transfer.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Transfer.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Transfer.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Transfer.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAYwEsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T11:35:51.756Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "AuthCore.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Account\\AuthCore.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Account\\AuthCore.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Account\\AuthCore.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Account\\AuthCore.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAhwEUAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T12:06:05.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "FuseGate\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAWwD8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T10:09:24.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\appsettings.json",
+              "RelativeDocumentMoniker": "FuseGate\\appsettings.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\appsettings.json",
+              "RelativeToolTip": "FuseGate\\appsettings.json",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-07T08:31:45.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "database.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\database.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\database.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\database.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\database.json",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-04T07:50:41.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "ratelimit.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\ratelimit.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\ratelimit.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\ratelimit.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\ratelimit.json",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:55:45.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "security.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\security.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\security.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\security.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\security.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:55:55.768Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "hangfire.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\hangfire.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\hangfire.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\hangfire.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\hangfire.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:07.616Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "cache.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\cache.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\cache.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\cache.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\cache.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:11.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "cors.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\cors.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\cors.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\cors.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\cors.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:14.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "logger.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\logger.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\logger.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\logger.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\logger.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:17.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "mail.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\mail.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\mail.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\mail.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\mail.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:28.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "openapi.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\openapi.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\openapi.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\openapi.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\openapi.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:33.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "signalr.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\signalr.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\signalr.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\signalr.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\signalr.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:05.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "securityheaders.json",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\securityheaders.json",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\securityheaders.json",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\securityheaders.json",
+              "RelativeToolTip": "FuseGate\\Configurations\\securityheaders.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-14T04:56:02.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\Startup.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Configurations\\Startup.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Configurations\\Startup.cs",
+              "RelativeToolTip": "FuseGate\\Configurations\\Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T04:56:04.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "AkibaDbContext.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Context\\AkibaDbContext.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Context\\AkibaDbContext.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Context\\AkibaDbContext.cs",
+              "RelativeToolTip": "DAL\\DAL\\Context\\AkibaDbContext.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAIA8wBsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T12:13:09.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "CustomerApiLeads.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\CustomerApiLeads.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\CustomerApiLeads.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\CustomerApiLeads.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\CustomerApiLeads.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAADgvxwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T05:05:01.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "LeadManagement.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Leads\\LeadManagement.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Leads\\LeadManagement.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Leads\\LeadManagement.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Leads\\LeadManagement.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAlwDYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T05:19:06.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "CallBackResponseProcessingBackgroundService.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\BackgroundServices\\CallBackResponseProcessingBackgroundService.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\BackgroundServices\\CallBackResponseProcessingBackgroundService.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\BackgroundServices\\CallBackResponseProcessingBackgroundService.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\BackgroundServices\\CallBackResponseProcessingBackgroundService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAhwBsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-13T05:37:01.765Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "ILeads.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\ILeads.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Interface\\ILeads.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Interface\\ILeads.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Interface\\ILeads.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T05:21:17.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ResponseDTO.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\ResponseDTO.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\ModelView\\ResponseDTO.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\ModelView\\ResponseDTO.cs",
+              "RelativeToolTip": "DAL\\DAL\\ModelView\\ResponseDTO.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAArwE4AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T12:53:35.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "PensionManager.Balances.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Balances.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Balances.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Balances.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Balances.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAEwCwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T11:38:12.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "CallBackResponse.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\CallBackResponse.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\CallBackResponse.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\CallBackResponse.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\CallBackResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T12:35:44.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "FlexManager.Beneficiary.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Beneficiary.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Beneficiary.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Beneficiary.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Beneficiary.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAQwIAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T06:10:28.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "OTP.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\OTP.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\OTP.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\OTP.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\OTP.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T12:02:04.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "FuneralExpenseManager.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\FuneralExpense\\FuneralExpenseManager.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\FuneralExpense\\FuneralExpenseManager.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\FuneralExpense\\FuneralExpenseManager.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\FuneralExpense\\FuneralExpenseManager.cs",
+              "ViewState": "AgIAAFQCAAAAAAAAAAAAwFsCAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T07:42:33.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "FlexManager.Activate.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Activate.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Activate.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Activate.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Flex\\FlexManager.Activate.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAAwIEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T07:43:28.96Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "Pay.Token.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Token.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Token.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Token.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pay\\Pay.Token.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAlwCwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-13T05:01:14.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "0lqrani0.sql",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql",
+              "RelativeDocumentMoniker": "FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql",
+              "RelativeToolTip": "FuseGate\\obj\\Debug\\net8.0\\0lqrani0.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-19T14:26:18.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "20260419142528_contributions.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Migrations\\20260419142528_contributions.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Migrations\\20260419142528_contributions.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Migrations\\20260419142528_contributions.cs",
+              "RelativeToolTip": "FuseGate\\Migrations\\20260419142528_contributions.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAQwAsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:25:29.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Customers.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Customers.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\Customers.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Customers.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\Customers.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAA6wD0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:37:09.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "PensionCustomer.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Pensioner\\PensionCustomer.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL\\Model\\Pensioner\\PensionCustomer.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\DAL\\DAL\\Model\\Pensioner\\PensionCustomer.cs",
+              "RelativeToolTip": "DAL\\DAL\\Model\\Pensioner\\PensionCustomer.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAcwJEAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T07:35:40.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "PensionManager.Beneficiary.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Beneficiary.cs",
+              "RelativeDocumentMoniker": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Beneficiary.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Beneficiary.cs",
+              "RelativeToolTip": "API.Infrastructure\\API.Infrastructure\\Application\\Pension\\PensionManager.Beneficiary.cs",
+              "ViewState": "AgIAAN4AAAAAAAAAAAArwPgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T06:21:56.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "20260312124153_callbackresponse.cs",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Migrations\\20260312124153_callbackresponse.cs",
+              "RelativeDocumentMoniker": "FuseGate\\Migrations\\20260312124153_callbackresponse.cs",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\Migrations\\20260312124153_callbackresponse.cs",
+              "RelativeToolTip": "FuseGate\\Migrations\\20260312124153_callbackresponse.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T12:41:53.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "fkvb1flk.sql",
+              "DocumentMoniker": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql",
+              "RelativeDocumentMoniker": "FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql",
+              "ToolTip": "D:\\Playground\\source\\DMIT\\IPP\\FuseGate\\FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql",
+              "RelativeToolTip": "FuseGate\\obj\\Debug\\net8.0\\fkvb1flk.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-03-12T12:42:27.418Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
