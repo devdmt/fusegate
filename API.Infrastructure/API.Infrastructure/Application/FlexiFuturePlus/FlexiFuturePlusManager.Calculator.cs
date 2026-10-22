@@ -33,6 +33,8 @@ public partial class FlexiFuturePlusManager
                 sumAssured = SolveSumAssuredFromPremium(request, pack, anb);
                 ValidateSaTermRules(pack.Settings, sumAssured, request.PolicyTerm);
             }
+            
+            
 
             var result = BuildResult(request, pack, anb, sumAssured);
             if (string.Equals(request.CalculationMode, FlexiFutureCalculationModes.PremiumToSa, StringComparison.OrdinalIgnoreCase)
@@ -960,8 +962,8 @@ public partial class FlexiFuturePlusManager
 
             if (string.Equals(riderCode, FlexiFutureRateCodes.Life, StringComparison.OrdinalIgnoreCase))
             {
-                // Excel G7: rate * F7 * sum_assured_spouse / 1000, F7 = DTH_Ben.
-                return deathBenefitPct * ResolveSpouseLifeCover(mainSa, spouseCap, deathBenefitPct);
+                // Excel G7: rate * sum_assured_spouse / 1000
+                return ResolveSpouseLifeCover(mainSa, spouseCap, deathBenefitPct);
             }
 
             return spouseSa;
@@ -1497,10 +1499,16 @@ public partial class FlexiFuturePlusManager
                 if (table != null)
                     ValidateRiderAge(table, anb);
             }
+            
+            var life = RateLookup.GetTable(pack, FlexiFutureRateCodes.Life, RateLookup.ResolvePremiumMode(request.Frequency));
+
+            if (life != null && request.DeathBenefitPct == 0)
+            {
+                throw new InvalidOperationException("LIFE rider cannot be added when death percentage is 0");
+            }
 
             if (request.DeathBenefitPct > 0)
             {
-                var life = RateLookup.GetTable(pack, FlexiFutureRateCodes.Life, RateLookup.ResolvePremiumMode(request.Frequency));
                 if (life != null)
                     ValidateRiderAge(life, anb);
             }
