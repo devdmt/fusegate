@@ -34,7 +34,7 @@ namespace DAL
         public DbSet<PensionContributions> pensionContributions { get; set; }
         public DbSet<CustomerRoles> customerRoles { get; set; }
         public DbSet<PensionerGurdian>  gurdian { get; set; }
-
+          public  DbSet<OTP> Otp { get; set; }
         public DbSet<FlexiFutureProductSettings> FlexiFutureProductSettings { get; set; }
         public DbSet<FlexiFutureFrequencyDiscount> FlexiFutureFrequencyDiscounts { get; set; }
         public DbSet<FlexiFutureRateTable> FlexiFutureRateTables { get; set; }

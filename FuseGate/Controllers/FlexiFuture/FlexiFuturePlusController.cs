@@ -225,6 +225,30 @@ public class FlexiFuturePlusController : VersionedApiController
         }
     }
 
+    [HttpPost("consent")]
+    [PartnerCodeHeader]
+    public async Task<IActionResult> SubmitConsent(
+        [FromBody] FlexiFuturePlusConsentDto request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>.Fail("Invalid request."));
+
+            var auth = await ValidatePartnerAsync(nameof(SubmitConsent), cancellationToken);
+            if (auth != null) return auth;
+
+            var result = await _manager.SubmitConsentAsync(request, CurrentPartner(), cancellationToken);
+            return ToActionResult(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "SubmitConsent failed");
+            return BadRequest(FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>.Fail(ex.Message));
+        }
+    }
+
     [HttpPost("onboarding/send-otp")]
     [PartnerCodeHeader]
     public async Task<IActionResult> SendConsentOtp(

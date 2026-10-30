@@ -87,6 +87,218 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "AddPayment",
+    "RelativePath": "api/v1/flexifutureplus/add-payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFuturePlusAddPaymentRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "GetConfigs",
+    "RelativePath": "api/v1/flexifutureplus/configs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFuturePlusResponse\u00601[[DAL.ModelView.FlexiFuture.FlexiFutureUiConfigDto, DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "SubmitConsent",
+    "RelativePath": "api/v1/flexifutureplus/consent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFuturePlusConsentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "GetCoverPremiums",
+    "RelativePath": "api/v1/flexifutureplus/cover-premiums",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuture.FlexiFutureCoverPremiumsRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "SaveOnboarding",
+    "RelativePath": "api/v1/flexifutureplus/onboarding",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFuturePlusOnboardingRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "GetOnboarding",
+    "RelativePath": "api/v1/flexifutureplus/onboarding",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quoteId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "GetOnboardingQuestions",
+    "RelativePath": "api/v1/flexifutureplus/onboarding/questions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quoteId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "SendConsentOtp",
+    "RelativePath": "api/v1/flexifutureplus/onboarding/send-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFuturePlusSendOtpRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "PollMpesaStkResult",
+    "RelativePath": "api/v1/flexifutureplus/payments/mpesa/stk-result/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "UpdateQuote",
+    "RelativePath": "api/v1/flexifutureplus/quote",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuturePlus.FlexiFutureQuoteRecalculateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "UpsertQuote",
+    "RelativePath": "api/v1/flexifutureplus/quotes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuture.FlexiFutureQuoteUpsertDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "SearchQuotes",
+    "RelativePath": "api/v1/flexifutureplus/quotes/search",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuture.FlexiFutureQuoteSearchDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.FlexiFuture.FlexiFuturePlusController",
+    "Method": "ShareQuote",
+    "RelativePath": "api/v1/flexifutureplus/quotes/share",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DAL.ModelView.FlexiFuture.FlexiFutureShareQuoteDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FuseGate.Controllers.MSure.InsureController",
     "Method": "PostHealthDeclaration",
     "RelativePath": "api/v1/insure/{memberno}/health-declaration",
@@ -613,6 +825,22 @@
     "ContainingType": "FuseGate.Controllers.Pension.PaymentsController",
     "Method": "ProcessPensionSTKResult",
     "RelativePath": "processresult",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "api-version",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FuseGate.Controllers.Pension.PaymentsController",
+    "Method": "ProcessFlexiFutureSTKResult",
+    "RelativePath": "processresult/processflexifuturestkresult",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

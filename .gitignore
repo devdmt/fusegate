@@ -11,6 +11,9 @@ x86/
 **/obj/
 **/Debug/
 *.pdb
+.vs/
+[Bb]in/
+[Oo]bj/
 
 # Visual Studio
 .vs/

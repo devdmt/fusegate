@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\IPP.EsbJson.API.props" />
-</Project>

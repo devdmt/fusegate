@@ -99,6 +99,10 @@ public class FlexiFuturePartnerHazardousDto
 
 public class FlexiFuturePlusConsentDto
 {
+    [Required]
+    [JsonPropertyName("quoteId")]
+    public Guid QuoteId { get; set; }
+
     /// <summary>OTP code from <c>POST /onboarding/send-otp</c>. Mutually exclusive with <see cref="Signature"/>.</summary>
     [StringLength(32)]
     [JsonPropertyName("otp")]
@@ -425,9 +429,6 @@ public class FlexiFuturePlusOnboardingRequestDto
 
     [JsonPropertyName("hazardous")]
     public FlexiFuturePartnerHazardousDto? Hazardous { get; set; }
-
-    [JsonPropertyName("consent")]
-    public FlexiFuturePlusConsentDto? Consent { get; set; }
 }
 
 public class FlexiFuturePlusOnboardingStateDto

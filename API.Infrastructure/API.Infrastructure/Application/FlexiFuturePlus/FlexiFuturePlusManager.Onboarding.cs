@@ -166,19 +166,7 @@ public partial class FlexiFuturePlusManager
                 await SyncFlexiFundFromQuoteAsync(policy, quote, cancellationToken);
             }
 
-            if (HasSubmittedConsent(request.Consent))
-            {
-                await CompleteConsentAsync(
-                    policy,
-                    quote,
-                    request.Consent!,
-                    partner,
-                    cancellationToken);
-            }
-            else
-            {
-                policy.OnboardingStep = DetermineOnboardingStep(request, policy);
-            }
+            policy.OnboardingStep = DetermineOnboardingStep(request, policy);
             policy.UpdatedAt = DateTime.UtcNow;
             quote.UpdatedAt = DateTime.UtcNow;
 
@@ -189,11 +177,7 @@ public partial class FlexiFuturePlusManager
                 .FirstOrDefaultAsync(c => c.Id == policy.CustomerId, cancellationToken);
 
             response.Success = true;
-            response.Message = HasSubmittedConsent(request.Consent)
-                ? policy.IsApproved
-                    ? "Onboarding completed successfully. Policy approved."
-                    : "Onboarding completed successfully."
-                : "Onboarding saved successfully.";
+            response.Message = "Onboarding saved successfully.";
             response.Data = await MapOnboardingStateAsync(policy, quote, customer, request, cancellationToken);
         }
         catch (Exception ex)
@@ -303,8 +287,8 @@ public partial class FlexiFuturePlusManager
                 IsEmailSent = false
             };
 
-            _db.OTPs.Add(otp);
-            await _db.SaveChangesAsync(cancellationToken);
+            _akiba.Otp.Add(otp);
+            await _akiba.SaveChangesAsync(cancellationToken);
 
             response.Success = true;
             response.Message = "Consent OTP queued successfully.";
@@ -314,6 +298,56 @@ public partial class FlexiFuturePlusManager
         {
             response.Success = false;
             response.Message = FlexiFutureErrorHandling.ToClientMessage(ex, _logger, nameof(SendConsentOtpInternalAsync));
+        }
+
+        return response;
+    }
+
+    private async Task<FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>> SubmitConsentInternalAsync(
+        FlexiFuturePlusConsentDto request,
+        PartnerContext partner,
+        CancellationToken cancellationToken)
+    {
+        var response = new FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>();
+        try
+        {
+            if (request.QuoteId == Guid.Empty)
+                throw new InvalidOperationException("QuoteId is required.");
+
+            var quote = await _akiba.FlexiFutureQuotes
+                .Include(q => q.Spouses)
+                .FirstOrDefaultAsync(q => q.Id == request.QuoteId, cancellationToken)
+                ?? throw new InvalidOperationException($"Quote '{request.QuoteId}' was not found.");
+
+            EnsureQuoteAccessible(quote, partner);
+            EnsureQuoteNotCancelled(quote);
+
+            var policy = await _akiba.FlexiFuturePolicies
+                .FirstOrDefaultAsync(p => p.QuoteId == request.QuoteId, cancellationToken)
+                ?? throw new InvalidOperationException("Onboarding policy was not found. Submit customerDetails first.");
+
+            EnsureNotComplete(policy);
+
+            await CompleteConsentAsync(policy, quote, request, partner, cancellationToken);
+
+            policy.UpdatedAt = DateTime.UtcNow;
+            quote.UpdatedAt = DateTime.UtcNow;
+            await _akiba.SaveChangesAsync(cancellationToken);
+
+            var customer = await _akiba.customers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == policy.CustomerId, cancellationToken);
+
+            response.Success = true;
+            response.Message = policy.IsApproved
+                ? "Onboarding completed successfully. Policy approved."
+                : "Onboarding completed successfully.";
+            response.Data = await MapOnboardingStateAsync(policy, quote, customer, null, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = FlexiFutureErrorHandling.ToClientMessage(ex, _logger, nameof(SubmitConsentInternalAsync));
         }
 
         return response;
@@ -1072,8 +1106,6 @@ public partial class FlexiFuturePlusManager
         FlexiFuturePlusOnboardingRequestDto request,
         FlexiFuturePolicy policy)
     {
-        if (HasSubmittedConsent(request.Consent))
-            return FlexiFutureOnboardingSteps.Complete;
         if (request.Beneficiaries.Count > 0)
             return FlexiFutureOnboardingSteps.Beneficiaries;
         if (HasSubmittedHazardous(request.Hazardous))
@@ -1164,22 +1196,7 @@ public partial class FlexiFuturePlusManager
         return request.FamilyMembers.Count > 0
                || request.Beneficiaries.Count > 0
                || HasSubmittedHealthQuestions(request.HealthQuestions)
-               || HasSubmittedHazardous(request.Hazardous)
-               || HasSubmittedConsent(request.Consent);
-    }
-
-    private static bool HasSubmittedConsent(FlexiFuturePlusConsentDto? consent)
-    {
-        if (consent == null)
-            return false;
-
-        return !string.IsNullOrWhiteSpace(consent.Otp)
-               || HasSubmittedSignature(consent.Signature);
-    }
-
-    private static bool HasSubmittedSignature(FileUploadDTO? signature)
-    {
-        return signature != null && !string.IsNullOrWhiteSpace(signature.Data);
+               || HasSubmittedHazardous(request.Hazardous);
     }
 
     private static bool HasSubmittedHealthQuestions(FlexiFuturePartnerHealthQuestionsInputDto? healthQuestions)
@@ -2610,7 +2627,7 @@ public partial class FlexiFuturePlusManager
         try
         {
             var customerId = policy.CustomerId.ToString();
-            var otp = await _db.OTPs
+            var otp = await _akiba.Otp
                 .Where(o =>
                     o.CustomerId == customerId
                     && o.Code != null

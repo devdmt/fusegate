@@ -131,6 +131,12 @@ public partial class FlexiFuturePlusManager : IFlexiFuturePlusManager
         CancellationToken cancellationToken = default)
         => SendConsentOtpInternalAsync(request, partner, cancellationToken);
 
+    public Task<FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>> SubmitConsentAsync(
+        FlexiFuturePlusConsentDto request,
+        PartnerContext partner,
+        CancellationToken cancellationToken = default)
+        => SubmitConsentInternalAsync(request, partner, cancellationToken);
+
     public Task<FlexiFuturePlusResponse<FlexiFutureQuoteResultDto>> UpdateQuoteAsync(
         FlexiFutureQuoteRecalculateDto request,
         PartnerContext partner,

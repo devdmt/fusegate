@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\IPP.EsbJson.API.props" />
-</Project>

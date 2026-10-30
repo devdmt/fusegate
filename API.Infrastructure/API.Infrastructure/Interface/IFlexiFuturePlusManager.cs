@@ -45,6 +45,10 @@ public interface IFlexiFuturePlusManager : ITransientService
         FlexiFuturePlusSendOtpRequestDto request,
         PartnerContext partner,
         CancellationToken cancellationToken = default);
+    Task<FlexiFuturePlusResponse<FlexiFuturePlusOnboardingStateDto>> SubmitConsentAsync(
+        FlexiFuturePlusConsentDto request,
+        PartnerContext partner,
+        CancellationToken cancellationToken = default);
     Task<FlexiFuturePlusResponse<FlexiFutureQuoteResultDto>> UpdateQuoteAsync(
         FlexiFutureQuoteRecalculateDto request,
         PartnerContext partner,
