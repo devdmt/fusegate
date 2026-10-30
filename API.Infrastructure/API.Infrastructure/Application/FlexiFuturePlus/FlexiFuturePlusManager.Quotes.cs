@@ -405,6 +405,49 @@ public partial class FlexiFuturePlusManager
         return $"{visible}@{domain}";
     }
 
+    internal static string BuildOtpSentMessage(string? maskedPhone, string? maskedEmail)
+    {
+        var hasPhone = !string.IsNullOrWhiteSpace(maskedPhone);
+        var hasEmail = !string.IsNullOrWhiteSpace(maskedEmail);
+
+        if (hasPhone && hasEmail)
+            return $"OTP sent to {maskedPhone} and {maskedEmail}.";
+        if (hasPhone)
+            return $"OTP sent to {maskedPhone}.";
+        if (hasEmail)
+            return $"OTP sent to {maskedEmail}.";
+        return "OTP sent successfully.";
+    }
+
+    internal static bool TryNormalizeKenyanMobile(string? raw, out string normalized)
+    {
+        normalized = string.Empty;
+        if (string.IsNullOrWhiteSpace(raw))
+            return false;
+
+        var digits = Regex.Replace(raw, @"[^\d]", string.Empty);
+        if (digits.StartsWith("254", StringComparison.Ordinal) && digits.Length == 12)
+            normalized = digits;
+        else if (digits.StartsWith('0') && digits.Length == 10)
+            normalized = "254" + digits[1..];
+        else if ((digits.StartsWith('7') || digits.StartsWith('1')) && digits.Length == 9)
+            normalized = "254" + digits;
+        else
+            return false;
+
+        return normalized.Length == 12
+               && (normalized.StartsWith("2547", StringComparison.Ordinal)
+                   || normalized.StartsWith("2541", StringComparison.Ordinal));
+    }
+
+    internal static string MaskKenyanMobile(string normalized12)
+    {
+        if (string.IsNullOrWhiteSpace(normalized12) || normalized12.Length < 8)
+            return "***";
+
+        return normalized12[..6] + "****" + normalized12[^2..];
+    }
+
     internal static string? Truncate(string? value, int maxLength)
     {
         if (string.IsNullOrWhiteSpace(value))

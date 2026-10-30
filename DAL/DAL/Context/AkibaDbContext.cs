@@ -1,4 +1,5 @@
 using DAL.Model;
+using DAL.Model.Akiba;
 using DAL.Model.FlexiContributions;
 using DAL.Model.FlexiFuture;
 using DAL.Model.FlexiFund;
@@ -34,7 +35,7 @@ namespace DAL
         public DbSet<PensionContributions> pensionContributions { get; set; }
         public DbSet<CustomerRoles> customerRoles { get; set; }
         public DbSet<PensionerGurdian>  gurdian { get; set; }
-          public  DbSet<OTP> Otp { get; set; }
+        public DbSet<AkibaOtp> Otp { get; set; }
         public DbSet<FlexiFutureProductSettings> FlexiFutureProductSettings { get; set; }
         public DbSet<FlexiFutureFrequencyDiscount> FlexiFutureFrequencyDiscounts { get; set; }
         public DbSet<FlexiFutureRateTable> FlexiFutureRateTables { get; set; }
@@ -89,6 +90,7 @@ namespace DAL
             builder.ApplyConfiguration(new FlexiContributionConfiguration());
             builder.ApplyConfiguration(new PaymentInstructionConfiguration());
             builder.ApplyConfiguration(new FlexiFundConfiguration());
+            builder.ApplyConfiguration(new AkibaOtpConfiguration());
 
             DateOnlyModelConfiguration.ApplyDateOnlyConversions(builder);
         }

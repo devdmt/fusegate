@@ -1,3 +1,4 @@
+using API.Infrastructure.Application.Akiba;
 using API.Infrastructure.Interface;
 using API.Infrastructure.Otp;
 using DAL;
@@ -24,6 +25,7 @@ public partial class FlexiFuturePlusManager : IFlexiFuturePlusManager
     private readonly Isettings _settings;
     private readonly IPay _ipay;
     private readonly OtpSettings _otpSettings;
+    private readonly IAkibaOtpService _akibaOtpService;
 
     public FlexiFuturePlusManager(
         AkibappDbContext akiba,
@@ -32,7 +34,8 @@ public partial class FlexiFuturePlusManager : IFlexiFuturePlusManager
         ILogger<FlexiFuturePlusManager> logger,
         Isettings settings,
         IPay ipay,
-        IOptions<OtpSettings> otpSettings)
+        IOptions<OtpSettings> otpSettings,
+        IAkibaOtpService akibaOtpService)
     {
         _akiba = akiba;
         _db = db;
@@ -41,6 +44,7 @@ public partial class FlexiFuturePlusManager : IFlexiFuturePlusManager
         _settings = settings;
         _ipay = ipay;
         _otpSettings = otpSettings?.Value ?? new OtpSettings();
+        _akibaOtpService = akibaOtpService;
     }
 
     public async Task<FlexiFuturePlusResponse<FlexiFutureUiConfigDto>> GetConfigsAsync(

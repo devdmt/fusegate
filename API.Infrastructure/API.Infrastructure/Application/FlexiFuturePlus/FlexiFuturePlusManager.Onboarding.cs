@@ -1,4 +1,5 @@
 using System.Text.Json;
+using API.Infrastructure.Application.Akiba;
 using DAL.Model;
 using DAL.Model.FlexiFuture;
 using DAL.Model.Pensioner;
@@ -269,30 +270,28 @@ public partial class FlexiFuturePlusManager
                 .FirstOrDefaultAsync(c => c.Id == policy.CustomerId, cancellationToken)
                 ?? throw new InvalidOperationException($"Customer '{policy.CustomerId}' was not found.");
 
-            var otpCode = _settings.GenerateRadomCode(_otpSettings.Length);
-            var otp = new OTP
-            {
-                Id = Guid.NewGuid(),
-                CustomerId = customer.Id.ToString(),
-                ProductRef = policy.Id.ToString(),
-                Code = otpCode,
-                Phonenumber = customer.PhoneNumber ?? string.Empty,
-                Message = $"Your FlexiFuture Plus consent OTP is {otpCode}.",
-                notificationType = NotificationType.SMS,
-                CreatedAt = DateTime.UtcNow,
-                ExpiredAt = DateTime.UtcNow.AddMinutes(_otpSettings.ExpiryMinutes),
-                IsUsed = false,
-                ISsent = false,
-                ISSMSSent = false,
-                IsEmailSent = false
-            };
+            const int otpExpiryMinutes = 10;
+            await _akibaOtpService.AddOtpAsync(
+                new AkibaOtpAddRequest
+                {
+                    CustomerId = customer.Id,
+                    UserId = string.IsNullOrWhiteSpace(customer.UserId) ? null : customer.UserId,
+                    Firstname = customer.Fullname ?? string.Empty,
+                    CommType = AkibaOtpCommType.All
+                },
+                otpExpiryMinutes,
+                cancellationToken);
 
-            _akiba.Otp.Add(otp);
-            await _akiba.SaveChangesAsync(cancellationToken);
+            var maskedPhone = TryNormalizeKenyanMobile(customer.PhoneNumber, out var normalizedPhone)
+                ? MaskKenyanMobile(normalizedPhone)
+                : null;
+            var maskedEmail = string.IsNullOrWhiteSpace(customer.Email)
+                ? null
+                : MaskEmail(customer.Email.Trim());
 
             response.Success = true;
-            response.Message = "Consent OTP queued successfully.";
-            response.Data = new { QuoteId = request.QuoteId, OtpReference = otp.Id };
+            response.Message = BuildOtpSentMessage(maskedPhone, maskedEmail);
+            response.Data = new { QuoteId = request.QuoteId };
         }
         catch (Exception ex)
         {
@@ -2626,25 +2625,24 @@ public partial class FlexiFuturePlusManager
     {
         try
         {
-            var customerId = policy.CustomerId.ToString();
+            var customerId = policy.CustomerId;
             var otp = await _akiba.Otp
                 .Where(o =>
                     o.CustomerId == customerId
                     && o.Code != null
                     && o.Code.ToLower() == otpCode.ToLower()
-                    && !o.IsUsed
-                    && (o.ProductRef == null || o.ProductRef == policy.Id.ToString()))
+                    && (o.IsUsed == false || o.IsUsed == null))
                 .OrderByDescending(o => o.CreatedAt)
                 .FirstOrDefaultAsync(cancellationToken)
                 ?? throw new InvalidOperationException("Invalid OTP code.");
 
-            if (otp.ExpiredAt.HasValue && otp.ExpiredAt.Value < DateTime.UtcNow)
+            if (otp.ExpiredAt.HasValue && otp.ExpiredAt.Value < DateTime.Now)
                 throw new InvalidOperationException("OTP has expired.");
 
             otp.IsUsed = true;
-            otp.UsedAt = DateTime.UtcNow;
-            otp.UsedBy = customerId;
-            await _db.SaveChangesAsync(cancellationToken);
+            otp.UsedAt = DateTime.Now;
+            otp.UsedBy = customerId.ToString();
+            await _akiba.SaveChangesAsync(cancellationToken);
         }
         catch (InvalidOperationException)
         {
