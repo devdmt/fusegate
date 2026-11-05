@@ -965,8 +965,8 @@ public partial class FlexiFuturePlusManager
 
             if (string.Equals(riderCode, FlexiFutureRateCodes.Life, StringComparison.OrdinalIgnoreCase))
             {
-                // Excel G7: rate * F7 * sum_assured_spouse / 1000, F7 = DTH_Ben.
-                return deathBenefitPct * ResolveSpouseLifeCover(mainSa, spouseCap, deathBenefitPct);
+                // Excel G7: rate * sum_assured_spouse / 1000.
+                return ResolveSpouseLifeCover(mainSa, spouseCap, deathBenefitPct);
             }
 
             return spouseSa;
