@@ -101,6 +101,7 @@ public partial class FlexiFuturePlusManager
                     request,
                     policy,
                     flexiFundId,
+                    BuildPaymentNarration(quote.QuoteNumber, request.PaymentMode, null),
                     ipAddress,
                     browser,
                     cancellationToken);
@@ -132,7 +133,7 @@ public partial class FlexiFuturePlusManager
                 Id = contributionId,
                 CustomerId = policy.CustomerId,
                 Total_Contribution = request.Amount,
-                Naration = request.Narration,
+                Naration = BuildPaymentNarration(quote.QuoteNumber, request.PaymentMode, paymentReference),
                 Reference = paymentReference,
                 ThirdpartyRef = paymentReference,
                 FlexiFuturePolicyId = policy.Id,
@@ -511,6 +512,15 @@ public partial class FlexiFuturePlusManager
         }
     }
 
+    private static string BuildPaymentNarration(string? quoteNumber, FlexiPaymentMode paymentMode, string? paymentReference)
+    {
+        var quote = string.IsNullOrWhiteSpace(quoteNumber) ? string.Empty : quoteNumber.Trim();
+        var narration = string.IsNullOrWhiteSpace(paymentReference)
+            ? $"{quote} | {paymentMode}"
+            : $"{quote} | {paymentMode} | {paymentReference.Trim()}";
+        return narration.Length <= 1000 ? narration : narration[..1000];
+    }
+
     private static string? ValidatePaymentRequest(FlexiFuturePlusAddPaymentRequestDto request)
     {
         if ((!request.QuoteId.HasValue || request.QuoteId.Value == Guid.Empty)
@@ -572,6 +582,7 @@ public partial class FlexiFuturePlusManager
         FlexiFuturePlusAddPaymentRequestDto request,
         FlexiFuturePolicy policy,
         Guid? flexiFundId,
+        string narration,
         string? ipAddress,
         string? browser,
         CancellationToken cancellationToken)
@@ -619,7 +630,7 @@ public partial class FlexiFuturePlusManager
                 FlexiContributionType = request.PaymentMode,
                 ProcessingStatus = status,
                 Total_Contribution = request.Amount,
-                Naration = request.Narration,
+                Naration = narration,
                 UploadDocumentsName = uploadedFileName,
                 UploadDocumentsPath = uploadedFilePath,
                 UploadDocumentsBase64 = uploadedBase64,
@@ -635,7 +646,7 @@ public partial class FlexiFuturePlusManager
         else
         {
             instruction.Total_Contribution = request.Amount;
-            instruction.Naration = request.Narration;
+            instruction.Naration = narration;
             instruction.FlexiFundId ??= flexiFundId;
             instruction.ProcessingStatus = status;
             instruction.UploadDocumentsName = uploadedFileName ?? instruction.UploadDocumentsName;
