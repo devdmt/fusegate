@@ -33,10 +33,10 @@ public partial class FlexiFuturePlusManager
                 WHERE Id = @TransactionId
                 """;
 
-            if (_db.Connection.State != System.Data.ConnectionState.Open)
-                _db.Connection.Open();
+            if (_akiba.Connection.State != System.Data.ConnectionState.Open)
+                _akiba.Connection.Open();
 
-            var result = await _db.Connection.QueryFirstOrDefaultAsync<FlexiFuturePlusStkPollResultDto>(
+            var result = await _akiba.Connection.QueryFirstOrDefaultAsync<FlexiFuturePlusStkPollResultDto>(
                 new CommandDefinition(sql, new { TransactionId = transactionId }, cancellationToken: cancellationToken));
 
             if (result == null)
