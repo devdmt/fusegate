@@ -216,6 +216,7 @@ public partial class FlexiFuturePlusManager
                 response.Data = new FlexiFuturePlusOnboardingStateDto
                 {
                     QuoteId = quoteId,
+                    QuoteNumber = NormalizeOptionalQuoteNumber(quote.QuoteNumber),
                     OnboardingStep = FlexiFutureOnboardingSteps.KYC,
                     PolicyStatus = FlexiFuturePolicyStatuses.Draft,
                     SectionStatus = new FlexiFuturePlusSectionStatusDto()
@@ -1124,6 +1125,9 @@ public partial class FlexiFuturePlusManager
             throw new InvalidOperationException("customerDetails.firstName is required.");
         if (string.IsNullOrWhiteSpace(details.LastName))
             throw new InvalidOperationException("customerDetails.lastName is required.");
+
+        EnsureNameHasNoNumbers(details.FirstName, "customerDetails.firstName");
+        EnsureNameHasNoNumbers(details.LastName, "customerDetails.lastName");
         if (string.IsNullOrWhiteSpace(details.IdNumber))
             throw new InvalidOperationException("customerDetails.idNumber is required.");
         if (string.IsNullOrWhiteSpace(details.PhoneNumber))
@@ -1424,6 +1428,9 @@ public partial class FlexiFuturePlusManager
         };
     }
 
+    private static string? NormalizeOptionalQuoteNumber(string? quoteNumber) =>
+        string.IsNullOrWhiteSpace(quoteNumber) ? null : quoteNumber.Trim();
+
     private async Task<FlexiFuturePlusOnboardingStateDto> MapOnboardingStateAsync(
         FlexiFuturePolicy policy,
         FlexiFutureQuote quote,
@@ -1455,6 +1462,7 @@ public partial class FlexiFuturePlusManager
         {
             PolicyId = policy.Id,
             QuoteId = policy.QuoteId,
+            QuoteNumber = NormalizeOptionalQuoteNumber(quote.QuoteNumber),
             CustomerId = policy.CustomerId,
             PolicyStatus = policy.PolicyStatus,
             OnboardingStep = policy.OnboardingStep,

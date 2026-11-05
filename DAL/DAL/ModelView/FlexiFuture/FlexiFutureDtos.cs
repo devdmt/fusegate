@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace DAL.ModelView.FlexiFuture;
@@ -6,6 +7,7 @@ namespace DAL.ModelView.FlexiFuture;
 public class FlexiFutureClientDto
 {
     [Required]
+    [RegularExpression(@"^[^0-9]+$", ErrorMessage = "client.clientName must not contain numbers.")]
     public string ClientName { get; set; } = string.Empty;
 
     [Required]
@@ -65,6 +67,8 @@ public class FlexiFutureComputeRequestDto
 
 public class FlexiFutureQuoteUpsertDto : FlexiFutureComputeRequestDto
 {
+    /// <summary>Omit, null, or "" to create a quote. A GUID updates that quote.</summary>
+    [JsonConverter(typeof(NullableGuidJsonConverter))]
     public Guid? QuoteId { get; set; }
 
     [JsonPropertyName("refferalCode")]
@@ -78,6 +82,36 @@ public class FlexiFutureQuoteUpsertDto : FlexiFutureComputeRequestDto
 
     [JsonIgnore]
     public string? Browser { get; set; }
+}
+
+/// <summary>Reads a GUID, null, or blank string. Blank and empty GUIDs become null.</summary>
+public sealed class NullableGuidJsonConverter : JsonConverter<Guid?>
+{
+    public override Guid? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.Null)
+            return null;
+
+        if (reader.TokenType != JsonTokenType.String)
+            throw new JsonException("Expected a GUID or an empty value.");
+
+        var text = reader.GetString();
+        if (string.IsNullOrWhiteSpace(text))
+            return null;
+
+        if (!Guid.TryParse(text, out var guid))
+            throw new JsonException("Expected a GUID or an empty value.");
+
+        return guid == Guid.Empty ? null : guid;
+    }
+
+    public override void Write(Utf8JsonWriter writer, Guid? value, JsonSerializerOptions options)
+    {
+        if (!value.HasValue || value.Value == Guid.Empty)
+            writer.WriteNullValue();
+        else
+            writer.WriteStringValue(value.Value);
+    }
 }
 
 public class FlexiFutureQuoteSearchDto

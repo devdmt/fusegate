@@ -162,4 +162,10 @@ public partial class FlexiFuturePlusManager : IFlexiFuturePlusManager
         PartnerContext partner,
         CancellationToken cancellationToken = default)
         => PollMpesaStkResultInternalAsync(stkTransactionId, partner, cancellationToken);
+
+    public Task<FlexiFuturePlusResponse<FlexiFuturePlusPaymentStatusDto>> GetPaymentStatusAsync(
+        FlexiFuturePlusPaymentStatusRequestDto request,
+        PartnerContext partner,
+        CancellationToken cancellationToken = default)
+        => GetPaymentStatusInternalAsync(request, partner, cancellationToken);
 }

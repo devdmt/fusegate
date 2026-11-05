@@ -65,4 +65,9 @@ public interface IFlexiFuturePlusManager : ITransientService
         string stkTransactionId,
         PartnerContext partner,
         CancellationToken cancellationToken = default);
+
+    Task<FlexiFuturePlusResponse<FlexiFuturePlusPaymentStatusDto>> GetPaymentStatusAsync(
+        FlexiFuturePlusPaymentStatusRequestDto request,
+        PartnerContext partner,
+        CancellationToken cancellationToken = default);
 }

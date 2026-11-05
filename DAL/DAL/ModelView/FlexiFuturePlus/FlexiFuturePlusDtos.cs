@@ -231,10 +231,12 @@ public class FlexiFutureQuoteSearchResultDto : FlexiFutureQuoteResultDto
 public class FlexiFuturePlusCustomerDetailsDto
 {
     [Required]
+    [RegularExpression(@"^[^0-9]+$", ErrorMessage = "customerDetails.firstName must not contain numbers.")]
     [JsonPropertyName("firstName")]
     public string FirstName { get; set; } = string.Empty;
 
     [Required]
+    [RegularExpression(@"^[^0-9]+$", ErrorMessage = "customerDetails.lastName must not contain numbers.")]
     [JsonPropertyName("lastName")]
     public string LastName { get; set; } = string.Empty;
 
@@ -435,6 +437,10 @@ public class FlexiFuturePlusOnboardingStateDto
 {
     public Guid PolicyId { get; set; }
     public Guid QuoteId { get; set; }
+
+    [JsonPropertyName("quoteNumber")]
+    public string? QuoteNumber { get; set; }
+
     public Guid CustomerId { get; set; }
     public string PolicyStatus { get; set; } = string.Empty;
     public string OnboardingStep { get; set; } = string.Empty;
@@ -524,15 +530,65 @@ public class FlexiFuturePlusAddPaymentRequestDto
 
     [JsonPropertyName("callbackUrl")]
     public string? CallbackUrl { get; set; }
+
+    /// <summary>
+    /// Signed Checkoff mandate. Required when <see cref="PaymentMode"/> is Checkoff.
+    /// </summary>
+    [JsonPropertyName("paymentInstruction")]
+    [JsonConverter(typeof(FileUploadDtoJsonConverter))]
+    public FileUploadDTO? PaymentInstruction { get; set; }
 }
 
 public class FlexiFuturePlusPaymentResultDto
 {
-    public Guid ContributionId { get; set; }
+    /// <summary>Set when a FlexiContribution row was created (Mpesa, Bank, Cheque).</summary>
+    public Guid? ContributionId { get; set; }
+
+    /// <summary>Set when a PaymentInstruction row was created (Checkoff, Ratiba).</summary>
+    public Guid? PaymentInstructionId { get; set; }
+
+    /// <summary>FlexiContribution or PaymentInstruction.</summary>
+    public string RecordType { get; set; } = FlexiContributionRecordTypes.FlexiContribution;
+
     public PaymentMode PaymentMode { get; set; }
     public string PaymentStatus { get; set; } = DAL.Model.PaymentStatus.Pending.ToString();
+
+    /// <summary>Stored Checkoff mandate file name.</summary>
+    public string? DocumentName { get; set; }
+
     public string? StkTransactionId { get; set; }
     public string? CorrelationId { get; set; }
+}
+
+public class FlexiFuturePlusPaymentStatusRequestDto
+{
+    [JsonPropertyName("contributionId")]
+    public Guid ContributionId { get; set; }
+
+    [JsonPropertyName("quoteId")]
+    public Guid? QuoteId { get; set; }
+
+    [JsonPropertyName("quoteNumber")]
+    public string? QuoteNumber { get; set; }
+}
+
+public class FlexiFuturePlusPaymentStatusDto
+{
+    public Guid? ContributionId { get; set; }
+    public Guid? PaymentInstructionId { get; set; }
+    public string RecordType { get; set; } = FlexiContributionRecordTypes.FlexiContribution;
+    public PaymentMode? PaymentMode { get; set; }
+    public string PaymentStatus { get; set; } = DAL.Model.PaymentStatus.Pending.ToString();
+    public string? ProcessingStatus { get; set; }
+    public double Amount { get; set; }
+
+    [JsonPropertyName("quoteId")]
+    public Guid QuoteId { get; set; }
+
+    [JsonPropertyName("quoteNumber")]
+    public string QuoteNumber { get; set; } = string.Empty;
+
+    public string? RejectedReason { get; set; }
 }
 
 public class FlexiFuturePlusStkPollResultDto

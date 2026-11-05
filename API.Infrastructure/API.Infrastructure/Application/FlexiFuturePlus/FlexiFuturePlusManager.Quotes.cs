@@ -13,6 +13,7 @@ namespace API.Infrastructure.Application.FlexiFuturePlus;
 public partial class FlexiFuturePlusManager
 {
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+    private static readonly Regex PersonNameRegex = new(@"^[^0-9]+$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private async Task<FlexiFuturePlusResponse<FlexiFutureQuoteResultDto>> UpsertQuoteInternalAsync(
         FlexiFutureQuoteUpsertDto request,
@@ -22,6 +23,11 @@ public partial class FlexiFuturePlusManager
         var response = new FlexiFuturePlusResponse<FlexiFutureQuoteResultDto>();
         try
         {
+            if (request.Client == null || string.IsNullOrWhiteSpace(request.Client.ClientName))
+                throw new InvalidOperationException("client.clientName is required.");
+
+            EnsureNameHasNoNumbers(request.Client.ClientName, "client.clientName");
+
             var compute = await ComputeAsync(request, cancellationToken);
             if (!compute.Success || compute.Data == null)
             {
@@ -310,6 +316,7 @@ public partial class FlexiFuturePlusManager
 
             var partnerCode = partner.PartnerCode.Trim();
 
+            var searchingByIdNumber = !string.IsNullOrWhiteSpace(request.IdNumber);
             var completedQuoteIds = _akiba.FlexiFuturePolicies
                 .AsNoTracking()
                 .Where(p => p.OnboardingStep == FlexiFutureOnboardingSteps.Complete)
@@ -319,16 +326,34 @@ public partial class FlexiFuturePlusManager
 
             var query = _akiba.FlexiFutureQuotes.AsNoTracking()
                 .Where(q => q.Status != FlexiFutureQuoteStatuses.Cancelled)
-                .Where(q => !completedQuoteIds.Contains(q.Id))
                 .Where(q => q.Source == PartnerApiSource)
                 .Where(q => q.PartnerCode != null && q.PartnerCode.ToUpper() == partnerCode.ToUpper());
+
+            // ID search must still return the quote number after onboarding is complete.
+            if (!searchingByIdNumber)
+                query = query.Where(q => !completedQuoteIds.Contains(q.Id));
 
             if (hasQuoteId)
                 query = query.Where(q => q.Id == request.QuoteId!.Value);
             if (!string.IsNullOrWhiteSpace(request.QuoteNumber))
                 query = query.Where(q => q.QuoteNumber == request.QuoteNumber.Trim());
-            if (!string.IsNullOrWhiteSpace(request.IdNumber))
-                query = query.Where(q => q.IdNumber == request.IdNumber.Trim());
+            if (searchingByIdNumber)
+            {
+                var idNumber = request.IdNumber!.Trim().ToUpper();
+                var customerQuoteIds =
+                    from policy in _akiba.FlexiFuturePolicies.AsNoTracking()
+                    join customer in _akiba.customers.AsNoTracking() on policy.CustomerId equals customer.Id
+                    where customer.Idnumber != null
+                          && customer.Idnumber.Trim().ToUpper() == idNumber
+                          && policy.Source == PartnerApiSource
+                          && policy.PartnerCode != null
+                          && policy.PartnerCode.ToUpper() == partnerCode.ToUpper()
+                    select policy.QuoteId;
+
+                query = query.Where(q =>
+                    (q.IdNumber != null && q.IdNumber.Trim().ToUpper() == idNumber)
+                    || customerQuoteIds.Contains(q.Id));
+            }
             if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
             {
                 var lastNine = LastNineDigits(request.PhoneNumber);
@@ -446,6 +471,15 @@ public partial class FlexiFuturePlusManager
             return "***";
 
         return normalized12[..6] + "****" + normalized12[^2..];
+    }
+
+    private static void EnsureNameHasNoNumbers(string? name, string fieldName)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return;
+
+        if (!PersonNameRegex.IsMatch(name.Trim()))
+            throw new InvalidOperationException($"{fieldName} must not contain numbers.");
     }
 
     internal static string? Truncate(string? value, int maxLength)

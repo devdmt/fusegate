@@ -304,6 +304,7 @@ public class FlexiFuturePlusController : VersionedApiController
 
     [HttpPost("add-payment")]
     [PartnerCodeHeader]
+    [RequestSizeLimit(20 * 1024 * 1024)]
     public async Task<IActionResult> AddPayment(
         [FromBody] FlexiFuturePlusAddPaymentRequestDto request,
         CancellationToken cancellationToken)
@@ -328,6 +329,30 @@ public class FlexiFuturePlusController : VersionedApiController
         {
             _logger.LogError(ex, "AddPayment failed");
             return BadRequest(FlexiFuturePlusResponse<FlexiFuturePlusPaymentResultDto>.Fail(ex.Message));
+        }
+    }
+
+    [HttpPost("payments/status")]
+    [PartnerCodeHeader]
+    public async Task<IActionResult> GetPaymentStatus(
+        [FromBody] FlexiFuturePlusPaymentStatusRequestDto request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(FlexiFuturePlusResponse<FlexiFuturePlusPaymentStatusDto>.Fail("Invalid request."));
+
+            var auth = await ValidatePartnerAsync(nameof(GetPaymentStatus), cancellationToken);
+            if (auth != null) return auth;
+
+            var result = await _manager.GetPaymentStatusAsync(request, CurrentPartner(), cancellationToken);
+            return ToActionResult(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "GetPaymentStatus failed");
+            return BadRequest(FlexiFuturePlusResponse<FlexiFuturePlusPaymentStatusDto>.Fail(ex.Message));
         }
     }
 

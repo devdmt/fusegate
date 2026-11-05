@@ -82,7 +82,7 @@ namespace FuseGate.Controllers.Pension
             return Ok();
         }
 
-        [HttpPost("ProcessFlexiFutureSTKResult")]
+        [HttpPost("/ProcessFlexiFutureSTKResult")]
         [AllowAnonymous]
         public async Task<IActionResult> ProcessFlexiFutureSTKResult()
         {
