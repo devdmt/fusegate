@@ -68,6 +68,15 @@ public partial class FlexiFuturePlusManager
                 return response;
             }
 
+            var premiumPayable = decimal.Round(quote.TotalPremiumPayable, 2, MidpointRounding.AwayFromZero);
+            var paymentAmount = decimal.Round(Convert.ToDecimal(request.Amount), 2, MidpointRounding.AwayFromZero);
+            if (premiumPayable > 0m && paymentAmount < premiumPayable)
+            {
+                response.Success = false;
+                response.Message = $"Amount must not be less than the premium payable ({premiumPayable:0.##}).";
+                return response;
+            }
+
             var policy = await _akiba.FlexiFuturePolicies
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.QuoteId == quote.Id, cancellationToken)
