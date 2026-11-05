@@ -82,6 +82,13 @@ public partial class FlexiFuturePlusManager
                 .FirstOrDefaultAsync(p => p.QuoteId == quote.Id, cancellationToken)
                 ?? throw new InvalidOperationException("FlexiFuture policy was not found for this quote.");
 
+            if (!string.Equals(policy.OnboardingStep, FlexiFutureOnboardingSteps.Complete, StringComparison.OrdinalIgnoreCase))
+            {
+                response.Success = false;
+                response.Message = "Payment can only be made after onboarding is complete.";
+                return response;
+            }
+
             var customer = await _akiba.customers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == policy.CustomerId, cancellationToken)

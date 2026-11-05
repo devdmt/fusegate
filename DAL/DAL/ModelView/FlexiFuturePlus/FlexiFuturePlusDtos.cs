@@ -597,6 +597,8 @@ public class FlexiFuturePlusStkPollResultDto
     public bool Finalized { get; set; }
     public bool Processed { get; set; }
     public string? ResponseCode { get; set; }
+    public string? ResultCode { get; set; }
+    public string? ResultDesc { get; set; }
     public string? Amount { get; set; }
     public string? MpesaReceiptNumber { get; set; }
     public string? ContributionTrnId { get; set; }

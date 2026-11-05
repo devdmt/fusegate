@@ -26,6 +26,8 @@ public partial class FlexiFuturePlusManager
                     CASE WHEN ISNULL(Finalized, '0') IN ('1', 'true', 'True') THEN 1 ELSE 0 END AS Finalized,
                     CASE WHEN ISNULL(Processed, '0') IN ('1', 'true', 'True') THEN 1 ELSE 0 END AS Processed,
                     ResponseCode,
+                    ResultCode,
+                    ResultDesc,
                     CAST(Amount AS nvarchar(50)) AS Amount,
                     MpesaReceiptNumber,
                     ContributionTrnId
@@ -40,17 +42,37 @@ public partial class FlexiFuturePlusManager
                 new CommandDefinition(sql, new { TransactionId = transactionId }, cancellationToken: cancellationToken));
 
             if (result == null)
-                throw new InvalidOperationException($"STK transaction '{stkTransactionId}' was not found.");
+            {
+                response.Success = false;
+                response.StatusCode = 404;
+                response.Message = $"STK transaction '{stkTransactionId}' was not found.";
+                return response;
+            }
+
+            response.Data = result;
+            var paymentFailed = result.Finalized
+                && !string.IsNullOrWhiteSpace(result.ResultCode)
+                && result.ResultCode is not ("0" or "00");
+
+            if (paymentFailed)
+            {
+                response.Success = false;
+                response.StatusCode = 400;
+                response.Message = string.IsNullOrWhiteSpace(result.ResultDesc)
+                    ? "The M-Pesa payment was not completed."
+                    : result.ResultDesc;
+                return response;
+            }
 
             response.Success = true;
             response.Message = result.Finalized
                 ? "STK transaction finalized."
                 : "STK transaction is still pending.";
-            response.Data = result;
         }
         catch (Exception ex)
         {
             response.Success = false;
+            response.StatusCode = 400;
             response.Message = FlexiFutureErrorHandling.ToClientMessage(ex, _logger, nameof(PollMpesaStkResultInternalAsync));
         }
 

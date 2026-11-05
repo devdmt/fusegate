@@ -59,6 +59,7 @@ public partial class FlexiFuturePlusManager
 
                         EnsureQuoteAccessible(existing, partner);
                         EnsureQuoteNotCancelled(existing);
+                        await EnsureQuoteOnboardingNotCompleteAsync(existing.Id, cancellationToken);
 
                         _akiba.FlexiFutureQuoteSpouses.RemoveRange(existing.Spouses.ToList());
                         _akiba.FlexiFutureQuoteChildren.RemoveRange(existing.Children.ToList());
@@ -140,6 +141,7 @@ public partial class FlexiFuturePlusManager
 
             EnsureQuoteAccessible(existing, partner);
             EnsureQuoteNotCancelled(existing);
+            await EnsureQuoteOnboardingNotCompleteAsync(existing.Id, cancellationToken);
 
             var computeRequest = BuildRecalculateComputeRequest(existing, request, ipAddress, browser);
             var compute = await ComputeAsync(computeRequest, cancellationToken);
@@ -416,6 +418,19 @@ public partial class FlexiFuturePlusManager
     {
         if (string.Equals(quote.Status, FlexiFutureQuoteStatuses.Cancelled, StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Cancelled quotes cannot be modified.");
+    }
+
+    private async Task EnsureQuoteOnboardingNotCompleteAsync(Guid quoteId, CancellationToken cancellationToken)
+    {
+        var onboardingComplete = await _akiba.FlexiFuturePolicies
+            .AsNoTracking()
+            .AnyAsync(
+                p => p.QuoteId == quoteId
+                     && p.OnboardingStep == FlexiFutureOnboardingSteps.Complete,
+                cancellationToken);
+
+        if (onboardingComplete)
+            throw new InvalidOperationException("Quotes that have completed onboarding cannot be modified.");
     }
 
     internal static string MaskEmail(string email)
