@@ -52,7 +52,7 @@ public class FlexiFutureComputeRequestDto
     [Required]
     public string Frequency { get; set; } = "Monthly";
 
-    public decimal DeathBenefitPct { get; set; } = 0.5m;
+    public decimal? DeathBenefitPct { get; set; }
     public int MaturityBenefitPayments { get; set; } = 1;
     public decimal? TargetPremium { get; set; }
     public decimal? TargetSumAssured { get; set; }
@@ -279,7 +279,7 @@ public class FlexiFutureCoverPremiumsRequestDto
     [Required]
     public string Frequency { get; set; } = "Monthly";
 
-    public decimal DeathBenefitPct { get; set; } = 0.5m;
+    public decimal? DeathBenefitPct { get; set; }
     public int MaturityBenefitPayments { get; set; } = 1;
     public decimal? TargetPremium { get; set; }
     public decimal? TargetSumAssured { get; set; }

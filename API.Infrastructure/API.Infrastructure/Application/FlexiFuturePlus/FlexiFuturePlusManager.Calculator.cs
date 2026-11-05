@@ -123,6 +123,11 @@ public partial class FlexiFuturePlusManager
             if (string.IsNullOrWhiteSpace(request.Client.Gender))
                 throw new InvalidOperationException("Client gender is required.");
 
+            EnsureDeathBenefitWhenLifeSelected(
+                request.DeathBenefitPct,
+                request.SelectedRiders,
+                request.Spouses?.Select(s => (IEnumerable<string>?)s.SelectedRiders));
+
             RateLookup.GetFrequency(pack, request.Frequency);
 
             if (request.DeathBenefitPct > 0)
@@ -341,7 +346,7 @@ public partial class FlexiFuturePlusManager
 
             // LIFE only carries a premium when a death benefit percentage applies.
             var deathBenefitPct = mainSelected.Contains(FlexiFutureRateCodes.Life)
-                ? request.DeathBenefitPct
+                ? request.DeathBenefitPct ?? 0m
                 : 0m;
 
             return new FlexiFutureComputeRequestDto
@@ -475,7 +480,7 @@ public partial class FlexiFuturePlusManager
                                 premiumMode,
                                 mainAnb,
                                 sumAssured,
-                                request.DeathBenefitPct,
+                                request.DeathBenefitPct ?? 0m,
                                 request.PolicyTerm),
                             freq));
                     }
@@ -504,7 +509,7 @@ public partial class FlexiFuturePlusManager
                                     spouseSa,
                                     pack.Settings.SpouseSaCap,
                                     ciCoverPct,
-                                    request.DeathBenefitPct);
+                                    request.DeathBenefitPct ?? 0m);
                                 var rate = RateLookup.LookupAgeTerm(
                                     pack,
                                     table.Code,
@@ -1037,7 +1042,7 @@ public partial class FlexiFuturePlusManager
                 {
                     ValidateRiderAge(table, anb);
                     premium = RoundUpPremium(ApplyFrequencyAndDiscount(
-                        ComputeRiderMonthly(table, pack, premiumMode, anb, sumAssured, request.DeathBenefitPct, request.PolicyTerm),
+                        ComputeRiderMonthly(table, pack, premiumMode, anb, sumAssured, request.DeathBenefitPct ?? 0m, request.PolicyTerm),
                         freq));
                 }
 
@@ -1151,7 +1156,7 @@ public partial class FlexiFuturePlusManager
                             spouseSa,
                             pack.Settings.SpouseSaCap,
                             ciCoverPct,
-                            request.DeathBenefitPct);
+                            request.DeathBenefitPct ?? 0m);
                         var rate = RateLookup.LookupAgeTerm(pack, table.Code, premiumMode, anb, request.PolicyTerm);
                         var monthly = rate * (cover / 1000m);
                         premium = RoundUpPremium(ApplyFrequencyAndDiscount(monthly, freq));
@@ -1203,7 +1208,7 @@ public partial class FlexiFuturePlusManager
             // CHILD_LE is allowed only with death cover (deathBenefitPct > 0).
             // If deathBenefitPct <= 0, disregard even when CHILD_LE is in selectedRiders.
             var isSingle = string.Equals(premiumMode, FlexiFuturePremiumModes.Single, StringComparison.OrdinalIgnoreCase);
-            if (isSingle || request.DeathBenefitPct <= 0)
+            if (isSingle || (request.DeathBenefitPct ?? 0m) <= 0)
                 return results;
 
             var table = RateLookup.GetTable(pack, FlexiFutureRateCodes.ChildLe, premiumMode);
@@ -1449,6 +1454,24 @@ public partial class FlexiFuturePlusManager
         }
     }
 
+    private const string DeathBenefitPctRequiredMessage =
+        "Death Benefit % (deathBenefitPct) should be greater than 0";
+
+    private static void EnsureDeathBenefitWhenLifeSelected(
+        decimal? deathBenefitPct,
+        IEnumerable<string>? selectedRiders,
+        IEnumerable<IEnumerable<string>?>? otherSelections = null)
+    {
+        var lifeSelected = ContainsLifeRider(selectedRiders)
+            || (otherSelections?.Any(ContainsLifeRider) ?? false);
+
+        if (lifeSelected && (deathBenefitPct ?? 0m) <= 0)
+            throw new InvalidOperationException(DeathBenefitPctRequiredMessage);
+    }
+
+    private static bool ContainsLifeRider(IEnumerable<string>? riders) =>
+        riders?.Any(code => string.Equals(code, FlexiFutureRateCodes.Life, StringComparison.OrdinalIgnoreCase)) == true;
+
     private static void ValidateProductRules(
         FlexiFutureComputeRequestDto request,
         FlexiFutureRatePack pack,
@@ -1470,6 +1493,11 @@ public partial class FlexiFuturePlusManager
 
             if (string.IsNullOrWhiteSpace(request.Client.PhoneNumber))
                 throw new InvalidOperationException("PhoneNumber is required.");
+
+            EnsureDeathBenefitWhenLifeSelected(
+                request.DeathBenefitPct,
+                request.SelectedRiders,
+                request.Spouses?.Select(s => (IEnumerable<string>?)s.SelectedRiders));
 
             RateLookup.GetFrequency(pack, request.Frequency);
 

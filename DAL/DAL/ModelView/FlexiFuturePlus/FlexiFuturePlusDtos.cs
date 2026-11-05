@@ -171,7 +171,7 @@ public class FlexiFutureQuoteRecalculateDto
     public string Frequency { get; set; } = "Monthly";
 
     [JsonPropertyName("deathBenefitPct")]
-    public decimal DeathBenefitPct { get; set; } = 0.5m;
+    public decimal? DeathBenefitPct { get; set; }
 
     [JsonPropertyName("maturityBenefitPayments")]
     public int MaturityBenefitPayments { get; set; } = 1;

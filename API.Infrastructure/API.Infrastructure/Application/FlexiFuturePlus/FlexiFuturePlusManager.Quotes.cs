@@ -897,7 +897,7 @@ public partial class FlexiFuturePlusManager
         quote.IssueDate = request.IssueDate;
         quote.PolicyTerm = request.PolicyTerm;
         quote.Frequency = request.Frequency;
-        quote.DeathBenefitPct = request.DeathBenefitPct;
+        quote.DeathBenefitPct = request.DeathBenefitPct ?? 0m;
         quote.MaturityBenefitPayments = request.MaturityBenefitPayments;
         quote.TargetPremium = request.TargetPremium;
         quote.TargetSumAssured = request.TargetSumAssured;
@@ -1020,7 +1020,7 @@ public partial class FlexiFuturePlusManager
             IssueDate = request.IssueDate,
             PolicyTerm = request.PolicyTerm,
             Frequency = request.Frequency,
-            DeathBenefitPct = request.DeathBenefitPct,
+            DeathBenefitPct = request.DeathBenefitPct ?? 0m,
             MaturityBenefitPayments = request.MaturityBenefitPayments,
             TargetPremium = request.TargetPremium,
             TargetSumAssured = request.TargetSumAssured,

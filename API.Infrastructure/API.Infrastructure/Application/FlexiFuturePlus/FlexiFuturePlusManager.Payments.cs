@@ -90,20 +90,30 @@ public partial class FlexiFuturePlusManager
                     cancellationToken);
             }
 
-            var duplicateReferenceMessage = await ValidatePaymentReferenceUniqueAsync(
-                request.PaymentReference,
-                cancellationToken);
-            if (duplicateReferenceMessage != null)
+            var isMpesa = request.PaymentMode == FlexiPaymentMode.Mpesa;
+            var suppliedReference = string.IsNullOrWhiteSpace(request.PaymentReference)
+                ? null
+                : request.PaymentReference.Trim();
+            if (suppliedReference != null)
             {
-                response.Success = false;
-                response.Message = duplicateReferenceMessage;
-                return response;
+                var duplicateReferenceMessage = await ValidatePaymentReferenceUniqueAsync(
+                    suppliedReference,
+                    cancellationToken);
+                if (duplicateReferenceMessage != null)
+                {
+                    response.Success = false;
+                    response.Message = duplicateReferenceMessage;
+                    return response;
+                }
             }
 
-            var paymentReference = request.PaymentReference!.Trim();
+            var paymentReference = isMpesa ? null : suppliedReference;
+
+            var contributionId = Guid.NewGuid();
             var now = DateTimeOffset.UtcNow;
             var contribution = new FlexiContribution
             {
+                Id = contributionId,
                 CustomerId = policy.CustomerId,
                 Total_Contribution = request.Amount,
                 Naration = request.Narration,
@@ -224,7 +234,7 @@ public partial class FlexiFuturePlusManager
                     Request = JsonConvert.SerializeObject(request),
                     Response = string.Empty,
                     CorrelationId = stk.ProductRef,
-                    RequestId = paymentReference,
+                    RequestId = suppliedReference ?? contribution.Id.ToString(),
                     CallbackProcessed = false,
                     ProcessResponse = false,
                     Responded = false,
@@ -493,7 +503,7 @@ public partial class FlexiFuturePlusManager
             return "Provide quoteId or quoteNumber.";
         }
 
-        if (request.PaymentMode is not (FlexiPaymentMode.Checkoff or FlexiPaymentMode.Ratiba)
+        if (request.PaymentMode is not (FlexiPaymentMode.Mpesa or FlexiPaymentMode.Checkoff or FlexiPaymentMode.Ratiba)
             && string.IsNullOrWhiteSpace(request.PaymentReference))
         {
             return "paymentReference is required.";
